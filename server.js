@@ -22,8 +22,11 @@ io.sockets.on('connection', (socket) => {
 });
 
 
-var NUM_LEDS = 32;
-var ws281x = require('rpi-ws281x-native');
+var NUM_LEDS = 64;
+var ws281x = require('rpi-ws281x');
+// One time initialization
+ws281x.configure({leds:NUM_LEDS});
+
 pixelData = new Uint32Array(NUM_LEDS);
 blackpixelData = new Uint32Array(NUM_LEDS);
 for (var i = 0; i < NUM_LEDS; i++) {
