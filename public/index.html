@@ -17,6 +17,11 @@
   <input type="range" id= "inputSliderBlue" min="0" max="255" value="50" step="1" oninput="showValueBlue(this.value)" />
 <br><span id="outputTextBlue">50</span>
 
+<br><div id="html5DIV">
+        <h3>Or Use HTML5:</h3>
+        <input type="color" id="html5colorpicker" onchange="setColor()" value="#ff0000" style="width:85%;">
+      </div>
+
 
 	<script type="text/javascript">
 		var socket = io.connect();
@@ -38,7 +43,15 @@
 			document.getElementById("outputTextBlue").innerHTML = data.value;
 		});
 
-		function showValueBrightness(newValue)
+    function setColor()
+		{
+			document.getElementById("html5colorpicker").innerHTML=newValue;
+      var colorRGB = hexToRgb(newValue);
+      socket.emit('red', { value: colorRGB.r });
+      socket.emit('green', { value: colorRGB.g });
+      socket.emit('blue', { value: colorRGB.b });
+		}
+    function showValueBrightness(newValue)
 		{
 			document.getElementById("outputTextBrightness").innerHTML=newValue;
 			socket.emit('brightness', { value: newValue });
@@ -58,6 +71,14 @@
 			document.getElementById("outputTextBlue").innerHTML=newValue;
 			socket.emit('blue', { value: newValue });
 		}
+    function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
 	</script>
   </body>
 </html>
