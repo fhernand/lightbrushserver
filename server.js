@@ -66,6 +66,9 @@ class Circle {
       } else if (x >= this.width && y < this.width) {
         var index = (x-this.width) + (this.width-y-1)*this.width;
         this.map[i] = this.mapCircleQuarter1[index];
+      } else if (x < this.width && y >= this.width) {
+        var index = (this.width-x-1) + (y-this.width)*this.width;
+        this.map[i] = this.mapCircleQuarter1[index];
       }
     }
   }
