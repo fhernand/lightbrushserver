@@ -45,7 +45,6 @@ class Circle {
         var index = (x-this.width) + (y-this.width)*this.width;
 
         this.map[i] = this.mapCircleQuarter[index]
-        console.log(i);
       } else if (x < this.width && y < this.width) {
         var index = (this.width-x-1) + (this.width-y-1)*this.width;
         this.map[i] = this.mapCircleQuarter[index];
@@ -168,7 +167,6 @@ class LedHandler {
 };
 
 var ledHandlerInstance = new LedHandler();
-ledHandlerInstance.setRadius(1);
 var brightness = 50;
 var radius = 50;
 var color = { r:255, g:215, b:0 };
