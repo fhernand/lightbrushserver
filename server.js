@@ -123,8 +123,7 @@ class LedHandler {
     }
 
     run() {
-      // Loop every 100 ms
-      setInterval(this.loop.bind(this), 100);
+      setInterval(this.loop.bind(this), 2000);
     }
   };
 
