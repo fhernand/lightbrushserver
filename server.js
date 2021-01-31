@@ -27,7 +27,7 @@ class ledHandler {
     this.config = {};
 
     // Set full brightness, a value from 0 to 255 (default 255)
-    this.config.brightness = 255;
+    this.config.brightness = 100;
 
     // By setting width and height instead of number of leds
     // you may use named pixel mappings.
@@ -51,7 +51,6 @@ class ledHandler {
     this.config.brightness = brightness;
     // Configure ws281x and restart
     ws281x.reset();
-    ws281x.configure(this.config);
     this.run();
   }
 
