@@ -48,7 +48,7 @@ class circle {
 }
 
 class ledHandler {
-  this circleInstance = new Circle(NUM_LEDS_WIDTH/2);
+  this.circleInstance = new Circle(NUM_LEDS_WIDTH/2);
 
   constructor() {
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
