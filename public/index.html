@@ -45,7 +45,7 @@
 
     function setColor()
 		{
-			document.getElementById("html5colorpicker").innerHTML=newValue;
+			var newValue = document.getElementById("html5colorpicker").innerHTML;
       var colorRGB = hexToRgb(newValue);
       socket.emit('red', { value: colorRGB.r });
       socket.emit('green', { value: colorRGB.g });
