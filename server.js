@@ -42,7 +42,7 @@ class Circle {
       var x = i % (this.width*2);
       var y = Math.floor(i / (this.width*2));
 
-      if (x > this.width && y > this.width){
+      if (x >= this.width && y >= this.width){
         this.map[i] = this.mapCircleQuarter[(this.width - x) + (y-this.width)*this.width]
       }
     }
