@@ -29,9 +29,9 @@ class ledHandler {
     this.config = {};
 
     // Set full brightness, a value from 0 to 255 (default 255)
-    this.config.brightness = 50;
+    this.config.brightness = 255;
 
-    //this.config.strip = 'grb';
+    this.config.strip = 'grb';
 
     // By setting width and height instead of number of leds
     // you may use named pixel mappings.
@@ -97,7 +97,7 @@ class ledHandler {
   };
 
   var ledHandlerInstance = new ledHandler();
-  var brightness = ledHandlerInstance.MaxBrightness;
+  var brightness = 50;
   var color = { r:255, g:215, b:0 };
 
   io.sockets.on('connection', (socket) => {
