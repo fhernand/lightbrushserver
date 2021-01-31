@@ -53,12 +53,13 @@ class Circle {
       var x = i % (this.width*2);
       var y = Math.floor(i / (this.width*2));
 
-      var index = (x-this.width) + (y-this.width)*this.width;
       if (x >= this.width && y >= this.width){
+        var index = (x-this.width) + (y-this.width)*this.width;
 
         this.map[i] = this.mapCircleQuarter4[index]
         console.log(i);
       } else if (x < this.width && y < this.width) {
+        var index = (this.width-x) + (this.width-y)*this.width;
 
         this.map[i] = this.mapCircleQuarter1[index];
       }
