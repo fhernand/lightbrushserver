@@ -18,14 +18,20 @@ class Circle {
   constructor(width){
 
     this.width = width;
-    this.map = new Float32Array(this.width * this.width);
-    this.mapCircleQuarter = new Float32Array(this.width * this.width / 4);
+    this.map = new Float32Array(this.width * this.width * 4);
+    this.mapCircleQuarter1 = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter2 = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter3 = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter4 = new Float32Array(this.width * this.width);
     this.anteil = 0;
     this.granularity = 100;
   }
   reset(){
     this.map = new Float32Array(this.width * this.width * 4);
-    this.mapCircleQuarter = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter1 = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter2 = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter3 = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter4 = new Float32Array(this.width * this.width);
   }
   setRadius(radius){
     this.reset();
@@ -34,7 +40,13 @@ class Circle {
   }
   calculateMap(){
     for (var i = 0; i < this.width*this.width; i++) {
-      this.mapCircleQuarter[i] = this.draw(i);
+      this.mapCircleQuarter4[i] = this.draw(i);
+    }
+
+    for (var i = 0; i < this.width; i++) {
+      for (var j = 0; j < this.width; j++) {
+        this.mapCircleQuarter1[this.width * i + j] = this.mapCircleQuarter4[this.width * j + i];
+      }
     }
 
     for (var i = 0; i < this.width*this.width*4; i++) {
@@ -47,8 +59,8 @@ class Circle {
         this.map[i] = this.mapCircleQuarter[index]
         console.log(i);
       } else if (x < this.width && y < this.width) {
-        var transposed = this.mapCircleQuarter.map((_, i, a) => a[(i % this.width) * this.width + Math.floor(i / this.width)]);
-        this.map[i] = this.transposed[index];
+
+        this.map[i] = this.mapCircleQuarter4[index];
       }
     }
   }
