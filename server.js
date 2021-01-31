@@ -56,11 +56,11 @@ class Circle {
       var index = (x-this.width) + (y-this.width)*this.width;
       if (x >= this.width && y >= this.width){
 
-        this.map[i] = this.mapCircleQuarter[index]
+        this.map[i] = this.mapCircleQuarter4[index]
         console.log(i);
       } else if (x < this.width && y < this.width) {
 
-        this.map[i] = this.mapCircleQuarter4[index];
+        this.map[i] = this.mapCircleQuarter1[index];
       }
     }
   }
