@@ -82,7 +82,6 @@ class ledHandler {
 };
 
 var ledHandlerInstance = new ledHandler();
-ledHandlerInstance.run();
 var brightness = 0;
 var color = { r:255, g:215, b:0 };
 
@@ -121,6 +120,7 @@ io.sockets.on('connection', (socket) => {
 
 });
 
+ledHandlerInstance.run();
 
 // ---- trap the SIGINT and reset before exit
 process.on('SIGINT', function () {
