@@ -31,7 +31,7 @@ class ledHandler {
     // Set full brightness, a value from 0 to 255 (default 255)
     this.config.brightness = 255;
 
-    this.config.strip = 'grb';
+    //this.config.strip = 'grb';
 
     // By setting width and height instead of number of leds
     // you may use named pixel mappings.
