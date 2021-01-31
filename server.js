@@ -53,7 +53,7 @@ class Circle {
     // if (x >= this.width && y >= this.width){
     //   return this.mapCircleQuarter[(x-this.width)*this.width - (y-this.width)];
     // }
-    return this.mapCircleQuarter[i];
+    return this.map[i];
 
   }
   draw(n) {
