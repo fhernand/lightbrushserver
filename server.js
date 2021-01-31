@@ -61,7 +61,7 @@ class ledHandler {
     var leds = this.config.width * this.config.height;
     var pixels = new Uint32Array(leds);
 
-    var pixelColor = (this.color.r << 16) | (this.color.g << 8)| this.color.b;
+    var pixelColor = rgb2Int(this.color.r,this.color.g,this.color.b);
 
     // Set a specific pixel
     pixels[this.offset] = pixelColor;
@@ -75,7 +75,7 @@ class ledHandler {
 
   run() {
     // Loop every 100 ms
-    setInterval(this.loop.bind(this), 100);
+    setInterval(this.loop.bind(this), 1);
   }
 };
 
