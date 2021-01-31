@@ -13,7 +13,42 @@ http.listen(3000, () => {
 
 app.use(express.static('public'));
 
+class circle {
+
+  constructor(width){
+    this.width = width;
+    this.anteil = 0;
+    this.granularity = 100;
+  }
+  setRadius(radius){
+    this.radius = this.granularity*this.width*radius;
+  }
+  draw(n) {
+    this.anteil = 0;
+    const x = Math.floor(n / this.width);
+    const y = n % this.width;
+    const max_i = this.granularity*(x+1);
+    const max_j = this.granularity*(y+1);
+
+    for (var i = max_i; i > this.granularity * x; i-- ){
+      for (var j = max_j; j > this.granularity * y; j-- ){
+        var dist_ij = Math.sqrt( (i * i) + (j * j) );
+        var value = dist_ij / this.radius;
+        if (i == max_i && j == max_j && value <= 1){
+          return 1;
+        } else {
+          if (value<=1){
+            this.anteil++;
+          }
+        }
+      }
+    }
+    return this.anteil / ( this.granularity * this.granularity );
+  }
+}
+
 class ledHandler {
+  this circleInstance = new Circle(NUM_LEDS_WIDTH/2);
 
   constructor() {
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
@@ -61,30 +96,26 @@ class ledHandler {
     this.color = color;
   }
 
+  setRadius(radius){
+    this.circleInstance.setRadius(0.8);
+  }
+
   loop() {
     var leds = this.config.width * this.config.height;
     var pixels = new Uint32Array(leds);
-
-    var pixelColor = rgb2Int(this.color.r * this.MaxBrightness / 255,
-       this.color.g * this.MaxBrightness / 255,
-       this.color.b * this.MaxBrightness / 255);
-
-      //var pixelColor = ((this.color.r * this.MaxBrightness) / 255 << 16) | ((this.color.g * this.MaxBrightness / 255) << 8)| (this.color.b * this.MaxBrightness / 255);
-
-      //var pixelColor = (this.color.r,
-      //   this.color.g,
-      //   this.color.b);
-
-      //var pixelColor = (this.color.r << 16) | (this.color.g << 8)| this.color.b;
-
+    var colorRed = this.color.r * this.MaxBrightness / 255;
+    var colorGreen = this.color.g * this.MaxBrightness / 255;
+    var colorBlue = this.color.b * this.MaxBrightness / 255;
 
       for (var i = 0; i < leds; i++) {
-
+        var value = this.circleInstance.draw(i);
+        var pixelColor = rgb2Int(value*colorRed,value*colorGreen,value*colorBlue);
+        pixels[i] = pixelColor;
         // Set a specific pixel
-        pixels[this.offset] = pixelColor;
+        //pixels[this.offset] = pixelColor;
 
         // Move on to next
-        this.offset = (this.offset + 1) % leds;
+        //this.offset = (this.offset + 1) % leds;
       }
       // Render to strip
       ws281x.render(pixels);
