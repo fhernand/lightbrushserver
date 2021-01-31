@@ -44,6 +44,7 @@ class Circle {
 
       if (x >= this.width && y >= this.width){
         this.map[i] = this.mapCircleQuarter[(this.width - x) + (y-this.width)*this.width]
+        console.log(this.map[i]);
       }
     }
   }
