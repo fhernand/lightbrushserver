@@ -55,7 +55,7 @@ class ledHandler {
     ws281x.configure(this.config);
 
     for (var i = 0; i < (NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT); i++) {
-      blackpixelData[i] = rgb2Int(0,0,0);
+      this.blackpixelData[i] = rgb2Int(0,0,0);
     }
   }
 
