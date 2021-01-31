@@ -47,7 +47,7 @@ class Circle {
         this.map[i] = this.mapCircleQuarter[index]
         console.log(i);
       } else if (x < this.width && y < this.width) {
-        var transposed = his.mapCircleQuarter.map((_, i, a) => a[(i % this.width) * this.width + Math.floor(i / this.width)]);
+        var transposed = this.mapCircleQuarter.map((_, i, a) => a[(i % this.width) * this.width + Math.floor(i / this.width)]);
         this.map[i] = this.transposed[index];
       }
     }
