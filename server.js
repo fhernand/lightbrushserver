@@ -69,7 +69,11 @@ class ledHandler {
     //   this.color.g * this.MaxBrightness / 255,
     //   this.color.b * this.MaxBrightness / 255);
 
-      var pixelColor = ((this.color.r * this.MaxBrightness) / 255 << 16) | ((this.color.g * this.MaxBrightness / 255) << 8)| (this.color.b * this.MaxBrightness / 255);
+      //var pixelColor = ((this.color.r * this.MaxBrightness) / 255 << 16) | ((this.color.g * this.MaxBrightness / 255) << 8)| (this.color.b * this.MaxBrightness / 255);
+
+      var pixelColor = rgb2Int(this.color.r,
+         this.color.g,
+         this.color.b);
 
 
       for (var i = 0; i < this.config.leds; i++) {
