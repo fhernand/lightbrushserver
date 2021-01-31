@@ -40,7 +40,7 @@ class Circle {
   getMapValue(i){
     const x = Math.floor(i / this.width*2);
     const y = i % this.width*2 - 1;
-    if (x >= this.width && y >= this.width){
+    if (x > this.width && y > this.width){
       return this.mapCircleQuarter[(x-this.width)+(y-this.width)];
     }
   }
