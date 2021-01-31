@@ -29,7 +29,7 @@ class ledHandler {
     this.config = {};
 
     // Set full brightness, a value from 0 to 255 (default 255)
-    this.config.brightness = 255;
+    this.config.brightness = 50;
 
     //this.config.strip = 'grb';
 
