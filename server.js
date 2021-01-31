@@ -32,7 +32,7 @@ class Circle {
   }
   calculateMap(){
     for (var i = 0; i < this.width*this.width/4; i++) {
-      this.mapCircleQuarter[i] = draw(i);
+      this.mapCircleQuarter[i] = this.draw(i);
     }
   }
   getMapValue(i){
