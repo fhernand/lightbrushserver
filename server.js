@@ -24,20 +24,22 @@ class Circle {
     this.granularity = 100;
   }
   reset(){
-    new Uint32Array(this.width * this.width);
+    this.map = new Uint32Array(this.width * this.width * 4);
+    this.mapCircleQuarter = new Uint32Array(this.width * this.width);
   }
   setRadius(radius){
+    this.reset();
     this.radius = this.granularity*this.width*radius;
     this.calculateMap();
   }
   calculateMap(){
-    for (var i = 0; i < this.width*this.width/4; i++) {
+    for (var i = 0; i < this.width*this.width; i++) {
       this.mapCircleQuarter[i] = this.draw(i);
     }
   }
   getMapValue(i){
-    const x = Math.floor(i / this.width);
-    const y = i % this.width - 1;
+    const x = Math.floor(i / this.width*2);
+    const y = i % this.width*2 - 1;
     if (x >= this.width && y >= this.width){
       return this.mapCircleQuarter[(x-this.width)+(y-this.width)];
     }
@@ -128,7 +130,6 @@ class LedHandler {
     var colorGreen = this.color.g * this.MaxBrightness / 255;
     var colorBlue = this.color.b * this.MaxBrightness / 255;
 
-    this.circleInstance.reset();
     for (var i = 0; i < leds; i++) {
       var value = this.circleInstance.getMapValue(i);
       var pixelColor = rgb2Int(value*colorRed,value*colorGreen,value*colorBlue);
