@@ -123,7 +123,6 @@ class LedHandler {
 
   setRadius(radius){
     this.circleInstance.setRadius(radius);
-    this.circleInstance.calculateMap();
   }
 
   loop() {
