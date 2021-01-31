@@ -61,11 +61,11 @@ class Circle {
     const x = n % this.width;
     const y = Math.floor(n / this.width);
 
-    const max_i = this.granularity*(x+1);
-    const max_j = this.granularity*(y+1);
+    const max_i = this.granularity*(x+1)-1;
+    const max_j = this.granularity*(y+1)-1;
 
-    for (var i = max_i; i > this.granularity * x; i-- ){
-      for (var j = max_j; j > this.granularity * y; j-- ){
+    for (var i = max_i; i >= this.granularity * x; i-- ){
+      for (var j = max_j; j >= this.granularity * y; j-- ){
         var dist_ij = Math.sqrt( (i * i) + (j * j) );
         var value = dist_ij / this.radius;
         if (i == max_i && j == max_j && value <= 1){
@@ -78,7 +78,6 @@ class Circle {
         }
       }
     }
-    console.log(this.anteil);
     return this.anteil / ( this.granularity * this.granularity );
   }
 }
