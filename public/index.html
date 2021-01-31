@@ -47,9 +47,9 @@
 		{
 			var newValue = document.getElementById("html5colorpicker").innerHTML;
       var colorRGB = hexToRgb(newValue);
-      socket.emit('red', { value: colorRGB.r });
-      socket.emit('green', { value: colorRGB.g });
-      socket.emit('blue', { value: colorRGB.b });
+      socket.emit('red', { value: colorRGB[1] });
+      socket.emit('green', { value: colorRGB[2] });
+      socket.emit('blue', { value: colorRGB[3] });
 		}
     function showValueBrightness(newValue)
 		{
