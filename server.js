@@ -149,7 +149,7 @@ class LedHandler {
 };
 
 var ledHandlerInstance = new LedHandler();
-ledHandlerIn  stance.setRadius(0.8);
+ledHandlerInstance.setRadius(0.8);
 var brightness = 50;
 var color = { r:255, g:215, b:0 };
 
