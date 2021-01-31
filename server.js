@@ -97,7 +97,7 @@ class LedHandler {
   }
 
   setRadius(radius){
-    this.circleInstance.setRadius(0.8);
+    this.circleInstance.setRadius(radius);
   }
 
   loop() {
@@ -128,6 +128,7 @@ class LedHandler {
   };
 
   var ledHandlerInstance = new LedHandler();
+  ledHandlerInstance.setRadius(0.8);
   var brightness = 50;
   var color = { r:255, g:215, b:0 };
 
