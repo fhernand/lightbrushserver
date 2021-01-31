@@ -19,19 +19,13 @@ class Circle {
 
     this.width = width;
     this.map = new Float32Array(this.width * this.width * 4);
-    this.mapCircleQuarter1 = new Float32Array(this.width * this.width);
-    this.mapCircleQuarter2 = new Float32Array(this.width * this.width);
-    this.mapCircleQuarter3 = new Float32Array(this.width * this.width);
-    this.mapCircleQuarter4 = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter = new Float32Array(this.width * this.width);
     this.anteil = 0;
     this.granularity = 100;
   }
   reset(){
     this.map = new Float32Array(this.width * this.width * 4);
-    this.mapCircleQuarter1 = new Float32Array(this.width * this.width);
-    this.mapCircleQuarter2 = new Float32Array(this.width * this.width);
-    this.mapCircleQuarter3 = new Float32Array(this.width * this.width);
-    this.mapCircleQuarter4 = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter = new Float32Array(this.width * this.width);
   }
   setRadius(radius){
     this.reset();
@@ -40,16 +34,8 @@ class Circle {
   }
   calculateMap(){
     for (var i = 0; i < this.width*this.width; i++) {
-      this.mapCircleQuarter1[i] = this.draw(i);
+      this.mapCircleQuarter[i] = this.draw(i);
     }
-
-    // for (var i = 0; i < this.width; i++) {
-    //   for (var j = 0; j < this.width; j++) {
-    //     this.mapCircleQuarter1[this.width * i + j] = this.mapCircleQuarter4[this.width * j + i];
-    //   }
-    // }
-
-
 
     for (var i = 0; i < this.width*this.width*4; i++) {
       var x = i % (this.width*2);
@@ -58,26 +44,21 @@ class Circle {
       if (x >= this.width && y >= this.width){
         var index = (x-this.width) + (y-this.width)*this.width;
 
-        this.map[i] = this.mapCircleQuarter1[index]
+        this.map[i] = this.mapCircleQuarter[index]
         console.log(i);
       } else if (x < this.width && y < this.width) {
         var index = (this.width-x-1) + (this.width-y-1)*this.width;
-        this.map[i] = this.mapCircleQuarter1[index];
+        this.map[i] = this.mapCircleQuarter[index];
       } else if (x >= this.width && y < this.width) {
         var index = (x-this.width) + (this.width-y-1)*this.width;
-        this.map[i] = this.mapCircleQuarter1[index];
+        this.map[i] = this.mapCircleQuarter[index];
       } else if (x < this.width && y >= this.width) {
         var index = (this.width-x-1) + (y-this.width)*this.width;
-        this.map[i] = this.mapCircleQuarter1[index];
+        this.map[i] = this.mapCircleQuarter[index];
       }
     }
   }
   getMapValue(i){
-    // const x = Math.floor(i / (this.width*2));
-    // const y = i % (this.width*2);
-    // if (x >= this.width && y >= this.width){
-    //   return this.mapCircleQuarter[(x-this.width)*this.width - (y-this.width)];
-    // }
     return this.map[i];
 
   }
@@ -157,7 +138,7 @@ class LedHandler {
   }
 
   setRadius(radius){
-    this.circleInstance.setRadius(radius);
+    this.circleInstance.setRadius(radius/100);
   }
 
   loop() {
@@ -189,6 +170,7 @@ class LedHandler {
 var ledHandlerInstance = new LedHandler();
 ledHandlerInstance.setRadius(1);
 var brightness = 50;
+var radius = 50;
 var color = { r:255, g:215, b:0 };
 
 io.sockets.on('connection', (socket) => {
@@ -198,6 +180,14 @@ io.sockets.on('connection', (socket) => {
     brightness = data.value;  //updates brightness from the data object
     ledHandlerInstance.updateBrightness(brightness);
     io.sockets.emit('brightness', {value: brightness}); //sends the updated brightness to all connected clients
+  });
+
+  socket.emit('radius', {value: radius});
+
+  socket.on('radius', function (data) { //makes the socket react to 'led' packets by calling this function
+    radius = data.value;  //updates brightness from the data object
+    ledHandlerInstance.setRadius(radius);
+    io.sockets.emit('radius', {value: radius}); //sends the updated brightness to all connected clients
   });
 
   socket.emit('red', {value: color.r});
