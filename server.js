@@ -49,7 +49,8 @@ class ledHandler {
   updateBrightness(brightness) {
     // Set full brightness, a value from 0 to 255 (default 255)
     this.config.brightness = brightness;
-    // Configure ws281x
+    // Configure ws281x and restart
+    ws281x.reset();
     ws281x.configure(this.config);
     this.run();
   }
