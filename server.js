@@ -18,14 +18,14 @@ class Circle {
   constructor(width){
 
     this.width = width;
-    this.map = new Uint32Array(this.width * this.width);
-    this.mapCircleQuarter = new Uint32Array(this.width * this.width / 4);
+    this.map = new Float32Array(this.width * this.width);
+    this.mapCircleQuarter = new Float32Array(this.width * this.width / 4);
     this.anteil = 0;
     this.granularity = 100;
   }
   reset(){
-    this.map = new Uint32Array(this.width * this.width * 4);
-    this.mapCircleQuarter = new Uint32Array(this.width * this.width);
+    this.map = new Float32Array(this.width * this.width * 4);
+    this.mapCircleQuarter = new Float32Array(this.width * this.width);
   }
   setRadius(radius){
     this.reset();
