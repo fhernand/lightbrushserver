@@ -27,21 +27,21 @@
     socket.on('red', function (data) {
       var colorPickerValue = document.getElementById("html5colorpicker").value;
       var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.r = parseInt(newValue);
+      colorPickerRGB.r = parseInt(data.value);
       document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
       setColor();
     });
     socket.on('green', function (data) {
       var colorPickerValue = document.getElementById("html5colorpicker").value;
       var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.g = parseInt(newValue);
+      colorPickerRGB.g = parseInt(data.value);
       document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
       setColor();
     });
     socket.on('blue', function (data) {
       var colorPickerValue = document.getElementById("html5colorpicker").value;
       var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.b = parseInt(newValue);
+      colorPickerRGB.b = parseInt(data.value);
       document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
       setColor();
     });
