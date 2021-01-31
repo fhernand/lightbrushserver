@@ -65,9 +65,12 @@ class ledHandler {
     var leds = this.config.width * this.config.height;
     var pixels = new Uint32Array(leds);
 
-    var pixelColor = rgb2Int(this.color.r * this.MaxBrightness / 255,
-      this.color.g * this.MaxBrightness / 255,
-      this.color.b * this.MaxBrightness / 255);
+    // var pixelColor = rgb2Int(this.color.r * this.MaxBrightness / 255,
+    //   this.color.g * this.MaxBrightness / 255,
+    //   this.color.b * this.MaxBrightness / 255);
+
+      var pixelColor = ((this.color.r * this.MaxBrightness) / 255 << 16) | ((this.color.g * this.MaxBrightness / 255) << 8)| (this.color.b * this.MaxBrightness / 255);
+
 
       for (var i = 0; i < this.config.leds; i++) {
 
@@ -83,7 +86,7 @@ class ledHandler {
 
     run() {
       // Loop every 100 ms
-      setInterval(this.loop.bind(this), 10);
+      setInterval(this.loop.bind(this), 100);
     }
   };
 
