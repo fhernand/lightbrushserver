@@ -43,11 +43,11 @@ class Circle {
       this.mapCircleQuarter1[i] = this.draw(i);
     }
 
-    for (var i = 0; i < this.width; i++) {
-      for (var j = 0; j < this.width; j++) {
-        this.mapCircleQuarter1[this.width * i + j] = this.mapCircleQuarter4[this.width * j + i];
-      }
-    }
+    // for (var i = 0; i < this.width; i++) {
+    //   for (var j = 0; j < this.width; j++) {
+    //     this.mapCircleQuarter1[this.width * i + j] = this.mapCircleQuarter4[this.width * j + i];
+    //   }
+    // }
 
 
 
