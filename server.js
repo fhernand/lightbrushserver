@@ -13,7 +13,7 @@ http.listen(3000, () => {
 
 app.use(express.static('public'));
 
-class circle {
+class Circle {
 
   constructor(width){
     this.width = width;
@@ -47,7 +47,7 @@ class circle {
   }
 }
 
-class ledHandler {
+class LedHandler {
 
   constructor() {
     this.circleInstance = new Circle(NUM_LEDS_WIDTH/2);
@@ -127,7 +127,7 @@ class ledHandler {
     }
   };
 
-  var ledHandlerInstance = new ledHandler();
+  var ledHandlerInstance = new LedHandler();
   var brightness = 50;
   var color = { r:255, g:215, b:0 };
 
