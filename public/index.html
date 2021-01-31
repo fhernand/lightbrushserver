@@ -8,22 +8,55 @@
 	<link rel="stylesheet" href="style.css">
   </head>
   <body>
-	<input type="range" id= "inputSlider" min="0" max="255" value="50" step="1" oninput="showValue(this.value)" />
+  <input type="range" id= "inputSliderBrightness" min="0" max="255" value="50" step="1" oninput="showValue(this.value)" />
+<br><br><span id="outputTextBrightness">50</span>
+  <input type="range" id= "inputSliderRed" min="0" max="255" value="50" step="1" oninput="showValue(this.value)" />
+<br><br><span id="outputTextRed">50</span>
+  <input type="range" id= "inputSliderGreen" min="0" max="255" value="50" step="1" oninput="showValue(this.value)" />
+<br><br><span id="outputTextGreen">50</span>
+  <input type="range" id= "inputSliderBlue" min="0" max="255" value="50" step="1" oninput="showValue(this.value)" />
+<br><br><span id="outputTextBlue">50</span>
 
-	<br><br><span id="outputText">50</span>
 
 	<script type="text/javascript">
 		var socket = io.connect();
 
-		socket.on('led', function (data) {
-			document.getElementById("inputSlider").value = data.value;
-			document.getElementById("outputText").innerHTML = data.value;
+		socket.on('brightness', function (data) {
+			document.getElementById("inputSliderBrightness").value = data.value;
+			document.getElementById("outputTextBrightness").innerHTML = data.value;
+		});
+    socket.on('red', function (data) {
+			document.getElementById("inputSliderRed").value = data.value;
+			document.getElementById("outputTextRed").innerHTML = data.value;
+		});
+    socket.on('green', function (data) {
+			document.getElementById("inputSliderGreen").value = data.value;
+			document.getElementById("outputTextGreen").innerHTML = data.value;
+		});
+    socket.on('blue', function (data) {
+			document.getElementById("inputSliderBlue").value = data.value;
+			document.getElementById("outputTextBlue").innerHTML = data.value;
 		});
 
-		function showValue(newValue)
+		function showValueBrightness(newValue)
 		{
-			document.getElementById("outputText").innerHTML=newValue;
-			socket.emit('led', { value: newValue });
+			document.getElementById("outputTextBrightness").innerHTML=newValue;
+			socket.emit('brightness', { value: newValue });
+		}
+    function showValueRed(newValue)
+		{
+			document.getElementById("outputTextRed").innerHTML=newValue;
+			socket.emit('red', { value: newValue });
+		}
+    function showValueGreen(newValue)
+		{
+			document.getElementById("outputTextGreen").innerHTML=newValue;
+			socket.emit('green', { value: newValue });
+		}
+    function showValueBlue(newValue)
+		{
+			document.getElementById("outputTextBlue").innerHTML=newValue;
+			socket.emit('blue', { value: newValue });
 		}
 	</script>
   </body>

@@ -19,6 +19,7 @@ class ledHandler {
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
     this.blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
+    this.color = { r:0 g:0, b:0 };
     // Current pixel position
     this.offset = 0;
 
@@ -50,15 +51,22 @@ class ledHandler {
     this.config.brightness = brightness;
     // Configure ws281x
     ws281x.configure(this.config);
+    this.run();
   }
 
+  updateColor(color) {
+    // Set full brightness, a value from 0 to 255 (default 255)
+    this.color = color;
+  }
 
   loop() {
     var leds = this.config.width * this.config.height;
     var pixels = new Uint32Array(leds);
 
+    var pixelColor = (this.color.r << 16) | (this.color.g << 8)| this.color.b;
+
     // Set a specific pixel
-    pixels[this.offset] = 0xFF0000;
+    pixels[this.offset] = pixelColor;
 
     // Move on to next
     this.offset = (this.offset + 1) % leds;
@@ -76,15 +84,41 @@ class ledHandler {
 var ledHandlerInstance = new ledHandler();
 ledHandlerInstance.run();
 var brightness = 0;
+var color = { r:255, g:215, b:0 };
 
 io.sockets.on('connection', (socket) => {
-  socket.emit('led', {value: brightness});
+  socket.emit('brightness', {value: brightness});
 
-  socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
+  socket.on('brightness', function (data) { //makes the socket react to 'led' packets by calling this function
     brightness = data.value;  //updates brightness from the data object
     ledHandlerInstance.updateBrightness(brightness);
-    io.sockets.emit('led', {value: brightness}); //sends the updated brightness to all connected clients
+    io.sockets.emit('brightness', {value: brightness}); //sends the updated brightness to all connected clients
   });
+
+  socket.emit('red', {value: red});
+
+  socket.on('red', function (data) {
+    color.r = data.value;
+    ledHandlerInstance.updateColor(color);
+    io.sockets.emit('red', {value: color.r});
+  });
+
+  socket.emit('green', {value: red});
+
+  socket.on('green', function (data) {
+    color.g = data.value;
+    ledHandlerInstance.updateColor(color);
+    io.sockets.emit('green', {value: color.g});
+  });
+
+  socket.emit('blue', {value: red});
+
+  socket.on('blue', function (data) {
+    color.g = data.value;
+    ledHandlerInstance.updateColor(color);
+    io.sockets.emit('green', {value: color.g}); //sends the updated brightness to all connected clients
+  });
+
 });
 
 
