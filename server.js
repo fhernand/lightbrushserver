@@ -38,11 +38,13 @@ class Circle {
     }
   }
   getMapValue(i){
-    const x = Math.floor(i / (this.width*2));
-    const y = i % (this.width*2);
-    if (x >= this.width && y >= this.width){
-      return this.mapCircleQuarter[(x-this.width)*this.width - (y-this.width)];
-    }
+    // const x = Math.floor(i / (this.width*2));
+    // const y = i % (this.width*2);
+    // if (x >= this.width && y >= this.width){
+    //   return this.mapCircleQuarter[(x-this.width)*this.width - (y-this.width)];
+    // }
+    return this.mapCircleQuarter[i];
+
   }
   draw(n) {
     this.anteil = 0;
