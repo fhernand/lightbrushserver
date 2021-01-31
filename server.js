@@ -9,6 +9,8 @@ http.listen(3000, () => {
 
 app.use(express.static('public'));
 
+var ledHandlerInstance = new ledHandler();
+
 var brightness = 0;
 
 io.sockets.on('connection', (socket) => {
@@ -16,7 +18,7 @@ io.sockets.on('connection', (socket) => {
 
   socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
     brightness = data.value;  //updates brightness from the data object
-
+    ledHandlerInstance.updateBrightness(brightness);
     io.sockets.emit('led', {value: brightness}); //sends the updated brightness to all connected clients
   });
 });
@@ -59,6 +61,14 @@ class ledHandler {
     }
   }
 
+  updateBrightness(brightness) {
+    // Set full brightness, a value from 0 to 255 (default 255)
+    this.config.brightness = brightness;
+    // Configure ws281x
+    ws281x.configure(this.config);
+  }
+
+
   loop() {
     var leds = this.config.width * this.config.height;
     var pixels = new Uint32Array(leds);
@@ -79,7 +89,6 @@ class ledHandler {
   }
 };
 
-var ledHandlerInstance = new ledHandler();
 ledHandlerInstance.run();
 
 // ---- trap the SIGINT and reset before exit
