@@ -38,9 +38,9 @@ class Circle {
     }
   }
   getMapValue(i){
-    const x = Math.floor(i / this.width*2);
-    const y = i % this.width*2 - 1;
-    if (x > this.width && y > this.width){
+    const x = Math.floor(i / (this.width*2));
+    const y = (i % (this.width*2)) - 1;
+    if (x >= this.width && y >= this.width){
       return this.mapCircleQuarter[(x-this.width)+(y-this.width)];
     }
   }
@@ -51,20 +51,20 @@ class Circle {
     const max_i = this.granularity*(x+1);
     const max_j = this.granularity*(y+1);
 
-      for (var i = max_i; i > this.granularity * x; i-- ){
-        for (var j = max_j; j > this.granularity * y; j-- ){
-          var dist_ij = Math.sqrt( (i * i) + (j * j) );
-          var value = dist_ij / this.radius;
-          if (i == max_i && j == max_j && value <= 1){
-            return 1;
+    for (var i = max_i; i > this.granularity * x; i-- ){
+      for (var j = max_j; j > this.granularity * y; j-- ){
+        var dist_ij = Math.sqrt( (i * i) + (j * j) );
+        var value = dist_ij / this.radius;
+        if (i == max_i && j == max_j && value <= 1){
+          return 1;
 
-          } else {
-            if (value<=1){
-              this.anteil++;
-            }
+        } else {
+          if (value<=1){
+            this.anteil++;
           }
         }
       }
+    }
     return this.anteil / ( this.granularity * this.granularity );;
   }
 }
