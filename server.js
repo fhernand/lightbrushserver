@@ -54,7 +54,6 @@ class ledHandler {
   updateBrightness(brightness) {
     // Set full brightness, a value from 0 to 255 (default 255)
     this.MaxBrightness = brightness;
-    // Configure ws281x and restart
   }
 
   updateColor(color) {
@@ -89,7 +88,7 @@ class ledHandler {
     };
 
     var ledHandlerInstance = new ledHandler();
-    var brightness = 0;
+    var brightness = ledHandlerInstance.MaxBrightness;
     var color = { r:255, g:215, b:0 };
 
     io.sockets.on('connection', (socket) => {
