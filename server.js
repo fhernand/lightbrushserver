@@ -95,7 +95,7 @@ io.sockets.on('connection', (socket) => {
     io.sockets.emit('brightness', {value: brightness}); //sends the updated brightness to all connected clients
   });
 
-  socket.emit('red', {value: red});
+  socket.emit('red', {value: color.r});
 
   socket.on('red', function (data) {
     color.r = data.value;
@@ -103,7 +103,7 @@ io.sockets.on('connection', (socket) => {
     io.sockets.emit('red', {value: color.r});
   });
 
-  socket.emit('green', {value: red});
+  socket.emit('green', {value: color.g});
 
   socket.on('green', function (data) {
     color.g = data.value;
@@ -111,12 +111,12 @@ io.sockets.on('connection', (socket) => {
     io.sockets.emit('green', {value: color.g});
   });
 
-  socket.emit('blue', {value: red});
+  socket.emit('blue', {value: color.b});
 
   socket.on('blue', function (data) {
-    color.g = data.value;
+    color.b = data.value;
     ledHandlerInstance.updateColor(color);
-    io.sockets.emit('green', {value: color.g}); //sends the updated brightness to all connected clients
+    io.sockets.emit('blue', {value: color.b});
   });
 
 });
