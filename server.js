@@ -38,7 +38,7 @@ class ledHandler {
     // to a custom Uint32Array to define your own map.
     this.config.width = NUM_LEDS_WIDTH;
     this.config.height = NUM_LEDS_HEIGHT;
-    this.config.map = 'canvas-matrix';
+    this.config.map = 'alternating-matrix';
 
 
     // Configure ws281x
