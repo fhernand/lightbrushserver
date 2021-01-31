@@ -22,18 +22,61 @@ io.sockets.on('connection', (socket) => {
 });
 
 
-var NUM_LEDS = 64;
 var ws281x = require('rpi-ws281x');
-// One time initialization
-ws281x.configure({leds:NUM_LEDS});
 
-pixelData = new Uint32Array(NUM_LEDS);
-blackpixelData = new Uint32Array(NUM_LEDS);
-for (var i = 0; i < NUM_LEDS; i++) {
-			blackpixelData[i] = rgb2Int(0,0,0);
-}
-ws281x.init(NUM_LEDS);
-ws281x.setBrightness(brightness);
+  var NUM_LEDS_WIDTH = 8;
+  var NUM_LEDS_HEIGHT = 8;
+
+class ledHandler {
+  var pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
+  var blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
+    constructor() {
+        // Current pixel position
+        this.offset = 0;
+
+        // Set my Neopixel configuration
+        this.config = {};
+
+        // Set full brightness, a value from 0 to 255 (default 255)
+               this.config.brightness = 255;
+
+        // By setting width and height instead of number of leds
+        // you may use named pixel mappings.
+        // Currently "matrix" and "alternating-matrix" are
+        // supported. You may also set the "map" property
+        // to a custom Uint32Array to define your own map.
+        this.config.width = NUM_LEDS_WIDTH;
+        this.config.height = NUM_LEDS_HEIGHT;
+        this.config.map = 'alternating-matrix';
+
+        // Configure ws281x
+        ws281x.configure(this.config);
+
+        for (var i = 0; i < (NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT); i++) {
+        			blackpixelData[i] = rgb2Int(0,0,0);
+        }
+    }
+
+    loop() {
+        var leds = this.config.width * this.config.height;
+        var pixels = new Uint32Array(leds);
+
+        // Set a specific pixel
+        pixels[this.offset] = 0xFF0000;
+
+        // Move on to next
+        this.offset = (this.offset + 1) % leds;
+
+        // Render to strip
+        ws281x.render(pixels);
+    }
+
+    run() {
+        // Loop every 100 ms
+        setInterval(this.loop.bind(this), 100);
+    }
+};
+
 
 // ---- trap the SIGINT and reset before exit
 process.on('SIGINT', function () {
@@ -41,22 +84,6 @@ process.on('SIGINT', function () {
   process.nextTick(function () { process.exit(0); });
 });
 
-
-
-// ---- animation-loop
-setInterval(function () {
-	if (brightness > 0){
-
-    var currentColor = rgb2Int(2*brightness,2*brightness,2*brightness);
-		for (var i = 0; i < NUM_LEDS; i++) {
-					pixelData[NUM_LEDS - 1 - i] = currentColor;
-			}
-		ws281x.render(pixelData);
-
-	} else {
-		clearLEDs();
-	}
-}, 1000 / 30);
 
 function clearLEDs(){
 		ws281x.render(blackpixelData);
