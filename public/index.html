@@ -63,7 +63,7 @@
       colorPickerRGB.r = parseInt(newValue);
       document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
       document.getElementById("outputTextRed").innerHTML=newValue;
-      socket.emit('red', { value: newValue });
+      setColor();
     }
     function showValueGreen(newValue)
     {
@@ -72,7 +72,7 @@
       colorPickerRGB.g = parseInt(newValue);
       document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
       document.getElementById("outputTextGreen").innerHTML=newValue;
-      socket.emit('green', { value: newValue });
+      setColor();
     }
     function showValueBlue(newValue)
     {
@@ -81,7 +81,7 @@
       colorPickerRGB.b = parseInt(newValue);
       document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
       document.getElementById("outputTextBlue").innerHTML=newValue;
-      socket.emit('blue', { value: newValue });
+      setColor();
     }
     function hexToRgb(hex) {
       var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
