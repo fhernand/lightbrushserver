@@ -144,9 +144,9 @@ class LedHandler {
     var colorBlue = this.color.b * this.MaxBrightness / 255;
 
     for (var i = 0; i < leds; i++) {
-      var value = this.circleInstance.getMapValue(i);
+      var value = this.circleInstance.getMapValue(this.offset);
       var pixelColor = rgb2Int(value*colorRed,value*colorGreen,value*colorBlue);
-      pixels[i] = pixelColor;
+      //pixels[i] = pixelColor;
       // Set a specific pixel
       pixels[this.offset] = pixelColor;
 
