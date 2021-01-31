@@ -109,7 +109,6 @@ class LedHandler {
 
       for (var i = 0; i < leds; i++) {
         var value = this.circleInstance.draw(i);
-        console.log(value);
         var pixelColor = rgb2Int(value*255*colorRed,value*255*colorGreen,value*255*colorBlue);
         pixels[i] = pixelColor;
         // Set a specific pixel
@@ -123,7 +122,7 @@ class LedHandler {
     }
 
     run() {
-      setInterval(this.loop.bind(this), 2000);
+      setInterval(this.loop.bind(this), 100);
     }
   };
 
