@@ -19,7 +19,7 @@ class ledHandler {
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
     this.blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
-    this.color = { r:0 g:0, b:0 };
+    this.color = { r:0, g:0, b:0 };
     // Current pixel position
     this.offset = 0;
 
