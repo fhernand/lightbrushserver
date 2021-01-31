@@ -148,10 +148,10 @@ class LedHandler {
       var pixelColor = rgb2Int(value*colorRed,value*colorGreen,value*colorBlue);
       pixels[i] = pixelColor;
       // Set a specific pixel
-      //pixels[this.offset] = pixelColor;
+      pixels[this.offset] = pixelColor;
 
       // Move on to next
-      //this.offset = (this.offset + 1) % leds;
+      this.offset = (this.offset + 1) % leds;
     }
     // Render to strip
     ws281x.render(pixels);
