@@ -12,36 +12,13 @@
   <br><span id="outputTextBrightness">50</span><br><br>
 
   <br><div id="html5DIV">
-    <h3>Or Use HTML5:</h3>
+    <h3>LED Color Picker</h3>
     <input type="color" id="html5colorpicker" onchange="setColor()" value="#ff0000" style="width:85%;">
   </div>
 
 
   <script type="text/javascript">
     var socket = io.connect();
-
-    socket.on('brightness', function (data) {
-      document.getElementById("inputSliderBrightness").value = data.value;
-      document.getElementById("outputTextBrightness").innerHTML = data.value;
-    });
-    socket.on('red', function (data) {
-      var colorPickerValue = document.getElementById("html5colorpicker").value;
-      var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.r = parseInt(data.value);
-      document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
-    });
-    socket.on('green', function (data) {
-      var colorPickerValue = document.getElementById("html5colorpicker").value;
-      var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.g = parseInt(data.value);
-      document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
-    });
-    socket.on('blue', function (data) {
-      var colorPickerValue = document.getElementById("html5colorpicker").value;
-      var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.b = parseInt(data.value);
-      document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
-    });
 
     function setColor()
     {
