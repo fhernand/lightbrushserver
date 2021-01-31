@@ -40,6 +40,7 @@
   }
   function showValueRadius(newValue)
   {
+    document.getElementById("outputTextRadius").innerHTML=newValue;
     rtime = new Date();
     if (timeout === false) {
       timeout = true;
@@ -52,8 +53,8 @@
       setTimeout(resizeend, delta);
     } else {
       timeout = false;
-      document.getElementById("outputTextRadius").innerHTML=newValue;
-      socket.emit('radius', { value: newValue });
+
+      socket.emit('radius', { value: document.getElementById("outputTextRadius").innerHTML });
     }
   }
 
