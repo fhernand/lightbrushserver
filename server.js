@@ -27,7 +27,9 @@ class ledHandler {
     this.config = {};
 
     // Set full brightness, a value from 0 to 255 (default 255)
-    this.config.brightness = 100;
+    this.config.brightness = 255;
+
+    this.config.strip = 'grb';
 
     // By setting width and height instead of number of leds
     // you may use named pixel mappings.
@@ -36,7 +38,8 @@ class ledHandler {
     // to a custom Uint32Array to define your own map.
     this.config.width = NUM_LEDS_WIDTH;
     this.config.height = NUM_LEDS_HEIGHT;
-    this.config.map = 'alternating-matrix';
+    this.config.map = 'canvas-matrix';
+
 
     // Configure ws281x
     ws281x.configure(this.config);
@@ -61,76 +64,82 @@ class ledHandler {
     var leds = this.config.width * this.config.height;
     var pixels = new Uint32Array(leds);
 
-    var pixelColor = rgb2Int(this.color.r,this.color.g,this.color.b);
-
-    // Set a specific pixel
-    pixels[this.offset] = pixelColor;
-
-    // Move on to next
-    this.offset = (this.offset + 1) % leds;
-
-    // Render to strip
-    ws281x.render(pixels);
-  }
-
-  run() {
-    // Loop every 100 ms
-    setInterval(this.loop.bind(this), 1);
-  }
-};
-
-var ledHandlerInstance = new ledHandler();
-var brightness = 0;
-var color = { r:255, g:215, b:0 };
-
-io.sockets.on('connection', (socket) => {
-  socket.emit('brightness', {value: brightness});
-
-  socket.on('brightness', function (data) { //makes the socket react to 'led' packets by calling this function
-    brightness = data.value;  //updates brightness from the data object
-    ledHandlerInstance.updateBrightness(brightness);
-    io.sockets.emit('brightness', {value: brightness}); //sends the updated brightness to all connected clients
-  });
-
-  socket.emit('red', {value: color.r});
-
-  socket.on('red', function (data) {
-    color.r = data.value;
-    ledHandlerInstance.updateColor(color);
-    io.sockets.emit('red', {value: color.r});
-  });
-
-  socket.emit('green', {value: color.g});
-
-  socket.on('green', function (data) {
-    color.g = data.value;
-    ledHandlerInstance.updateColor(color);
-    io.sockets.emit('green', {value: color.g});
-  });
-
-  socket.emit('blue', {value: color.b});
-
-  socket.on('blue', function (data) {
-    color.b = data.value;
-    ledHandlerInstance.updateColor(color);
-    io.sockets.emit('blue', {value: color.b});
-  });
-
-});
-
-ledHandlerInstance.run();
-
-// ---- trap the SIGINT and reset before exit
-process.on('SIGINT', function () {
-  ws281x.reset();
-  process.nextTick(function () { process.exit(0); });
-});
+    var pixelColor = rgb2Int(this.color.r * this.brightness / 255,
+      this.color.g * this.brightness / 255,
+      this.color.b * this.brightness / 255);
 
 
-function clearLEDs(){
-  ws281x.render(blackpixelData);
-}
 
-function rgb2Int(r, g, b) {
-  return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-}
+      for (var i = 0; i < this.config.leds; i++) {
+
+        // Set a specific pixel
+        pixels[this.offset] = pixelColor;
+
+        // Move on to next
+        this.offset = (this.offset + 1) % leds;
+
+        // Render to strip
+        ws281x.render(pixels); }
+      }
+
+      run() {
+        // Loop every 100 ms
+        setInterval(this.loop.bind(this), 10);
+      }
+    };
+
+    var ledHandlerInstance = new ledHandler();
+    var brightness = 0;
+    var color = { r:255, g:215, b:0 };
+
+    io.sockets.on('connection', (socket) => {
+      socket.emit('brightness', {value: brightness});
+
+      socket.on('brightness', function (data) { //makes the socket react to 'led' packets by calling this function
+        brightness = data.value;  //updates brightness from the data object
+        ledHandlerInstance.updateBrightness(brightness);
+        io.sockets.emit('brightness', {value: brightness}); //sends the updated brightness to all connected clients
+      });
+
+      socket.emit('red', {value: color.r});
+
+      socket.on('red', function (data) {
+        color.r = data.value;
+        ledHandlerInstance.updateColor(color);
+        io.sockets.emit('red', {value: color.r});
+      });
+
+      socket.emit('green', {value: color.g});
+
+      socket.on('green', function (data) {
+        color.g = data.value;
+        ledHandlerInstance.updateColor(color);
+        io.sockets.emit('green', {value: color.g});
+      });
+
+      socket.emit('blue', {value: color.b});
+
+      socket.on('blue', function (data) {
+        color.b = data.value;
+        ledHandlerInstance.updateColor(color);
+        io.sockets.emit('blue', {value: color.b});
+      });
+
+    });
+
+    ledHandlerInstance.run();
+
+    // ---- trap the SIGINT and reset before exit
+    process.on('SIGINT', function () {
+      ws281x.reset();
+      process.nextTick(function () { process.exit(0); });
+    });
+
+
+    function clearLEDs(){
+      ws281x.render(blackpixelData);
+    }
+
+    function rgb2Int(r, g, b) {
+      return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+    }
