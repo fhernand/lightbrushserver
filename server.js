@@ -37,6 +37,15 @@ class Circle {
       this.mapCircleQuarter[i] = this.draw(i);
       console.log(this.mapCircleQuarter[i]);
     }
+
+    for (var i = 0; i < this.width*this.width*4; i++) {
+      var x = i % (this.width*2);
+      var y = Math.floor(i / (this.width*2));
+
+      if (x > this.width && y > this.width){
+        this.map[i] = this.mapCircleQuarter[(this.width - x) + (y-this.width)*this.width]
+      }
+    }
   }
   getMapValue(i){
     // const x = Math.floor(i / (this.width*2));
@@ -49,8 +58,9 @@ class Circle {
   }
   draw(n) {
     this.anteil = 0;
-    const x = Math.floor(n / this.width);
-    const y = n % this.width;
+    const x = n % this.width;
+    const y = Math.floor(n / this.width);
+
     const max_i = this.granularity*(x+1);
     const max_j = this.granularity*(y+1);
 
