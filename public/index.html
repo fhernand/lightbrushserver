@@ -10,12 +10,6 @@
 <body>
   <input type="range" id= "inputSliderBrightness" min="0" max="255" value="50" step="1" oninput="showValueBrightness(this.value)" />
   <br><span id="outputTextBrightness">50</span><br><br>
-  <input type="range" id= "inputSliderRed" min="0" max="255" value="50" step="1" oninput="showValueRed(this.value)" />
-  <br><span id="outputTextRed">50</span><br><br>
-  <input type="range" id= "inputSliderGreen" min="0" max="255" value="50" step="1" oninput="showValueGreen(this.value)" />
-  <br><span id="outputTextGreen">50</span><br><br>
-  <input type="range" id= "inputSliderBlue" min="0" max="255" value="50" step="1" oninput="showValueBlue(this.value)" />
-  <br><span id="outputTextBlue">50</span>
 
   <br><div id="html5DIV">
     <h3>Or Use HTML5:</h3>
@@ -31,16 +25,25 @@
       document.getElementById("outputTextBrightness").innerHTML = data.value;
     });
     socket.on('red', function (data) {
-      document.getElementById("inputSliderRed").value = data.value;
-      document.getElementById("outputTextRed").innerHTML = data.value;
+      var colorPickerValue = document.getElementById("html5colorpicker").value;
+      var colorPickerRGB = hexToRgb(colorPickerValue);
+      colorPickerRGB.r = parseInt(newValue);
+      document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
+      setColor();
     });
     socket.on('green', function (data) {
-      document.getElementById("inputSliderGreen").value = data.value;
-      document.getElementById("outputTextGreen").innerHTML = data.value;
+      var colorPickerValue = document.getElementById("html5colorpicker").value;
+      var colorPickerRGB = hexToRgb(colorPickerValue);
+      colorPickerRGB.g = parseInt(newValue);
+      document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
+      setColor();
     });
     socket.on('blue', function (data) {
-      document.getElementById("inputSliderBlue").value = data.value;
-      document.getElementById("outputTextBlue").innerHTML = data.value;
+      var colorPickerValue = document.getElementById("html5colorpicker").value;
+      var colorPickerRGB = hexToRgb(colorPickerValue);
+      colorPickerRGB.b = parseInt(newValue);
+      document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
+      setColor();
     });
 
     function setColor()
@@ -55,33 +58,6 @@
     {
       document.getElementById("outputTextBrightness").innerHTML=newValue;
       socket.emit('brightness', { value: newValue });
-    }
-    function showValueRed(newValue)
-    {
-      var colorPickerValue = document.getElementById("html5colorpicker").value;
-      var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.r = parseInt(newValue);
-      document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
-      document.getElementById("outputTextRed").innerHTML=newValue;
-      setColor();
-    }
-    function showValueGreen(newValue)
-    {
-      var colorPickerValue = document.getElementById("html5colorpicker").value;
-      var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.g = parseInt(newValue);
-      document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
-      document.getElementById("outputTextGreen").innerHTML=newValue;
-      setColor();
-    }
-    function showValueBlue(newValue)
-    {
-      var colorPickerValue = document.getElementById("html5colorpicker").value;
-      var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.b = parseInt(newValue);
-      document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
-      document.getElementById("outputTextBlue").innerHTML=newValue;
-      setColor();
     }
     function hexToRgb(hex) {
       var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
