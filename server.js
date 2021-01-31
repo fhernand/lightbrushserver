@@ -50,7 +50,7 @@ class Circle {
   draw(n) {
     this.anteil = 0;
     const x = Math.floor(n / this.width);
-    const y = this.width - (n % this.width) - 1;
+    const y = n % this.width;
     const max_i = this.granularity*(x+1);
     const max_j = this.granularity*(y+1);
 
@@ -68,7 +68,8 @@ class Circle {
         }
       }
     }
-    return this.anteil / ( this.granularity * this.granularity );;
+    console.log(this.anteil);
+    return this.anteil / ( this.granularity * this.granularity );
   }
 }
 
