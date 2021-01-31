@@ -20,42 +20,59 @@
 
 
   <script type="text/javascript">
-    var socket = io.connect();
+  var socket = io.connect();
+  var rtime;
+  var timeout = false;
+  var delta = 200;
 
-    function setColor()
-    {
-      var newValue = document.getElementById("html5colorpicker").value;
-      var colorRGB = hexToRgb(newValue);
-      socket.emit('red', { value: colorRGB.r });
-      socket.emit('green', { value: colorRGB.g });
-      socket.emit('blue', { value: colorRGB.b });
+  function setColor()
+  {
+    var newValue = document.getElementById("html5colorpicker").value;
+    var colorRGB = hexToRgb(newValue);
+    socket.emit('red', { value: colorRGB.r });
+    socket.emit('green', { value: colorRGB.g });
+    socket.emit('blue', { value: colorRGB.b });
+  }
+  function showValueBrightness(newValue)
+  {
+    document.getElementById("outputTextBrightness").innerHTML=newValue;
+    socket.emit('brightness', { value: newValue });
+  }
+  function showValueRadius(newValue)
+  {
+    rtime = new Date();
+    if (timeout === false) {
+      timeout = true;
+      setTimeout(resizeend, delta);
     }
-    function showValueBrightness(newValue)
-    {
-      document.getElementById("outputTextBrightness").innerHTML=newValue;
-      socket.emit('brightness', { value: newValue });
-    }
-    function showValueRadius(newValue)
-    {
+  }
+
+  function resizeend() {
+    if (new Date() - rtime < delta) {
+      setTimeout(resizeend, delta);
+    } else {
+      timeout = false;
       document.getElementById("outputTextRadius").innerHTML=newValue;
       socket.emit('radius', { value: newValue });
     }
-    function hexToRgb(hex) {
-      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      } : null;
-    }
-    function componentToHex(c) {
-  var hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
-}
+  }
 
-function rgbToHex(r, g, b) {
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-  </script>
+  function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+  function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }
+
+  function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  }
+</script>
 </body>
 </html>
