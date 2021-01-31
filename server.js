@@ -40,7 +40,7 @@ class Circle {
   }
   calculateMap(){
     for (var i = 0; i < this.width*this.width; i++) {
-      this.mapCircleQuarter4[i] = this.draw(i);
+      this.mapCircleQuarter1[i] = this.draw(i);
     }
 
     for (var i = 0; i < this.width; i++) {
@@ -58,7 +58,7 @@ class Circle {
       if (x >= this.width && y >= this.width){
         var index = (x-this.width) + (y-this.width)*this.width;
 
-        this.map[i] = this.mapCircleQuarter4[index]
+        this.map[i] = this.mapCircleQuarter1[index]
         console.log(i);
       } else if (x < this.width && y < this.width) {
         var index = (this.width-x-1) + (this.width-y-1)*this.width;
