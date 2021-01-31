@@ -28,9 +28,11 @@ var ws281x = require('rpi-ws281x');
   var NUM_LEDS_HEIGHT = 8;
 
 class ledHandler {
-  pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
-  blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
+
     constructor() {
+      this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
+      this.blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
+      
         // Current pixel position
         this.offset = 0;
 
@@ -77,6 +79,8 @@ class ledHandler {
     }
 };
 
+var ledHandler = new ledHandler();
+ledHandler.run();
 
 // ---- trap the SIGINT and reset before exit
 process.on('SIGINT', function () {
