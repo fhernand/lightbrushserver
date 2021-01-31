@@ -2,32 +2,16 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const ws281x = require('rpi-ws281x');
+
+const NUM_LEDS_WIDTH = 8;
+const NUM_LEDS_HEIGHT = 8;
 
 http.listen(3000, () => {
   console.log('listening on *:3000');
 });
 
 app.use(express.static('public'));
-
-var ledHandlerInstance = new ledHandler();
-
-var brightness = 0;
-
-io.sockets.on('connection', (socket) => {
-  socket.emit('led', {value: brightness});
-
-  socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
-    brightness = data.value;  //updates brightness from the data object
-    ledHandlerInstance.updateBrightness(brightness);
-    io.sockets.emit('led', {value: brightness}); //sends the updated brightness to all connected clients
-  });
-});
-
-
-var ws281x = require('rpi-ws281x');
-
-var NUM_LEDS_WIDTH = 8;
-var NUM_LEDS_HEIGHT = 8;
 
 class ledHandler {
 
@@ -89,7 +73,20 @@ class ledHandler {
   }
 };
 
+var ledHandlerInstance = new ledHandler();
 ledHandlerInstance.run();
+var brightness = 0;
+
+io.sockets.on('connection', (socket) => {
+  socket.emit('led', {value: brightness});
+
+  socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
+    brightness = data.value;  //updates brightness from the data object
+    ledHandlerInstance.updateBrightness(brightness);
+    io.sockets.emit('led', {value: brightness}); //sends the updated brightness to all connected clients
+  });
+});
+
 
 // ---- trap the SIGINT and reset before exit
 process.on('SIGINT', function () {
