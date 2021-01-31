@@ -109,7 +109,7 @@ class LedHandler {
 
       for (var i = 0; i < leds; i++) {
         var value = this.circleInstance.draw(i);
-        var pixelColor = rgb2Int(value*255*colorRed,value*255*colorGreen,value*255*colorBlue);
+        var pixelColor = rgb2Int(value*colorRed,value*colorGreen,value*colorBlue);
         pixels[i] = pixelColor;
         // Set a specific pixel
         //pixels[this.offset] = pixelColor;
