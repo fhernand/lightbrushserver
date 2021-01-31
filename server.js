@@ -35,6 +35,7 @@ class Circle {
   calculateMap(){
     for (var i = 0; i < this.width*this.width; i++) {
       this.mapCircleQuarter[i] = this.draw(i);
+      console.log(this.mapCircleQuarter[i]);
     }
   }
   getMapValue(i){
@@ -152,7 +153,7 @@ class LedHandler {
 };
 
 var ledHandlerInstance = new LedHandler();
-ledHandlerInstance.setRadius(0.8);
+ledHandlerInstance.setRadius(1);
 var brightness = 50;
 var color = { r:255, g:215, b:0 };
 
