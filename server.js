@@ -162,7 +162,7 @@ class LedHandler {
   }
 
   run() {
-    setInterval(this.loop.bind(this), 100);
+    setInterval(this.loop.bind(this), 10);
   }
 };
 
@@ -183,9 +183,9 @@ io.sockets.on('connection', (socket) => {
   socket.emit('radius', {value: radius});
 
   socket.on('radius', function (data) { //makes the socket react to 'led' packets by calling this function
-    radius = data.value;  //updates brightness from the data object
+    radius = data.value;
     ledHandlerInstance.setRadius(radius);
-    io.sockets.emit('radius', {value: radius}); //sends the updated brightness to all connected clients
+    io.sockets.emit('radius', {value: radius});
   });
 
   socket.emit('red', {value: color.r});
