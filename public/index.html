@@ -60,7 +60,7 @@
     {
       var colorPickerValue = document.getElementById("html5colorpicker").value;
       var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.r = newValue;
+      colorPickerRGB.r = parseInt(newValue);
       document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
       document.getElementById("outputTextRed").innerHTML=newValue;
       socket.emit('red', { value: newValue });
@@ -69,7 +69,7 @@
     {
       var colorPickerValue = document.getElementById("html5colorpicker").value;
       var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.g = newValue;
+      colorPickerRGB.g = parseInt(newValue);
       document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
       document.getElementById("outputTextGreen").innerHTML=newValue;
       socket.emit('green', { value: newValue });
@@ -78,7 +78,7 @@
     {
       var colorPickerValue = document.getElementById("html5colorpicker").value;
       var colorPickerRGB = hexToRgb(colorPickerValue);
-      colorPickerRGB.b = newValue;
+      colorPickerRGB.b = parseInt(newValue);
       document.getElementById("html5colorpicker").value = rgbToHex(colorPickerRGB.r,colorPickerRGB.b,colorPickerRGB.g);
       document.getElementById("outputTextBlue").innerHTML=newValue;
       socket.emit('blue', { value: newValue });
