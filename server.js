@@ -78,14 +78,14 @@ class ledHandler {
       var pixelColor = (this.color.r << 16) | (this.color.g << 8)| this.color.b;
 
 
-      for (var i = 0; i < this.config.leds; i++) {
+      //for (var i = 0; i < this.config.leds; i++) {
 
         // Set a specific pixel
         pixels[this.offset] = pixelColor;
 
         // Move on to next
         this.offset = (this.offset + 1) % leds;
-      }
+      //}
       // Render to strip
       ws281x.render(pixels);
     }
