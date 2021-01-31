@@ -19,6 +19,8 @@ class ledHandler {
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
     this.blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
+    this.MaxBrightness = 255;
+
     this.color = { r:0, g:0, b:0 };
     // Current pixel position
     this.offset = 0;
@@ -51,7 +53,7 @@ class ledHandler {
 
   updateBrightness(brightness) {
     // Set full brightness, a value from 0 to 255 (default 255)
-    this.config.brightness = brightness;
+    this.MaxBrightness = brightness;
     // Configure ws281x and restart
   }
 
@@ -64,11 +66,9 @@ class ledHandler {
     var leds = this.config.width * this.config.height;
     var pixels = new Uint32Array(leds);
 
-    var pixelColor = rgb2Int(this.color.r * this.brightness / 255,
-      this.color.g * this.brightness / 255,
-      this.color.b * this.brightness / 255);
-
-
+    var pixelColor = rgb2Int(this.color.r * this.MaxBrightness / 255,
+      this.color.g * this.MaxBrightness / 255,
+      this.color.b * this.MaxBrightness / 255);
 
       for (var i = 0; i < this.config.leds; i++) {
 
