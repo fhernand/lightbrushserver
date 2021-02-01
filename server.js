@@ -22,6 +22,7 @@ class Circle {
     this.mapCircleQuarter = new Float32Array(this.width * this.width);
     this.anteil = 0;
     this.granularity = 10;
+    this.megamap = [];
   }
   reset(){
     this.map = new Float32Array(this.width * this.width * 4);
