@@ -117,13 +117,8 @@ class LedHandler {
     this.config.height = NUM_LEDS_HEIGHT;
     this.config.map = 'alternating-matrix';
 
-
     // Configure ws281x
     ws281x.configure(this.config);
-
-    for (var i = 0; i < (NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT); i++) {
-      this.blackpixelData[i] = rgb2Int(0,0,0);
-    }
   }
 
   updateBrightness(brightness) {
@@ -222,10 +217,6 @@ process.on('SIGINT', function () {
   process.nextTick(function () { process.exit(0); });
 });
 
-
-function clearLEDs(){
-  ws281x.render(blackpixelData);
-}
 
 function rgb2Int(r, g, b) {
   return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
