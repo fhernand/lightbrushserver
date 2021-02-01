@@ -62,7 +62,9 @@ class Circle {
     }
   }
   getMapValue(i){
-    return this.megamap[this.radius][i];
+    if (this.megamap[this.radius] != null ){
+      return this.megamap[this.radius][i];
+    }
 
   }
   draw(n) {
