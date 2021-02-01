@@ -21,9 +21,6 @@
 
   <script type="text/javascript">
   var socket = io.connect();
-  var rtime;
-  var timeout = false;
-  var delta = 5;
 
   function setColor()
   {
@@ -41,21 +38,7 @@
   function showValueRadius(newValue)
   {
     document.getElementById("outputTextRadius").innerHTML=newValue;
-    rtime = new Date();
-    if (timeout === false) {
-      timeout = true;
-      setTimeout(resizeend, delta);
-    }
-  }
-
-  function resizeend() {
-    if (new Date() - rtime < delta) {
-      setTimeout(resizeend, delta);
-    } else {
-      timeout = false;
-
-      socket.emit('radius', { value: document.getElementById("outputTextRadius").innerHTML });
-    }
+    socket.emit('radius', { value: newValue });
   }
 
   function hexToRgb(hex) {
