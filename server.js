@@ -30,9 +30,8 @@ class Circle {
   }
   setRadius(radius){
     this.reset();
-    this.inputradius = radius*100;
     this.radius = this.granularity*this.width*this.inputradius;
-    this.megamap[this.inputradius] = new Float32Array(this.width * this.width * 4);
+    this.megamap[this.radius] = new Float32Array(this.width * this.width * 4);
     this.buffered = false;
     this.calculateMap();
   }
@@ -49,24 +48,24 @@ class Circle {
         if (x >= this.width && y >= this.width){
           var index = (x-this.width) + (y-this.width)*this.width;
 
-          this.megamap[this.inputradius][i] = this.mapCircleQuarter[index]
+          this.megamap[this.radius][i] = this.mapCircleQuarter[index]
         } else if (x < this.width && y < this.width) {
           var index = (this.width-x-1) + (this.width-y-1)*this.width;
-          this.megamap[this.inputradius][i] = this.mapCircleQuarter[index];
+          this.megamap[this.radius][i] = this.mapCircleQuarter[index];
         } else if (x >= this.width && y < this.width) {
           var index = (x-this.width) + (this.width-y-1)*this.width;
-          this.megamap[this.inputradius][i] = this.mapCircleQuarter[index];
+          this.megamap[this.radius][i] = this.mapCircleQuarter[index];
         } else if (x < this.width && y >= this.width) {
           var index = (this.width-x-1) + (y-this.width)*this.width;
-          this.megamap[this.inputradius][i] = this.mapCircleQuarter[index];
+          this.megamap[this.radius][i] = this.mapCircleQuarter[index];
         }
       }
       this.buffered = true;
     }
   }
   getMapValue(i){
-    if (this.megamap[this.inputradius] != null ){
-      return this.megamap[this.inputradius][i];
+    if (this.megamap[this.radius] != null ){
+      return this.megamap[this.radius][i];
     }
 
   }
