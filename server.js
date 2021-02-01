@@ -30,7 +30,8 @@ class Circle {
   }
   setRadius(radius){
     this.reset();
-    this.radius = this.granularity*this.width*radius;
+    this.radius = radius;
+    this.convertedradius = this.granularity*this.width*radius/100;
     this.megamap[this.radius] = new Float32Array(this.width * this.width * 4);
     this.buffered = false;
     this.calculateMap();
@@ -80,7 +81,7 @@ class Circle {
     for (var i = max_i; i >= this.granularity * x; i-- ){
       for (var j = max_j; j >= this.granularity * y; j-- ){
         var dist_ij = Math.sqrt( (i * i) + (j * j) );
-        var value = dist_ij / this.radius;
+        var value = dist_ij / this.convertedradius;
         if (i == max_i && j == max_j && value <= 1){
           return 1;
 
@@ -140,7 +141,7 @@ class LedHandler {
   }
 
   setRadius(radius){
-    this.circleInstance.setRadius(radius/100);
+    this.circleInstance.setRadius(radius);
   }
 
   loop() {
