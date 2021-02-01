@@ -30,7 +30,7 @@ class Circle {
   }
   setRadius(radius){
     this.reset();
-    this.radius = this.granularity*this.width*this.inputradius;
+    this.radius = this.granularity*this.width*radius;
     this.megamap[this.radius] = new Float32Array(this.width * this.width * 4);
     this.buffered = false;
     this.calculateMap();
