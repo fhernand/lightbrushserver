@@ -32,11 +32,11 @@ class Circle {
     this.reset();
     this.radius = this.granularity*this.width*radius;
     this.megamap[this.radius] = new Float32Array(this.width * this.width * 4);
-
+    this.buffered = false;
     this.calculateMap();
   }
   calculateMap(){
-    if (this.megamap[this.radius] == null ){
+    if (this.buffered == false ){
       for (var i = 0; i < this.width*this.width; i++) {
         this.mapCircleQuarter[i] = this.draw(i);
       }
@@ -60,6 +60,7 @@ class Circle {
           this.megamap[this.radius][i] = this.mapCircleQuarter[index];
         }
       }
+      this.buffered = true;
     }
   }
   getMapValue(i){
