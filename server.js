@@ -21,7 +21,7 @@ class Circle {
     this.map = new Float32Array(this.width * this.width * 4);
     this.mapCircleQuarter = new Float32Array(this.width * this.width);
     this.anteil = 0;
-    this.granularity = 25;
+    this.granularity = 10;
   }
   reset(){
     this.map = new Float32Array(this.width * this.width * 4);
@@ -30,35 +30,39 @@ class Circle {
   setRadius(radius){
     this.reset();
     this.radius = this.granularity*this.width*radius;
+    this.megamap[this.radius] = new Float32Array(this.width * this.width * 4);
+
     this.calculateMap();
   }
   calculateMap(){
-    for (var i = 0; i < this.width*this.width; i++) {
-      this.mapCircleQuarter[i] = this.draw(i);
-    }
+    if (this.megamap[this.radius] == null ){
+      for (var i = 0; i < this.width*this.width; i++) {
+        this.mapCircleQuarter[i] = this.draw(i);
+      }
 
-    for (var i = 0; i < this.width*this.width*4; i++) {
-      var x = i % (this.width*2);
-      var y = Math.floor(i / (this.width*2));
+      for (var i = 0; i < this.width*this.width*4; i++) {
+        var x = i % (this.width*2);
+        var y = Math.floor(i / (this.width*2));
 
-      if (x >= this.width && y >= this.width){
-        var index = (x-this.width) + (y-this.width)*this.width;
+        if (x >= this.width && y >= this.width){
+          var index = (x-this.width) + (y-this.width)*this.width;
 
-        this.map[i] = this.mapCircleQuarter[index]
-      } else if (x < this.width && y < this.width) {
-        var index = (this.width-x-1) + (this.width-y-1)*this.width;
-        this.map[i] = this.mapCircleQuarter[index];
-      } else if (x >= this.width && y < this.width) {
-        var index = (x-this.width) + (this.width-y-1)*this.width;
-        this.map[i] = this.mapCircleQuarter[index];
-      } else if (x < this.width && y >= this.width) {
-        var index = (this.width-x-1) + (y-this.width)*this.width;
-        this.map[i] = this.mapCircleQuarter[index];
+          this.megamap[this.radius][i] = this.mapCircleQuarter[index]
+        } else if (x < this.width && y < this.width) {
+          var index = (this.width-x-1) + (this.width-y-1)*this.width;
+          this.megamap[this.radius][i] = this.mapCircleQuarter[index];
+        } else if (x >= this.width && y < this.width) {
+          var index = (x-this.width) + (this.width-y-1)*this.width;
+          this.megamap[this.radius][i] = this.mapCircleQuarter[index];
+        } else if (x < this.width && y >= this.width) {
+          var index = (this.width-x-1) + (y-this.width)*this.width;
+          this.megamap[this.radius][i] = this.mapCircleQuarter[index];
+        }
       }
     }
   }
   getMapValue(i){
-    return this.map[i];
+    return this.megamap[this.radius][i];
 
   }
   draw(n) {
