@@ -8,10 +8,27 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <br>
+  <input type="range" id= "inputSliderBrush" min="1" max="3" value="1" step="1" oninput="showValueBrush(this.value)" />
+  <br><span id="outputTextBrush">50</span><br><br>
+
   <input type="range" id= "inputSliderBrightness" min="0" max="255" value="50" step="1" oninput="showValueBrightness(this.value)" />
-  <br><span id="outputTextBrightness">50</span><br><br>
-  <input type="range" id= "inputSliderRadius" min="0" max="100" value="50" step="1" oninput="showValueRadius(this.value)" />
-  <br><span id="outputTextRadius">50</span><br><br>
+  <br><span id="outputTextBrightness">50</span><br>
+  <br>
+  <input type="range" id= "inputSliderPressure" min="0" max="100" value="50" step="1" oninput="showValuePressure(this.value)" />
+  <br><span id="outputTextPressure">50</span><br><br>
+
+  <br>
+  <input type="range" id= "inputSliderRed" min="0" max="255" value="50" step="1" oninput="showValueRed(this.value)" />
+  <br><span id="outputTextRed">50</span><br><br>
+
+  <br>
+  <input type="range" id= "inputSliderGreen" min="0" max="255" value="50" step="1" oninput="showValueGreen(this.value)" />
+  <br><span id="outputTextGreen">50</span><br><br>
+
+  <br>
+  <input type="range" id= "inputSliderBlue" min="0" max="255" value="50" step="1" oninput="showValueBlue(this.value)" />
+  <br><span id="outputTextBlue">50</span><br><br>
 
   <br><div id="html5DIV">
     <h3>LED Color Picker</h3>
@@ -33,14 +50,35 @@
     socket.emit('green', { value: colorRGB.g });
     socket.emit('blue', { value: colorRGB.b });
   }
+  function showValueBrush(newValue)
+  {
+    document.getElementById("outputTextBrush").innerHTML=newValue;
+    socket.emit('brush', { value: newValue });
+  }
   function showValueBrightness(newValue)
   {
     document.getElementById("outputTextBrightness").innerHTML=newValue;
     socket.emit('brightness', { value: newValue });
   }
-  function showValueRadius(newValue)
+  function showValueRed(newValue)
   {
-    document.getElementById("outputTextRadius").innerHTML=newValue;
+    document.getElementById("outputTextRed").innerHTML=newValue;
+    socket.emit('red', { value: newValue });
+  }
+  function showValueGreen(newValue)
+  {
+    document.getElementById("outputTextGreen").innerHTML=newValue;
+    socket.emit('green', { value: newValue });
+  }
+  function showValueBlue(newValue)
+  {
+    document.getElementById("outputTextBlue").innerHTML=newValue;
+    socket.emit('blue', { value: newValue });
+  }
+
+  function showValuePressure(newValue)
+  {
+    document.getElementById("outputTextPressure").innerHTML=newValue;
     rtime = new Date();
     if (timeout === false) {
       timeout = true;
@@ -54,7 +92,7 @@
     } else {
       timeout = false;
 
-      socket.emit('radius', { value: document.getElementById("outputTextRadius").innerHTML });
+      socket.emit('pressure', { value: document.getElementById("outputTextPressure").innerHTML });
     }
   }
 
