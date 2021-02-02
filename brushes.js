@@ -9,7 +9,7 @@ class Brush {
 
   bufferAllMaps(){
     for (var i = 0; i < this.pressureRange; i++) {
-      setPressure(i);
+      this.setPressure(i);
     }
   }
 
