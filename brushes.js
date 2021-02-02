@@ -55,17 +55,16 @@ class Circle extends Brush {
         var y = Math.floor(i / (this.height));
 
         if (x >= this.width/2 && y >= this.height/2){
-          var index = (x-this.width/2) + (y-this.height/2)*this.height/2;
-
+          var index = (x-(this.width/2)) + (y-(this.height/2))*this.height/2;
           this.megamap[this.pressure][i] = this.mapCircleQuarter[index]
         } else if (x < this.width/2 && y < this.height/2) {
-          var index = (this.width/2-x-1) + (this.height/2-y-1)*this.height/2;
+          var index = ((this.width/2)-x-1) + ((this.height/2)-y-1)*this.height/2;
           this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
         } else if (x >= this.width/2 && y < this.height/2) {
-          var index = (x-this.width/2) + (this.height/2-y-1)*this.height/2;
+          var index = (x-(this.width/2)) + ((this.height/2)-y-1)*this.height/2;
           this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
         } else if (x < this.width/2 && y >= this.height/2) {
-          var index = (this.width/2-x-1) + (y-this.height/2)*this.height/2;
+          var index = ((this.width/2)-x-1) + (y-(this.height/2))*this.height/2;
           this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
         }
       }
@@ -75,8 +74,8 @@ class Circle extends Brush {
 
   draw(n) {
     this.anteil = 0;
-    const x = n % this.width/2;
-    const y = Math.floor(n / this.height/2);
+    const x = n % (this.width/2);
+    const y = Math.floor(n / (this.height/2));
 
     const max_i = this.granularity*(x+1)-1;
     const max_j = this.granularity*(y+1)-1;
@@ -105,7 +104,7 @@ class Circle extends Brush {
 
   setPressure(pressure){
     super.setPressure(pressure);
-    this.convertedradius = this.granularity*(this.width/2)*pressure/100;
+    this.convertedradius = this.granularity*(this.width/2)*(pressure/this.pressureRange);
     this.calculateMap();
   }
 }
