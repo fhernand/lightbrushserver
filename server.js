@@ -12,8 +12,9 @@ http.listen(3000, () => {
 app.use(express.static('public'));
 
 var brightness = 50;
-var radius = 50;
+var pressure = 50;
 var color = { r:255, g:215, b:0 };
+var brush = 1;
 
 var ledHandlerInstance = new LedHandler();
 ledHandlerInstance.run();
@@ -21,18 +22,26 @@ ledHandlerInstance.run();
 io.sockets.on('connection', (socket) => {
   socket.emit('brightness', {value: brightness});
 
-  socket.on('brightness', function (data) { //makes the socket react to 'led' packets by calling this function
-    brightness = data.value;  //updates brightness from the data object
+  socket.on('brightness', function (data) {
+    brightness = data.value;
     ledHandlerInstance.updateBrightness(brightness);
-    io.sockets.emit('brightness', {value: brightness}); //sends the updated brightness to all connected clients
+    io.sockets.emit('brightness', {value: brightness});
   });
 
-  socket.emit('radius', {value: radius});
+  socket.emit('pressure', {value: pressure});
 
-  socket.on('radius', function (data) { //makes the socket react to 'led' packets by calling this function
-    radius = data.value;
-    ledHandlerInstance.setRadius(radius);
-    io.sockets.emit('radius', {value: radius});
+  socket.on('pressure', function (data) {
+    pressure = data.value;
+    ledHandlerInstance.setPressure(pressure);
+    io.sockets.emit('pressure', {value: pressure});
+  });
+
+  socket.emit('brush', {value: brush});
+
+  socket.on('brush', function (data) {
+    brush = data.value;
+    ledHandlerInstance.setBrush(brush);
+    io.sockets.emit('brush', {value: brush});
   });
 
   socket.emit('red', {value: color.r});
