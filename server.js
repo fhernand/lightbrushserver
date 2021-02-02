@@ -6,9 +6,6 @@ const io = require('socket.io')(http);
 const { Brush } = require("./brushes");
 const { LedHandler } = require("./ledhandler");
 
-const NUM_LEDS_WIDTH = 8;
-const NUM_LEDS_HEIGHT = 8;
-
 http.listen(3000, () => {
   console.log('listening on *:3000');
 });
