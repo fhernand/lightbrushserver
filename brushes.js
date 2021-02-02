@@ -24,15 +24,16 @@ class Brush {
       return this.megamap[this.pressure][i];
     }
   }
-
+  
   reset(){
   }
 
   setPressure(pressure){
     this.pressure = pressure;
-    this.megamap[this.pressure] = new Float32Array(this.width * this.height);
-    this.buffered = false;
-    this.calculateMap();
+    if (this.megamap[this.pressure] == null ){
+      this.megamap[this.pressure] = new Float32Array(this.width * this.height);
+      this.buffered = false;
+    }
   }
 }
 
@@ -41,6 +42,7 @@ class Circle extends Brush {
     super(width, height, pressureRange);
     this.anteil = 0;
     this.mapCircleQuarter = new Float32Array(this.width * this.height / 4);
+    console.log(pressureRange);
     console.log(this.pressureRange);
     this.bufferAllMaps();
   }
@@ -111,5 +113,5 @@ class Circle extends Brush {
 }
 
 module.exports = {
-    Circle
+  Circle
 };
