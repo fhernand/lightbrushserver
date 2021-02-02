@@ -38,7 +38,7 @@ class Brush {
 
 class Circle extends Brush {
   constructor(width, height){
-    super.constructor(width, height);
+    super(width, height);
     this.anteil = 0;
     this.mapCircleQuarter = new Float32Array(this.width * this.height / 4);
     bufferAllMaps();
