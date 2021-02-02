@@ -3,7 +3,7 @@ class Brush {
     this.width = width;
     this.height = height;
     this.pressureRange = pressureRange;
-    this.granularity = 50;
+    this.granularity = 100;
     this.megamap = [];
   }
 
@@ -41,6 +41,7 @@ class Circle extends Brush {
     super(width, height, pressureRange);
     this.anteil = 0;
     this.mapCircleQuarter = new Float32Array(this.width * this.height / 4);
+    console.log(this.pressureRange);
     this.bufferAllMaps();
   }
 
