@@ -13,6 +13,7 @@ class LedHandler {
     this.blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
     this.MaxBrightness = 255;
+    this.pressureRange = 100;
 
     this.color = { r:0, g:0, b:0 };
     // Current pixel position
@@ -53,18 +54,18 @@ class LedHandler {
     this.brushInstance = null;
     switch(brush) {
       case "1":
-      this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT);
+      this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
       break;
       case "2":
       // other brush
       break;
       default:
-      this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT);
+      this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
     }
   }
 
-  setRadius(radius){
-    this.brushInstance.setRadius(radius);
+  setPressure(pressure){
+    this.brushInstance.setPressure(pressure);
   }
 
   loop() {
