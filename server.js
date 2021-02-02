@@ -4,7 +4,7 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const ws281x = require('rpi-ws281x');
 
-const { Brush } = require("brushes");
+const { Brush } = require("Brush");
 
 const NUM_LEDS_WIDTH = 8;
 const NUM_LEDS_HEIGHT = 8;
