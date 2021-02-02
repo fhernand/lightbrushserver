@@ -1,6 +1,6 @@
 const ws281x = require('rpi-ws281x');
 
-const { Brush } = require("./brushes");
+const { Circle } = require("./brushes");
 
 const NUM_LEDS_WIDTH = 8;
 const NUM_LEDS_HEIGHT = 8;
@@ -8,7 +8,7 @@ const NUM_LEDS_HEIGHT = 8;
 class LedHandler {
 
   constructor() {
-    this.brushInstance = new Brush(NUM_LEDS_WIDTH/2);
+    this.setBrush();
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
     this.blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
@@ -47,6 +47,20 @@ class LedHandler {
   updateColor(color) {
     // Set full brightness, a value from 0 to 255 (default 255)
     this.color = color;
+  }
+
+  setBrush(brush){
+    this.brushInstance = null;
+    switch(brush) {
+      case "1":
+      this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT);
+      break;
+      case "2":
+      // other brush
+      break;
+      default:
+      this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT);
+    }
   }
 
   setRadius(radius){
@@ -90,5 +104,5 @@ function rgb2Int(r, g, b) {
 }
 
 module.exports = {
-    LedHandler
+  LedHandler
 };

@@ -3,7 +3,6 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-const { Brush } = require("./brushes");
 const { LedHandler } = require("./ledhandler");
 
 http.listen(3000, () => {
