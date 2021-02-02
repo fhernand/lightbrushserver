@@ -8,12 +8,11 @@ const NUM_LEDS_HEIGHT = 8;
 class LedHandler {
 
   constructor() {
-    this.setBrush();
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
     this.blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
     this.MaxBrightness = 255;
-    this.pressureRange = 100;
+    this.pressureRange = 1000;
 
     this.color = { r:0, g:0, b:0 };
     // Current pixel position
@@ -38,6 +37,8 @@ class LedHandler {
 
     // Configure ws281x
     ws281x.configure(this.config);
+
+    this.setBrush();
   }
 
   updateBrightness(brightness) {
