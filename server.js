@@ -12,10 +12,12 @@ http.listen(3000, () => {
 
 app.use(express.static('public'));
 
-var ledHandlerInstance = new LedHandler();
 var brightness = 50;
 var radius = 50;
 var color = { r:255, g:215, b:0 };
+
+var ledHandlerInstance = new LedHandler();
+ledHandlerInstance.run();
 
 io.sockets.on('connection', (socket) => {
   socket.emit('brightness', {value: brightness});
@@ -57,7 +59,4 @@ io.sockets.on('connection', (socket) => {
     ledHandlerInstance.updateColor(color);
     io.sockets.emit('blue', {value: color.b});
   });
-
 });
-
-ledHandlerInstance.run();

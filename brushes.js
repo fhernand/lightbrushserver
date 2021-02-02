@@ -1,64 +1,82 @@
 class Brush {
-
-  constructor(width){
-
+  constructor(width, height, pressureRange){
     this.width = width;
-    this.map = new Float32Array(this.width * this.width * 4);
-    this.mapCircleQuarter = new Float32Array(this.width * this.width);
-    this.anteil = 0;
+    this.height = height;
+    this.pressureRange = pressureRange;
     this.granularity = 50;
     this.megamap = [];
+    bufferAllMaps();
   }
+
+  bufferAllMaps(){
+    for (var i = 0; i < this.pressureRange; i++) {
+      setPressure(i);
+    }
+  }
+
+  calculateMap(){
+  }
+
+  draw(n) {
+  }
+
+  getMapValue(i){
+    if (this.megamap[this.pressure] != null ){
+      return this.megamap[this.pressure][i];
+    }
+  }
+
   reset(){
-    this.map = new Float32Array(this.width * this.width * 4);
-    this.mapCircleQuarter = new Float32Array(this.width * this.width);
   }
-  setRadius(radius){
-    this.reset();
-    this.radius = radius;
-    this.convertedradius = this.granularity*this.width*radius/100;
-    this.megamap[this.radius] = new Float32Array(this.width * this.width * 4);
+
+  setPressure(pressure){
+    this.pressure = pressure;
+    this.megamap[this.pressure] = new Float32Array(this.width * this.height);
     this.buffered = false;
     this.calculateMap();
   }
+}
+
+class Circle extends Brush {
+  constructor(width, height){
+    this.anteil = 0;
+    this.mapCircleQuarter = new Float32Array(width * height / 4);
+    super.constructor(width, height);
+  }
+
   calculateMap(){
     if (this.buffered == false ){
-      for (var i = 0; i < this.width*this.width; i++) {
+      for (var i = 0; i < this.width*this.height/4; i++) {
         this.mapCircleQuarter[i] = this.draw(i);
       }
 
-      for (var i = 0; i < this.width*this.width*4; i++) {
-        var x = i % (this.width*2);
-        var y = Math.floor(i / (this.width*2));
+      for (var i = 0; i < this.width*this.height; i++) {
+        var x = i % (this.width);
+        var y = Math.floor(i / (this.height));
 
-        if (x >= this.width && y >= this.width){
-          var index = (x-this.width) + (y-this.width)*this.width;
+        if (x >= this.width/2 && y >= this.height/2){
+          var index = (x-this.width/2) + (y-this.height/2)*this.height;
 
-          this.megamap[this.radius][i] = this.mapCircleQuarter[index]
-        } else if (x < this.width && y < this.width) {
-          var index = (this.width-x-1) + (this.width-y-1)*this.width;
-          this.megamap[this.radius][i] = this.mapCircleQuarter[index];
-        } else if (x >= this.width && y < this.width) {
-          var index = (x-this.width) + (this.width-y-1)*this.width;
-          this.megamap[this.radius][i] = this.mapCircleQuarter[index];
-        } else if (x < this.width && y >= this.width) {
-          var index = (this.width-x-1) + (y-this.width)*this.width;
-          this.megamap[this.radius][i] = this.mapCircleQuarter[index];
+          this.megamap[this.pressure][i] = this.mapCircleQuarter[index]
+        } else if (x < this.width/2 && y < this.height/2) {
+          var index = (this.width/2-x-1) + (this.height/2-y-1)*this.height/2;
+          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
+        } else if (x >= this.width/2 && y < this.height/2) {
+          var index = (x-this.width/2) + (this.height/2-y-1)*this.height/2;
+          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
+        } else if (x < this.width/2 && y >= this.height/2) {
+          var index = (this.width/2-x-1) + (y-this.height/2)*this.height/2;
+          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
         }
       }
       this.buffered = true;
     }
   }
-  getMapValue(i){
-    if (this.megamap[this.radius] != null ){
-      return this.megamap[this.radius][i];
-    }
 
-  }
   draw(n) {
     this.anteil = 0;
-    const x = n % this.width;
-    const y = Math.floor(n / this.width);
+    const x = n % this.width/2;
+    const y = Math.floor(n / this.height/2);
 
     const max_i = this.granularity*(x+1)-1;
     const max_j = this.granularity*(y+1)-1;
@@ -79,8 +97,19 @@ class Brush {
     }
     return this.anteil / ( this.granularity * this.granularity );
   }
+
+  reset(){
+    super.reset();
+    this.mapCircleQuarter = new Float32Array(this.width * this.height);
+  }
+
+  setPressure(pressure){
+    super.setPressure(pressure);
+    this.convertedradius = this.granularity*(this.width/2)*pressure/100;
+    this.calculateMap();
+  }
 }
 
 module.exports = {
-    Brush
+    Circle
 };
