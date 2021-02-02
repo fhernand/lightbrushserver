@@ -55,7 +55,7 @@ class Circle extends Brush {
         var y = Math.floor(i / (this.height));
 
         if (x >= this.width/2 && y >= this.height/2){
-          var index = (x-this.width/2) + (y-this.height/2)*this.height;
+          var index = (x-this.width/2) + (y-this.height/2)*this.height/2;
 
           this.megamap[this.pressure][i] = this.mapCircleQuarter[index]
         } else if (x < this.width/2 && y < this.height/2) {
