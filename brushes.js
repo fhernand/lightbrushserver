@@ -5,7 +5,6 @@ class Brush {
     this.pressureRange = pressureRange;
     this.granularity = 50;
     this.megamap = [];
-    bufferAllMaps();
   }
 
   bufferAllMaps(){
@@ -39,9 +38,10 @@ class Brush {
 
 class Circle extends Brush {
   constructor(width, height){
-    this.anteil = 0;
-    this.mapCircleQuarter = new Float32Array(width * height / 4);
     super.constructor(width, height);
+    this.anteil = 0;
+    this.mapCircleQuarter = new Float32Array(this.width * this.height / 4);
+    bufferAllMaps();
   }
 
   calculateMap(){
