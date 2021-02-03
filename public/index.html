@@ -15,7 +15,7 @@
   <input type="range" id= "inputSliderBrightness" min="0" max="255" value="50" step="1" oninput="showValueBrightness(this.value)" />
   <br><h3>Brightness: </h3><span id="outputTextBrightness">50</span><br>
   <br>
-  <input type="range" id= "inputSliderPressure" min="0" max="1000" value="50" step="1" oninput="showValuePressure(this.value)" />
+  <input type="range" id= "inputSliderPressure" min="0" max="100" value="50" step="1" oninput="showValuePressure(this.value)" />
   <br><h3>Pressure: </h3><span id="outputTextPressure">50</span><br><br>
 
   <br>
@@ -41,6 +41,19 @@
   var rtime;
   var timeout = false;
   var delta = 5;
+
+  socket.on('red', function (data) {
+    document.getElementById("inputSliderRed").value = data.value;
+    document.getElementById("outputTextRed").innerHTML = data.value;
+  });
+  socket.on('green', function (data) {
+    document.getElementById("inputSliderGreen").value = data.value;
+    document.getElementById("outputTextGreen").innerHTML = data.value;
+  });
+  socket.on('blue', function (data) {
+    document.getElementById("inputSliderBlue").value = data.value;
+    document.getElementById("outputTextBlue").innerHTML = data.value;
+  });
 
   function setColor()
   {

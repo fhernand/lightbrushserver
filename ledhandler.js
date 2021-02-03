@@ -12,7 +12,7 @@ class LedHandler {
     this.blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
     this.MaxBrightness = 255;
-    this.pressureRange = 1000;
+    this.pressureRange = 100;
 
     this.color = { r:0, g:0, b:0 };
     // Current pixel position
@@ -46,8 +46,11 @@ class LedHandler {
     this.MaxBrightness = brightness;
   }
 
+  getCurrentColor(){
+    return this.color;
+  }
+  
   updateColor(color) {
-    // Set full brightness, a value from 0 to 255 (default 255)
     this.color = color;
   }
 

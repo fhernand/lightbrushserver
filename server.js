@@ -47,6 +47,7 @@ io.sockets.on('connection', (socket) => {
   socket.emit('red', {value: color.r});
 
   socket.on('red', function (data) {
+    color = ledHandlerInstance.getCurrentColor();
     color.r = data.value;
     ledHandlerInstance.updateColor(color);
     io.sockets.emit('red', {value: color.r});
@@ -55,6 +56,7 @@ io.sockets.on('connection', (socket) => {
   socket.emit('green', {value: color.g});
 
   socket.on('green', function (data) {
+    color = ledHandlerInstance.getCurrentColor();
     color.g = data.value;
     ledHandlerInstance.updateColor(color);
     io.sockets.emit('green', {value: color.g});
@@ -63,6 +65,7 @@ io.sockets.on('connection', (socket) => {
   socket.emit('blue', {value: color.b});
 
   socket.on('blue', function (data) {
+    color = ledHandlerInstance.getCurrentColor();
     color.b = data.value;
     ledHandlerInstance.updateColor(color);
     io.sockets.emit('blue', {value: color.b});
