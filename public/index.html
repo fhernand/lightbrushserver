@@ -89,7 +89,7 @@
   function setValueColorSlider()
   {
     var colorhex = rgbToHex(document.getElementById("inputSliderRed").value,
-    document.getElementById("inputSliderGreen").value
+    document.getElementById("inputSliderGreen").value,
     document.getElementById("inputSliderBlue").value);
     socket.emit('hexcolor', { value: colorhex });
   }
