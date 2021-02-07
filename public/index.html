@@ -51,9 +51,9 @@
     document.getElementById("outputTextBrush").innerHTML = data.value;
   });
 
-  socket.on('thumbslider', (value) => {
-    document.getElementById("inputSliderThumbSlider").value = value;
-    document.getElementById("outputTextThumbSlider").innerHTML = value.valueOf();
+  socket.on('thumbslider', (data) => {
+    document.getElementById("inputSliderThumbSlider").value = data.value;
+    document.getElementById("outputTextThumbSlider").innerHTML = data.value;
   });
 
   socket.on('pressure', (data) => {
@@ -79,13 +79,13 @@
   }
   function setValueBrush(newValue)
   {
-    document.getElementById("outputTextBrush").innerHTML=newValue;
+    document.getElementById("outputTextBrush").innerHTML = newValue;
     socket.emit('brush', { value: newValue });
   }
   function setValueThumbSlider(newValue)
   {
-    document.getElementById("outputTextThumbSlider").innerHTML=newValue;
-    socket.emit('thumbslider', newValue);
+    document.getElementById("outputTextThumbSlider").innerHTML = newValue;
+    socket.emit('thumbslider', {value: newValue});
   }
   function setValueHexColor(newValue)
   {

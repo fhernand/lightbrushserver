@@ -21,7 +21,7 @@ ledHandlerInstance.run();
 
 io.sockets.on('connection', (socket) => {
   socket.emit('brush', {value: brush});
-  socket.emit('thumbslider', thumbslider);
+  socket.emit('thumbslider', {value: thumbslider});
   socket.emit('pressure', {value: pressure});
   socket.emit('hexcolor', {value: hexcolor});
 
@@ -31,8 +31,8 @@ io.sockets.on('connection', (socket) => {
     io.sockets.emit('brush', {value: brush});
   });
 
-  socket.on('thumbslider', (value) => {
-    thumbslider = value;
+  socket.on('thumbslider', (data) => {
+    thumbslider = data.value;
     ledHandlerInstance.updateThumbSlider(thumbslider);
     io.sockets.emit('thumbslider', {value: thumbslider});
   });
