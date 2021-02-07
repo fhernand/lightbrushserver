@@ -62,7 +62,7 @@ io.sockets.on('connection', (socket) => {
     ledHandlerInstance.updateHexColor('#ff0000');
     ledHandlerInstance.updateThumbSlider(255);
     for(i=0;i<=10;i++){
-      this.blink(2);
+      blink(2);
     }
     ledHandlerInstance.updateHexColor(hexcolor);
     ledHandlerInstance.updateThumbSlider(thumbslider);
