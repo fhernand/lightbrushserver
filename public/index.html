@@ -95,9 +95,9 @@
     socket.emit('hexcolor', { value: newValue });
   }
   function setValueColorSlider(){
-    var colorhex = rgbToHex(document.getElementById("inputSliderRed").value,
-    document.getElementById("inputSliderGreen").value,
-    document.getElementById("inputSliderBlue").value);
+    var colorhex = rgbToHex(parseInt(document.getElementById("inputSliderRed").value),
+    parseInt(document.getElementById("inputSliderGreen").value),
+    parseInt(document.getElementById("inputSliderBlue").value));
     setValueHexColor(colorhex);
   }
 
