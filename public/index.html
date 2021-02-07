@@ -42,6 +42,18 @@
   var timeout = false;
   var delta = 5;
 
+  socket.on('brush', function (data)){
+    document.getElementById("outputTextBrush").value = data.value;
+  }
+
+  socket.on('brightness', function (data)){
+    document.getElementById("outputTextBrightness").value = data.value;
+  }
+
+  socket.on('pressure', function (data)){
+    document.getElementById("outputTextPressure").value = data.value;
+  }
+
   socket.on('hexcolor', function (data) {
     var colorRGB = hexToRgb(data.value);
     document.getElementById("inputSliderRed").value = colorRGB.r;
@@ -70,8 +82,8 @@
   function showValueColorSlider()
   {
     var colorhex = rgbToHex(document.getElementById("inputSliderRed").value,
-                            document.getElementById("inputSliderGreen").value
-                            document.getElementById("inputSliderBlue").value);
+    document.getElementById("inputSliderGreen").value
+    document.getElementById("inputSliderBlue").value);
     socket.emit('hexcolor', { value: colorhex });
   }
 
@@ -111,6 +123,6 @@
   function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
   }
-</script>
-</body>
-</html>
+  </script>
+  </body>
+  </html>
