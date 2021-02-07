@@ -59,14 +59,19 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('errorhandling', () => {
-    ledHandlerInstance.updateColor({r:255,g:0,b:0});
+  ledHandlerInstance.updateHexColor('#ff0000');
+  io.sockets.volatile.emit('hexcolor', {value: '#ff0000'});
     ledHandlerInstance.updateThumbSlider(255);
+    io.sockets.volatile.emit('thumbslider', {value: 255});
     //for(i=0;i<=2;i++){
       blink(2);
     //}
     ledHandlerInstance.updateHexColor(hexcolor);
+    io.sockets.volatile.emit('hexcolor', {value: hexcolor});
     ledHandlerInstance.updateThumbSlider(thumbslider);
+    io.sockets.volatile.emit('thumbslider', {value: thumbslider});
     ledHandlerInstance.setPressure(pressure);
+    io.sockets.volatile.emit('pressure', {value: pressure});
   });
 });
 
