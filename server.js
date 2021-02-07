@@ -26,26 +26,59 @@ io.sockets.on('connection', (socket) => {
   socket.emit('hexcolor', {value: hexcolor});
 
   socket.on('brush', function (data) {
-    brush = data.value;
-    ledHandlerInstance.setBrush(brush);
-    io.sockets.emit('brush', {value: brush});
+    if(checkValue(data.value)!=null){
+      brush = data.value
+      ledHandlerInstance.setBrush(brush);
+        io.sockets.emit('brush', {value: brush});
+      }
+    });
+
+    socket.on('thumbslider', (data) => {
+      if(checkValue(data.value)!=null){
+        thumbslider = data.value;
+        ledHandlerInstance.updateThumbSlider(thumbslider);
+        io.sockets.emit('thumbslider', {value: thumbslider});
+      }
+    });
+
+    socket.on('pressure', function (data) {
+      if(checkValue(data.value)!=null){
+        pressure = data.value;
+        ledHandlerInstance.setPressure(pressure);
+        io.sockets.emit('pressure', {value: pressure});
+      }
+    });
+
+    socket.on('hexcolor', function (data) {
+      if(checkValue(data.value)!=null){
+        hexcolor = data.value;
+        ledHandlerInstance.updateHexColor(hexcolor);
+        io.sockets.emit('hexcolor', {value: hexcolor});
+      }
+    });
+
+    socket.on('error', function () {
+      io.sockets.emit('hexcolor', {value: '#ff0000'});
+      io.sockets.emit('thumbslider', {value: 255});
+      for (var i = 0; i < 3; i++)
+        blink();
+    });
   });
 
-  socket.on('thumbslider', (data) => {
-    thumbslider = data.value;
-    ledHandlerInstance.updateThumbSlider(thumbslider);
-    io.sockets.emit('thumbslider', {value: thumbslider});
-  });
+  function checkValue(value){
+    if (value!=null){
+      return value;
+    } else {
+      socket.emit('error');
+      return null;
+    }
+  }
 
-  socket.on('pressure', function (data) {
-    pressure = data.value;
-    ledHandlerInstance.setPressure(pressure);
-    io.sockets.emit('pressure', {value: pressure});
-  });
-
-  socket.on('hexcolor', function (data) {
-    hexcolor = data.value;
-    ledHandlerInstance.updateHexColor(hexcolor);
-    io.sockets.emit('hexcolor', {value: hexcolor});
-  });
-});
+  function blink(){
+    for(i=0; i<= 100;i++){
+      o.sockets.emit('pressure', {value: i});
+    }
+    for(i=99; i>= 0;i--){
+      o.sockets.emit('pressure', {value: i});
+    }
+  }

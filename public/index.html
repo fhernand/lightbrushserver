@@ -35,6 +35,7 @@
     <input type="color" id="html5colorpicker" oninput="setColor()" value="#000000" style="width:85%;">
   </div>
 
+  <br><button type="button" onclick="generateError()">Generate Error</button>
 
   <script type="text/javascript">
   var socket = io.connect();
@@ -103,6 +104,10 @@
     parseInt(document.getElementById("inputSliderGreen").value),
     parseInt(document.getElementById("inputSliderBlue").value));
     setValueHexColor(colorhex);
+  }
+
+  function generateError(){
+    socket.emit('error');
   }
 
   function setValuePressure(newValue)
