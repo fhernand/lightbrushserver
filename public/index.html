@@ -40,21 +40,24 @@
   var socket = io.connect();
   var rtime;
   var timeout = false;
-  var delta = 5;
+  var delta = 2;
 
   //socket.on('connect', () => {
 
   //});
 
   socket.on('brush', (data) => {
+    document.getElementById("inputSliderBrush").value = data.value;
     document.getElementById("outputTextBrush").value = data.value;
   });
 
   socket.on('brightness', (data) => {
+    document.getElementById("inputSliderBrightness").value = data.value;
     document.getElementById("outputTextBrightness").value = data.value;
   });
 
   socket.on('pressure', (data) => {
+    document.getElementById("inputSliderPressure").value = data.value;
     document.getElementById("outputTextPressure").value = data.value;
   });
 
