@@ -61,7 +61,7 @@ io.sockets.on('connection', (socket) => {
   socket.on('errorhandling', () => {
     ledHandlerInstance.updateHexColor('#ff0000');
     ledHandlerInstance.updateThumbSlider(255);
-    for(i=0;i<=10;i++){
+    for(i=0;i<=2;i++){
       blink(2);
     }
     ledHandlerInstance.updateHexColor(hexcolor);
@@ -82,11 +82,13 @@ function checkValue(value){
 function blink(seconds){
   for(i=0; i<= 100;i++){
     ledHandlerInstance.setPressure(i);
-    this.sleep(seconds*5);
+    sleep(seconds*5);
+    console.log('tick');
   }
   for(i=99; i>= 0;i--){
     ledHandlerInstance.setPressure(i);
-    this.sleep(seconds*5);
+    sleep(seconds*5);
+    console.log('tick');
   }
 }
 
