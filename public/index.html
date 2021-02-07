@@ -12,8 +12,8 @@
   <input type="range" id= "inputSliderBrush" min="1" max="3" value="1" step="1" oninput="setValueBrush(this.value)" />
   <br><h3>Brush: </h3><span id="outputTextBrush">1</span><br><br>
 
-  <input type="range" id= "inputSliderBrightness" min="0" max="255" value="0" step="1" oninput="setValueBrightness(this.value)" />
-  <br><h3>Brightness: </h3><span id="outputTextBrightness">0</span><br>
+  <input type="range" id= "inputSliderThumbSlider" min="0" max="255" value="0" step="1" oninput="setValueThumbSlider(this.value)" />
+  <br><h3>ThumbSlider: </h3><span id="outputTextThumbSlider">0</span><br>
   <br>
   <input type="range" id= "inputSliderPressure" min="0" max="100" value="0" step="1" oninput="setValuePressure(this.value)" />
   <br><h3>Pressure: </h3><span id="outputTextPressure">0</span><br><br>
@@ -51,9 +51,9 @@
     document.getElementById("outputTextBrush").innerHTML = data.value;
   });
 
-  socket.on('brightness', (data) => {
-    document.getElementById("inputSliderBrightness").value = data.value;
-    document.getElementById("outputTextBrightness").innerHTML = data.value;
+  socket.on('thumbslider', (value) => {
+    document.getElementById("inputSliderThumbSlider").value = value;
+    document.getElementById("outputTextThumbSlider").innerHTML = value;
   });
 
   socket.on('pressure', (data) => {
@@ -82,10 +82,10 @@
     document.getElementById("outputTextBrush").innerHTML=newValue;
     socket.emit('brush', { value: newValue });
   }
-  function setValueBrightness(newValue)
+  function setValueThumbSlider(newValue)
   {
-    document.getElementById("outputTextBrightness").innerHTML=newValue;
-    socket.emit('brightness', { value: newValue });
+    document.getElementById("outputTextThumbSlider").innerHTML=newValue;
+    socket.emit('thumbslider', newValue);
   }
   function setValueHexColor(newValue)
   {

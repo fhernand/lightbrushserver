@@ -11,7 +11,7 @@ http.listen(3000, () => {
 
 app.use(express.static('public'));
 
-var brightness = 0;
+var thumbslider = 0;
 var pressure = 0;
 var brush = 1;
 var hexcolor = '#000000';
@@ -21,20 +21,20 @@ ledHandlerInstance.run();
 
 io.sockets.on('connection', (socket) => {
   socket.emit('brush', {value: brush});
-  socket.emit('brightness', {value: brightness});
+  socket.emit('thumbslider', thumbslider);
   socket.emit('pressure', {value: pressure});
   socket.emit('hexcolor', {value: hexcolor});
 
   socket.on('brush', function (data) {
-      brush = data.value;
-      ledHandlerInstance.setBrush(brush);
-      io.sockets.emit('brush', {value: brush});
-    });
+    brush = data.value;
+    ledHandlerInstance.setBrush(brush);
+    io.sockets.emit('brush', {value: brush});
+  });
 
-  socket.on('brightness', function (data) {
-    brightness = data.value;
-    ledHandlerInstance.updateBrightness(brightness);
-    io.sockets.emit('brightness', {value: brightness});
+  socket.on('thumbslider', (value) => {
+    thumbslider = value;
+    ledHandlerInstance.updateThumbSlider(thumbslider);
+    io.sockets.emit('thumbslider', {value: thumbslider});
   });
 
   socket.on('pressure', function (data) {
