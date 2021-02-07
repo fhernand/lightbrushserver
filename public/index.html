@@ -12,22 +12,22 @@
   <input type="range" id= "inputSliderBrush" min="1" max="3" value="1" step="1" oninput="setValueBrush(this.value)" />
   <br><h3>Brush: </h3><span id="outputTextBrush">1</span><br><br>
 
-  <input type="range" id= "inputSliderBrightness" min="0" max="255" value="50" step="1" oninput="setValueBrightness(this.value)" />
+  <input type="range" id= "inputSliderBrightness" min="0" max="255" value="0" step="1" oninput="setValueBrightness(this.value)" />
   <br><h3>Brightness: </h3><span id="outputTextBrightness">50</span><br>
   <br>
-  <input type="range" id= "inputSliderPressure" min="0" max="100" value="50" step="1" oninput="setValuePressure(this.value)" />
+  <input type="range" id= "inputSliderPressure" min="0" max="100" value="0" step="1" oninput="setValuePressure(this.value)" />
   <br><h3>Pressure: </h3><span id="outputTextPressure">50</span><br><br>
 
   <br>
-  <input type="range" id= "inputSliderRed" min="0" max="255" value="50" step="1" oninput="setValueColorSlider()" />
+  <input type="range" id= "inputSliderRed" min="0" max="255" value="0" step="1" oninput="setValueColorSlider()" />
   <br><h3>Red: </h3><span id="outputTextRed">50</span><br><br>
 
   <br>
-  <input type="range" id= "inputSliderGreen" min="0" max="255" value="50" step="1" oninput="setValueColorSlider()" />
+  <input type="range" id= "inputSliderGreen" min="0" max="255" value="0" step="1" oninput="setValueColorSlider()" />
   <br><h3>Green: </h3><span id="outputTextGreen">50</span><br><br>
 
   <br>
-  <input type="range" id= "inputSliderBlue" min="0" max="255" value="50" step="1" oninput="setValueColorSlider()" />
+  <input type="range" id= "inputSliderBlue" min="0" max="255" value="0" step="1" oninput="setValueColorSlider()" />
   <br><h3>Blue: </h3><span id="outputTextBlue">50</span><br><br>
 
   <br><div id="html5DIV">
@@ -42,12 +42,9 @@
   var timeout = false;
   var delta = 5;
 
-  socket.on('connect', () => {
-    setValueBrush(1);
-    setValuePressure(0);
-    setValueBrightness(0);
-    setValueHexColor('#000000');
-  });
+  //socket.on('connect', () => {
+
+  //});
 
   socket.on('brush', (data) => {
     document.getElementById("outputTextBrush").value = data.value;
