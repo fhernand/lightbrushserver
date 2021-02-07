@@ -59,7 +59,7 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('error', () => {
-    debugger();
+    debugger;
     ledHandlerInstance.updateHexColor('#ff0000');
     ledHandlerInstance.updateThumbSlider(255);
     for (var i = 0; i < 3; i++){
