@@ -25,7 +25,7 @@ io.sockets.on('connection', (socket) => {
   io.sockets.emit('pressure', {value: pressure});
   io.sockets.emit('hexcolor', {value: hexcolor});
 
-  socket.on('brush', function (data) {
+  socket.on('brush', (data) => {
     if(checkValue(data.value)!=null){
       brush = data.value
       ledHandlerInstance.setBrush(brush);
@@ -37,23 +37,23 @@ io.sockets.on('connection', (socket) => {
     if(checkValue(data.value)!=null){
       thumbslider = data.value;
       ledHandlerInstance.updateThumbSlider(thumbslider);
-      io.sockets.emit('thumbslider', {value: thumbslider});
+      io.sockets.volatile.emit('thumbslider', {value: thumbslider});
     }
   });
 
-  socket.on('pressure', function (data) {
+  socket.on('pressure', (data) => {
     if(checkValue(data.value)!=null){
       pressure = data.value;
       ledHandlerInstance.setPressure(pressure);
-      io.sockets.emit('pressure', {value: pressure});
+      io.sockets.volatile.emit('pressure', {value: pressure});
     }
   });
 
-  socket.on('hexcolor', function (data) {
+  socket.on('hexcolor', (data) => {
     if(checkValue(data.value)!=null){
       hexcolor = data.value;
       ledHandlerInstance.updateHexColor(hexcolor);
-      io.sockets.emit('hexcolor', {value: hexcolor});
+      io.sockets.volatile.emit('hexcolor', {value: hexcolor});
     }
   });
 
@@ -63,9 +63,9 @@ io.sockets.on('connection', (socket) => {
     for (var i = 0; i < 3; i++){
       blink();
     }
-    ledHandlerInstance.updateHexColor(hexcolor);
-    ledHandlerInstance.updateThumbSlider(thumbslider);
-    ledHandlerInstance.setPressure(pressure);
+    //ledHandlerInstance.updateHexColor(hexcolor);
+    //ledHandlerInstance.updateThumbSlider(thumbslider);
+    //ledHandlerInstance.setPressure(pressure);
   });
 });
 
