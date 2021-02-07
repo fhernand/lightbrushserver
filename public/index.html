@@ -95,7 +95,7 @@
     document.getElementById("outputTextGreen").innerHTML = colorRGB.g;
     document.getElementById("inputSliderBlue").value = colorRGB.b;
     document.getElementById("outputTextBlue").innerHTML = colorRGB.b;
-    socket.emit('hexcolor', { value: colorhex });
+    socket.emit('hexcolor', { value: newValue });
   }
   function setValueColorSlider(){
     var colorhex = rgbToHex(document.getElementById("inputSliderRed").value,
