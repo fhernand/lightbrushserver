@@ -61,7 +61,7 @@ io.sockets.on('connection', (socket) => {
   socket.on('errorhandling', () => {
     ledHandlerInstance.updateHexColor('#ff0000');
     ledHandlerInstance.updateThumbSlider(255);
-      blink(2);
+    blink(2);
     ledHandlerInstance.updateHexColor(hexcolor);
     ledHandlerInstance.updateThumbSlider(thumbslider);
     ledHandlerInstance.setPressure(pressure);
@@ -79,9 +79,19 @@ function checkValue(value){
 
 function blink(seconds){
   for(i=0; i<= 100;i++){
-    setTimeout(() => {  ledHandlerInstance.setPressure(i); }, seconds / 200);
+    ledHandlerInstance.setPressure(i);
+    sleep(seconds*10);
   }
   for(i=99; i>= 0;i--){
-    setTimeout(() => {  ledHandlerInstance.setPressure(i); }, seconds / 200);
+    ledHandlerInstance.setPressure(i);
+    sleep(seconds*10);
   }
+}
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
 }
