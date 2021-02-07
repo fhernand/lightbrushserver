@@ -10,7 +10,7 @@ class LedHandler {
   constructor() {
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
-    this.MaxBrightness = 255;
+    this.MaxBrightness = 0;
     this.pressureRange = 100;
 
     this.color = { r:0, g:0, b:0 };
@@ -41,7 +41,6 @@ class LedHandler {
   }
 
   updateBrightness(brightness) {
-    // Set full brightness, a value from 0 to 255 (default 255)
     this.MaxBrightness = brightness;
   }
 

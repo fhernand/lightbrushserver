@@ -2,6 +2,7 @@ class Brush {
   constructor(width, height, pressureRange){
     this.width = width;
     this.height = height;
+    this.pressure = 0;
     this.pressureRange = pressureRange;
     this.granularity = 100;
     this.megamap = [];
