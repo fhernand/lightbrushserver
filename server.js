@@ -64,9 +64,9 @@ io.sockets.on('connection', (socket) => {
     for (var i = 0; i < 3; i++){
       blink();
     }
-    //ledHandlerInstance.updateHexColor(hexcolor);
-    //ledHandlerInstance.updateThumbSlider(thumbslider);
-    //ledHandlerInstance.setPressure(pressure);
+    ledHandlerInstance.updateHexColor(hexcolor);
+    ledHandlerInstance.updateThumbSlider(thumbslider);
+    ledHandlerInstance.setPressure(pressure);
   });
 });
 
