@@ -20,10 +20,10 @@ var ledHandlerInstance = new LedHandler();
 ledHandlerInstance.run();
 
 io.sockets.on('connection', (socket) => {
-  socket.emit('brush', {value: brush});
-  socket.emit('thumbslider', {value: thumbslider});
-  socket.emit('pressure', {value: pressure});
-  socket.emit('hexcolor', {value: hexcolor});
+  io.sockets.emit('brush', {value: brush});
+  io.sockets.emit('thumbslider', {value: thumbslider});
+  io.sockets.emit('pressure', {value: pressure});
+  io.sockets.emit('hexcolor', {value: hexcolor});
 
   socket.on('brush', function (data) {
     if(checkValue(data.value)!=null){
@@ -57,15 +57,15 @@ io.sockets.on('connection', (socket) => {
     }
   });
 
-  socket.on('error', function () {
+  socket.on('error', () => {
     io.sockets.emit('hexcolor', {value: '#ff0000'});
     io.sockets.emit('thumbslider', {value: 255});
     for (var i = 0; i < 3; i++){
       blink();
     }
-    socket.emit('thumbslider', {value: thumbslider});
-    socket.emit('pressure', {value: pressure});
-    socket.emit('hexcolor', {value: hexcolor});
+    io.sockets.emit('thumbslider', {value: thumbslider});
+    io.sockets.emit('pressure', {value: pressure});
+    io.sockets.emit('hexcolor', {value: hexcolor});
   });
 });
 
@@ -73,16 +73,16 @@ function checkValue(value){
   if (value!=null){
     return value;
   } else {
-    socket.emit('error');
+    io.sockets.emit('error');
     return null;
   }
 }
 
 function blink(){
   for(i=0; i<= 100;i++){
-    o.sockets.emit('pressure', {value: i});
+    io.sockets.emit('pressure', {value: i});
   }
   for(i=99; i>= 0;i--){
-    o.sockets.emit('pressure', {value: i});
+    io.sockets.emit('pressure', {value: i});
   }
 }
