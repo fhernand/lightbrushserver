@@ -9,25 +9,25 @@
 </head>
 <body>
   <br>
-  <input type="range" id= "inputSliderBrush" min="1" max="3" value="1" step="1" oninput="showValueBrush(this.value)" />
+  <input type="range" id= "inputSliderBrush" min="1" max="3" value="1" step="1" oninput="setValueBrush(this.value)" />
   <br><h3>Brush: </h3><span id="outputTextBrush">1</span><br><br>
 
-  <input type="range" id= "inputSliderBrightness" min="0" max="255" value="50" step="1" oninput="showValueBrightness(this.value)" />
+  <input type="range" id= "inputSliderBrightness" min="0" max="255" value="50" step="1" oninput="setValueBrightness(this.value)" />
   <br><h3>Brightness: </h3><span id="outputTextBrightness">50</span><br>
   <br>
-  <input type="range" id= "inputSliderPressure" min="0" max="100" value="50" step="1" oninput="showValuePressure(this.value)" />
+  <input type="range" id= "inputSliderPressure" min="0" max="100" value="50" step="1" oninput="setValuePressure(this.value)" />
   <br><h3>Pressure: </h3><span id="outputTextPressure">50</span><br><br>
 
   <br>
-  <input type="range" id= "inputSliderRed" min="0" max="255" value="50" step="1" oninput="showValueColorSlider()" />
+  <input type="range" id= "inputSliderRed" min="0" max="255" value="50" step="1" oninput="setValueColorSlider()" />
   <br><h3>Red: </h3><span id="outputTextRed">50</span><br><br>
 
   <br>
-  <input type="range" id= "inputSliderGreen" min="0" max="255" value="50" step="1" oninput="showValueColorSlider()" />
+  <input type="range" id= "inputSliderGreen" min="0" max="255" value="50" step="1" oninput="setValueColorSlider()" />
   <br><h3>Green: </h3><span id="outputTextGreen">50</span><br><br>
 
   <br>
-  <input type="range" id= "inputSliderBlue" min="0" max="255" value="50" step="1" oninput="showValueColorSlider()" />
+  <input type="range" id= "inputSliderBlue" min="0" max="255" value="50" step="1" oninput="setValueColorSlider()" />
   <br><h3>Blue: </h3><span id="outputTextBlue">50</span><br><br>
 
   <br><div id="html5DIV">
@@ -42,19 +42,26 @@
   var timeout = false;
   var delta = 5;
 
-  socket.on('brush', function (data)){
+  socket.on('connect', () => {
+    setValueBrush(1);
+    setValuePressure(0);
+    setValueBrightness(0);
+    setValueColorSlider('#000000');
+  });
+
+  socket.on('brush', () => {
     document.getElementById("outputTextBrush").value = data.value;
-  }
+  });
 
-  socket.on('brightness', function (data)){
+  socket.on('brightness', () => {
     document.getElementById("outputTextBrightness").value = data.value;
-  }
+  });
 
-  socket.on('pressure', function (data)){
+  socket.on('pressure', () => {
     document.getElementById("outputTextPressure").value = data.value;
-  }
+  });
 
-  socket.on('hexcolor', function (data) {
+  socket.on('hexcolor', () => {
     var colorRGB = hexToRgb(data.value);
     document.getElementById("inputSliderRed").value = colorRGB.r;
     document.getElementById("outputTextRed").innerHTML = colorRGB.r;
@@ -69,17 +76,17 @@
     var newValue = document.getElementById("html5colorpicker").value;
     socket.emit('hexcolor', { value: newValue });
   }
-  function showValueBrush(newValue)
+  function setValueBrush(newValue)
   {
     document.getElementById("outputTextBrush").innerHTML=newValue;
     socket.emit('brush', { value: newValue });
   }
-  function showValueBrightness(newValue)
+  function setValueBrightness(newValue)
   {
     document.getElementById("outputTextBrightness").innerHTML=newValue;
     socket.emit('brightness', { value: newValue });
   }
-  function showValueColorSlider()
+  function setValueColorSlider()
   {
     var colorhex = rgbToHex(document.getElementById("inputSliderRed").value,
     document.getElementById("inputSliderGreen").value
@@ -87,7 +94,7 @@
     socket.emit('hexcolor', { value: colorhex });
   }
 
-  function showValuePressure(newValue)
+  function setValuePressure(newValue)
   {
     document.getElementById("outputTextPressure").innerHTML=newValue;
     rtime = new Date();
