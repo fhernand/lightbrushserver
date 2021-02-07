@@ -48,17 +48,17 @@
 
   socket.on('brush', (data) => {
     document.getElementById("inputSliderBrush").value = data.value;
-    document.getElementById("outputTextBrush").value = data.value;
+    document.getElementById("outputTextBrush").innerHTML = data.value;
   });
 
   socket.on('brightness', (data) => {
     document.getElementById("inputSliderBrightness").value = data.value;
-    document.getElementById("outputTextBrightness").value = data.value;
+    document.getElementById("outputTextBrightness").innerHTML = data.value;
   });
 
   socket.on('pressure', (data) => {
     document.getElementById("inputSliderPressure").value = data.value;
-    document.getElementById("outputTextPressure").value = data.value;
+    document.getElementById("outputTextPressure").innerHTML = data.value;
   });
 
   socket.on('hexcolor', (data) => {
@@ -107,11 +107,12 @@
   function setValuePressure(newValue)
   {
     document.getElementById("outputTextPressure").innerHTML=newValue;
-    rtime = new Date();
-    if (timeout === false) {
-      timeout = true;
-      setTimeout(resizeend, delta);
-    }
+    socket.emit('pressure', { value: document.getElementById("outputTextPressure").innerHTML });
+    // rtime = new Date();
+    // if (timeout === false) {
+    //   timeout = true;
+    //   setTimeout(resizeend, delta);
+    // }
   }
 
   function resizeend() {
@@ -120,7 +121,6 @@
     } else {
       timeout = false;
 
-      socket.emit('pressure', { value: document.getElementById("outputTextPressure").innerHTML });
     }
   }
 
