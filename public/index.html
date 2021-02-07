@@ -19,15 +19,15 @@
   <br><h3>Pressure: </h3><span id="outputTextPressure">50</span><br><br>
 
   <br>
-  <input type="range" id= "inputSliderRed" min="0" max="255" value="50" step="1" oninput="showValueRed(this.value)" />
+  <input type="range" id= "inputSliderRed" min="0" max="255" value="50" step="1" oninput="showValueColorSlider()" />
   <br><h3>Red: </h3><span id="outputTextRed">50</span><br><br>
 
   <br>
-  <input type="range" id= "inputSliderGreen" min="0" max="255" value="50" step="1" oninput="showValueGreen(this.value)" />
+  <input type="range" id= "inputSliderGreen" min="0" max="255" value="50" step="1" oninput="showValueColorSlider()" />
   <br><h3>Green: </h3><span id="outputTextGreen">50</span><br><br>
 
   <br>
-  <input type="range" id= "inputSliderBlue" min="0" max="255" value="50" step="1" oninput="showValueBlue(this.value)" />
+  <input type="range" id= "inputSliderBlue" min="0" max="255" value="50" step="1" oninput="showValueColorSlider()" />
   <br><h3>Blue: </h3><span id="outputTextBlue">50</span><br><br>
 
   <br><div id="html5DIV">
@@ -42,26 +42,20 @@
   var timeout = false;
   var delta = 5;
 
-  socket.on('red', function (data) {
-    document.getElementById("inputSliderRed").value = data.value;
-    document.getElementById("outputTextRed").innerHTML = data.value;
-  });
-  socket.on('green', function (data) {
-    document.getElementById("inputSliderGreen").value = data.value;
-    document.getElementById("outputTextGreen").innerHTML = data.value;
-  });
-  socket.on('blue', function (data) {
-    document.getElementById("inputSliderBlue").value = data.value;
-    document.getElementById("outputTextBlue").innerHTML = data.value;
+  socket.on('hexcolor', function (data) {
+    var colorRGB = hexToRgb(data.value);
+    document.getElementById("inputSliderRed").value = colorRGB.r;
+    document.getElementById("outputTextRed").innerHTML = colorRGB.r;
+    document.getElementById("inputSliderGreen").value = colorRGB.g;
+    document.getElementById("outputTextGreen").innerHTML = colorRGB.g;
+    document.getElementById("inputSliderBlue").value = colorRGB.b;
+    document.getElementById("outputTextBlue").innerHTML = colorRGB.b;
   });
 
   function setColor()
   {
     var newValue = document.getElementById("html5colorpicker").value;
-    var colorRGB = hexToRgb(newValue);
-    socket.emit('red', { value: colorRGB.r });
-    socket.emit('green', { value: colorRGB.g });
-    socket.emit('blue', { value: colorRGB.b });
+    socket.emit('hexcolor', { value: newValue });
   }
   function showValueBrush(newValue)
   {
@@ -73,20 +67,12 @@
     document.getElementById("outputTextBrightness").innerHTML=newValue;
     socket.emit('brightness', { value: newValue });
   }
-  function showValueRed(newValue)
+  function showValueColorSlider()
   {
-    document.getElementById("outputTextRed").innerHTML=newValue;
-    socket.emit('red', { value: newValue });
-  }
-  function showValueGreen(newValue)
-  {
-    document.getElementById("outputTextGreen").innerHTML=newValue;
-    socket.emit('green', { value: newValue });
-  }
-  function showValueBlue(newValue)
-  {
-    document.getElementById("outputTextBlue").innerHTML=newValue;
-    socket.emit('blue', { value: newValue });
+    var colorhex = rgbToHex(document.getElementById("inputSliderRed").value,
+                            document.getElementById("inputSliderGreen").value
+                            document.getElementById("inputSliderBlue").value);
+    socket.emit('hexcolor', { value: colorhex });
   }
 
   function showValuePressure(newValue)

@@ -9,7 +9,6 @@ class LedHandler {
 
   constructor() {
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
-    this.blackpixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
     this.MaxBrightness = 255;
     this.pressureRange = 100;
@@ -49,9 +48,13 @@ class LedHandler {
   getCurrentColor(){
     return this.color;
   }
-  
+
   updateColor(color) {
     this.color = color;
+  }
+
+  updateHexColor(hexcolor) {
+    this.updateColor(hexToRgb(hexcolor));
   }
 
   setBrush(brush){
@@ -107,6 +110,25 @@ process.on('SIGINT', function () {
 function rgb2Int(r, g, b) {
   return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
+
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+//alert(rgbToHex(0, 51, 255)); // #0033ff
 
 module.exports = {
   LedHandler
