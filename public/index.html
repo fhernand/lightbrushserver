@@ -46,7 +46,7 @@
     setValueBrush(1);
     setValuePressure(0);
     setValueBrightness(0);
-    setValueColorSlider('#000000');
+    setValueHexColor('#000000');
   });
 
   socket.on('brush', () => {
@@ -86,12 +86,22 @@
     document.getElementById("outputTextBrightness").innerHTML=newValue;
     socket.emit('brightness', { value: newValue });
   }
-  function setValueColorSlider()
+  function setValueHexColor(newValue)
   {
+    var colorRGB = hexToRgb(newValue);
+    document.getElementById("inputSliderRed").value = colorRGB.r;
+    document.getElementById("outputTextRed").innerHTML = colorRGB.r;
+    document.getElementById("inputSliderGreen").value = colorRGB.g;
+    document.getElementById("outputTextGreen").innerHTML = colorRGB.g;
+    document.getElementById("inputSliderBlue").value = colorRGB.b;
+    document.getElementById("outputTextBlue").innerHTML = colorRGB.b;
+    socket.emit('hexcolor', { value: colorhex });
+  }
+  function setValueColorSlider(){
     var colorhex = rgbToHex(document.getElementById("inputSliderRed").value,
     document.getElementById("inputSliderGreen").value,
     document.getElementById("inputSliderBlue").value);
-    socket.emit('hexcolor', { value: colorhex });
+    setHexColorValue(colorhex);
   }
 
   function setValuePressure(newValue)
