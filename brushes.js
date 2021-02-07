@@ -2,7 +2,6 @@ class Brush {
   constructor(width, height, pressureRange){
     this.width = width;
     this.height = height;
-    this.pressure = 0;
     this.pressureRange = pressureRange;
     this.granularity = 100;
     this.megamap = [];
@@ -12,6 +11,7 @@ class Brush {
     for (var i = 0; i < this.pressureRange; i++) {
       this.setPressure(i);
     }
+    this.setPressure(0);
   }
 
   calculateMap(){
