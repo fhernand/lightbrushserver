@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
 
 const { LedHandler } = require("./ledhandler");
 
@@ -18,6 +17,8 @@ var hexcolor = '#000000';
 
 var ledHandlerInstance = new LedHandler();
 ledHandlerInstance.run();
+
+const io = require('socket.io')(http);
 
 io.sockets.on('connection', (socket) => {
   io.sockets.emit('brush', {value: brush});
@@ -58,6 +59,7 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('error', () => {
+    debugger();
     ledHandlerInstance.updateHexColor('#ff0000');
     ledHandlerInstance.updateThumbSlider(255);
     for (var i = 0; i < 3; i++){
