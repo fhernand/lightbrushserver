@@ -58,14 +58,14 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('error', () => {
-    io.sockets.emit('hexcolor', {value: '#ff0000'});
-    io.sockets.emit('thumbslider', {value: 255});
+    ledHandlerInstance.updateHexColor('#ff0000');
+    ledHandlerInstance.updateThumbSlider(255);
     for (var i = 0; i < 3; i++){
       blink();
     }
-    io.sockets.emit('thumbslider', {value: thumbslider});
-    io.sockets.emit('pressure', {value: pressure});
-    io.sockets.emit('hexcolor', {value: hexcolor});
+    ledHandlerInstance.updateHexColor(hexcolor);
+    ledHandlerInstance.updateThumbSlider(thumbslider);
+    ledHandlerInstance.setPressure(pressure);
   });
 });
 
@@ -80,9 +80,9 @@ function checkValue(value){
 
 function blink(){
   for(i=0; i<= 100;i++){
-    io.sockets.emit('pressure', {value: i});
+    ledHandlerInstance.setPressure(i);
   }
   for(i=99; i>= 0;i--){
-    io.sockets.emit('pressure', {value: i});
+  ledHandlerInstance.setPressure(i);
   }
 }
