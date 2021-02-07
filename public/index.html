@@ -53,7 +53,7 @@
 
   socket.on('thumbslider', (value) => {
     document.getElementById("inputSliderThumbSlider").value = value;
-    document.getElementById("outputTextThumbSlider").innerHTML = value;
+    document.getElementById("outputTextThumbSlider").innerHTML = parseInt(value);
   });
 
   socket.on('pressure', (data) => {
