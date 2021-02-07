@@ -59,11 +59,11 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('errorhandling', () => {
-    ledHandlerInstance.updateHexColor('#ff0000');
+    ledHandlerInstance.updateColor({r:255,g:0,b:0});
     ledHandlerInstance.updateThumbSlider(255);
-    for(i=0;i<=2;i++){
+    //for(i=0;i<=2;i++){
       blink(2);
-    }
+    //}
     ledHandlerInstance.updateHexColor(hexcolor);
     ledHandlerInstance.updateThumbSlider(thumbslider);
     ledHandlerInstance.setPressure(pressure);
