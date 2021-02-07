@@ -10,7 +10,7 @@ class LedHandler {
   constructor() {
     this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
 
-    this.MaxBrightness = 0;
+    this.MaxThumbSlider = 0;
     this.pressureRange = 100;
 
     this.color = { r:0, g:0, b:0 };
@@ -20,8 +20,8 @@ class LedHandler {
     // Set my Neopixel configuration
     this.config = {};
 
-    // Set full brightness, a value from 0 to 255 (default 255)
-    this.config.brightness = 255;
+    // Set full thumbslider, a value from 0 to 255 (default 255)
+    this.config.thumbslider = 255;
 
     this.config.strip = 'grb';
 
@@ -40,8 +40,8 @@ class LedHandler {
     this.setBrush();
   }
 
-  updateBrightness(brightness) {
-    this.MaxBrightness = brightness;
+  updateThumbSlider(thumbslider) {
+    this.MaxThumbSlider = thumbslider;
   }
 
   getCurrentColor(){
@@ -77,9 +77,9 @@ class LedHandler {
   loop() {
     var leds = this.config.width * this.config.height;
     var pixels = new Uint32Array(leds);
-    var colorRed = this.color.r * this.MaxBrightness / 255;
-    var colorGreen = this.color.g * this.MaxBrightness / 255;
-    var colorBlue = this.color.b * this.MaxBrightness / 255;
+    var colorRed = this.color.r * this.MaxThumbSlider / 255;
+    var colorGreen = this.color.g * this.MaxThumbSlider / 255;
+    var colorBlue = this.color.b * this.MaxThumbSlider / 255;
 
     for (var i = 0; i < leds; i++) {
       var value = this.brushInstance.getMapValue(this.offset);
