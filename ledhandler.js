@@ -125,12 +125,12 @@ class LedHandler {
     for(var i=0; i<= 100;i++){
       this.setPressure(i);
       this.loop();
-      sleep(seconds*1);
+      //sleep(seconds*1);
     }
     for(var i=99; i>= 0;i--){
       this.setPressure(i);
       this.loop();
-      sleep(seconds*1);
+      //sleep(seconds*1);
     }
   }
 };
