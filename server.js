@@ -66,7 +66,7 @@ io.sockets.on('connection', (socket) => {
     ledHandlerInstance.setPressure(100);
     io.sockets.emit('pressure', {value: 100});
     // for(i=0; i<= 100;i++){
-    sleep(200);
+    sleep(5000);
        ledHandlerInstance.setPressure(50);
     //   sleep(5);
     //   console.log('tick');
