@@ -74,10 +74,10 @@ io.sockets.on('connection', (socket) => {
     //for(i=0;i<=2;i++){
     //  blink(2);
     //}
-    sleep(2000);
-    ledHandlerInstance.updateHexColor(hexcolor);
-    ledHandlerInstance.updateThumbSlider(thumbslider);
-    ledHandlerInstance.setPressure(pressure);
+    // sleep(2000);
+    // ledHandlerInstance.updateHexColor(hexcolor);
+    // ledHandlerInstance.updateThumbSlider(thumbslider);
+    // ledHandlerInstance.setPressure(pressure);
   });
 });
 
