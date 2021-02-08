@@ -29,6 +29,9 @@ class Brush {
   reset(){
   }
 
+  getPressure(){
+    return this.pressure;
+  }
   setPressure(pressure){
     this.pressure = pressure;
     if (this.megamap[this.pressure] == null ){
