@@ -68,7 +68,7 @@ io.sockets.on('connection', (socket) => {
 
     // for(i=0; i<= 100;i++){
     sleep(2000);
-       ledHandlerInstance.setPressure(50);
+       blink(1);
     //   sleep(5);
     //   console.log('tick');
     // }
@@ -92,16 +92,17 @@ function checkValue(value){
 }
 
 function blink(seconds){
-  for(i=0; i<= 100;i++){
-    ledHandlerInstance.setPressure(i);
-    sleep(seconds*5);
-    console.log('tick');
-  }
-  for(i=99; i>= 0;i--){
-    ledHandlerInstance.setPressure(i);
-    sleep(seconds*5);
-    console.log('tick');
-  }
+  ledHandlerInstance.setPressure(50);
+  // for(i=0; i<= 100;i++){
+  //   ledHandlerInstance.setPressure(i);
+  //   sleep(seconds*5);
+  //   console.log('tick');
+  // }
+  // for(i=99; i>= 0;i--){
+  //   ledHandlerInstance.setPressure(i);
+  //   sleep(seconds*5);
+  //   console.log('tick');
+  // }
 }
 
 function sleep(milliseconds) {
