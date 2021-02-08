@@ -84,9 +84,11 @@ class LedHandler {
 
     this.updateHexColor('#ff0000');
     this.setPressure(100);
-    this.updateThumbSlider(255);
+    this.updateThumbSlider(150);
 
-    this.blink(1);
+    for(var i=0;i<=10;i++){
+      this.blink(0.5);
+    }
 
     this.updateColor(tempColor);
     this.setPressure(tempPressure);
@@ -168,8 +170,6 @@ function sleep(milliseconds) {
     currentDate = Date.now();
   } while (currentDate - date < milliseconds);
 }
-
-
 
 module.exports = {
   LedHandler
