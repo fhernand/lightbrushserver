@@ -61,6 +61,7 @@ io.sockets.on('connection', (socket) => {
   socket.on('errorhandling', () => {
     sleep(100);
     ledHandlerInstance.setPressure(95);
+    console.log(ledHandlerInstance.getCurrentPressure());
     sleep(100);
     ledHandlerInstance.updateHexColor('#ff0000');
     sleep(100);
