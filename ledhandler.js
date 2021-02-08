@@ -86,7 +86,7 @@ class LedHandler {
     this.setPressure(100);
     this.updateThumbSlider(80);
 
-    for(var i=0;i<=6;i++){
+    for(var i=0;i<=5;i++){
       this.blink();
     }
 
