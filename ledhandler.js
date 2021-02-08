@@ -86,8 +86,8 @@ class LedHandler {
     this.setPressure(100);
     this.updateThumbSlider(80);
 
-    for(var i=0;i<=10;i++){
-      this.blink(0.1);
+    for(var i=0;i<=5;i++){
+      this.blink();
     }
 
     this.updateColor(tempColor);
@@ -120,17 +120,15 @@ class LedHandler {
     setInterval(this.loop.bind(this), 10);
   }
 
-  blink(seconds){
+  blink(){
     //ledHandlerInstance.setPressure(50);
-    for(var i=0; i<= 100;i++){
-      this.setPressure(i);
+    for(var i=0; i<= 25;i++){
+      this.setPressure(i*4);
       this.loop();
-      //sleep(seconds*1);
     }
-    for(var i=99; i>= 0;i--){
-      this.setPressure(i);
+    for(var i=25; i>= 0;i--){
+      this.setPressure(i*4);
       this.loop();
-      //sleep(seconds*1);
     }
   }
 };
