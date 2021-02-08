@@ -59,26 +59,7 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('errorhandling', () => {
-    ledHandlerInstance.updateThumbSlider(250);
-    sleep(100);
-    ledHandlerInstance.updateHexColor('#ff0000');
-    sleep(100);
-    ledHandlerInstance.setPressure(95);
-    console.log(ledHandlerInstance.getCurrentPressure());
-
-    // for(i=0; i<= 100;i++){
-    sleep(2000);
-       blink(1);
-    //   sleep(5);
-    //   console.log('tick');
-    // }
-    //for(i=0;i<=2;i++){
-    //  blink(2);
-    //}
-    // sleep(2000);
-    // ledHandlerInstance.updateHexColor(hexcolor);
-    // ledHandlerInstance.updateThumbSlider(thumbslider);
-    // ledHandlerInstance.setPressure(pressure);
+    ledHandlerInstance.showError();
   });
 });
 
@@ -86,7 +67,7 @@ function checkValue(value){
   if (value!=null){
     return value;
   } else {
-    io.sockets.emit('error');
+    io.sockets.emit('errorhandling');
     return null;
   }
 }
@@ -103,12 +84,4 @@ function blink(seconds){
   //   sleep(seconds*5);
   //   console.log('tick');
   // }
-}
-
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
 }

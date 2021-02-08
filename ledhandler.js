@@ -21,7 +21,7 @@ class LedHandler {
     this.config = {};
 
     // Set full thumbslider, a value from 0 to 255 (default 255)
-    this.config.thumbslider = 255;
+    this.config.brightness = 255;
 
     this.config.strip = 'grb';
 
@@ -77,6 +77,18 @@ class LedHandler {
     this.brushInstance.setPressure(pressure);
   }
 
+  showError(){
+    this.updateHexColor('#ff0000');
+    this.setPressure(100);
+    this.updateThumbSlider(255);
+
+    sleep(2000);
+    +
+    this.updateColor(this.color);
+    this.setPressure(this.getCurrentPressure());
+    this.updateThumbSlider(this.MaxThumbSlider);
+  }
+
   loop() {
     var leds = this.config.width * this.config.height;
     var pixels = new Uint32Array(leds);
@@ -130,7 +142,14 @@ function hexToRgb(hex) {
     b: parseInt(result[3], 16)
   } : null;
 }
-//alert(rgbToHex(0, 51, 255)); // #0033ff
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
 
 module.exports = {
   LedHandler
