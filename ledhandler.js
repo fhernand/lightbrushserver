@@ -49,7 +49,7 @@ class LedHandler {
   }
 
   getCurrentPressure(){
-    return this.brushInstance.getCurrentPressure(pressure);
+    return this.brushInstance.getCurrentPressure();
   }
   updateColor(color) {
     this.color = color;
