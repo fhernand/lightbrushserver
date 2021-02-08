@@ -29,7 +29,7 @@ class Brush {
   reset(){
   }
 
-  getPressure(){
+  getCurrentPressure(){
     return this.pressure;
   }
   setPressure(pressure){
