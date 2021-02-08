@@ -117,6 +117,20 @@ class LedHandler {
   run() {
     setInterval(this.loop.bind(this), 10);
   }
+
+  blink(seconds){
+    //ledHandlerInstance.setPressure(50);
+    for(i=0; i<= 100;i++){
+      this.setPressure(i);
+      this.loop();
+      sleep(seconds*5);
+    }
+    for(i=99; i>= 0;i--){
+      this.setPressure(i);
+      this.loop();
+      sleep(seconds*5);
+    }
+  }
 };
 
 // ---- trap the SIGINT and reset before exit
@@ -155,19 +169,7 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
-function blink(seconds){
-  //ledHandlerInstance.setPressure(50);
-  for(i=0; i<= 100;i++){
-    this.setPressure(i);
-    this.loop();
-    sleep(seconds*5);
-  }
-  for(i=99; i>= 0;i--){
-    this.setPressure(i);
-    this.loop();
-    sleep(seconds*5);
-  }
-}
+
 
 module.exports = {
   LedHandler
