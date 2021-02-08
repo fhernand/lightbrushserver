@@ -88,7 +88,7 @@ class LedHandler {
 
     sleep(2000);
 
-    this.updateColor(tempColor;
+    this.updateColor(tempColor);
     this.setPressure(tempPressure);
     this.updateThumbSlider(tempThumbSlider);
   }
