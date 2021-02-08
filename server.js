@@ -61,15 +61,12 @@ io.sockets.on('connection', (socket) => {
   socket.on('errorhandling', () => {
     sleep(100);
     ledHandlerInstance.setPressure(100);
-    io.sockets.emit('pressure', {value: 100});
     sleep(100);
     ledHandlerInstance.updateHexColor('#ff0000');
-    io.sockets.emit('hexcolor', {value: '#ff0000'});
     sleep(100);
     ledHandlerInstance.updateThumbSlider(255);
-    io.sockets.emit('thumbslider', {value: 255});
     // for(i=0; i<= 100;i++){
-    sleep(5000);
+    sleep(2000);
        ledHandlerInstance.setPressure(50);
     //   sleep(5);
     //   console.log('tick');
@@ -77,12 +74,10 @@ io.sockets.on('connection', (socket) => {
     //for(i=0;i<=2;i++){
     //  blink(2);
     //}
-    // ledHandlerInstance.updateHexColor(hexcolor);
-    // io.sockets.emit('hexcolor', {value: hexcolor});
-    // ledHandlerInstance.updateThumbSlider(thumbslider);
-    // io.sockets.emit('thumbslider', {value: thumbslider});
-    // ledHandlerInstance.setPressure(pressure);
-    // io.sockets.emit('pressure', {value: pressure});
+    sleep(2000);
+    ledHandlerInstance.updateHexColor(hexcolor);
+    ledHandlerInstance.updateThumbSlider(thumbslider);
+    ledHandlerInstance.setPressure(pressure);
   });
 });
 
