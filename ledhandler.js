@@ -84,10 +84,10 @@ class LedHandler {
 
     this.updateHexColor('#ff0000');
     this.setPressure(100);
-    this.updateThumbSlider(150);
+    this.updateThumbSlider(80);
 
     for(var i=0;i<=10;i++){
-      this.blink(0.5);
+      this.blink(0.1);
     }
 
     this.updateColor(tempColor);
@@ -125,12 +125,12 @@ class LedHandler {
     for(var i=0; i<= 100;i++){
       this.setPressure(i);
       this.loop();
-      sleep(seconds*5);
+      sleep(seconds*1);
     }
     for(var i=99; i>= 0;i--){
       this.setPressure(i);
       this.loop();
-      sleep(seconds*5);
+      sleep(seconds*1);
     }
   }
 };
