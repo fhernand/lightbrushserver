@@ -78,15 +78,19 @@ class LedHandler {
   }
 
   showError(){
+    var tempColor = this.color;
+    var tempPressure = this.getCurrentPressure();
+    var tempThumbSlider = this.MaxThumbSlider;
+
     this.updateHexColor('#ff0000');
     this.setPressure(100);
     this.updateThumbSlider(255);
 
     sleep(2000);
-    +
-    this.updateColor(this.color);
-    this.setPressure(this.getCurrentPressure());
-    this.updateThumbSlider(this.MaxThumbSlider);
+
+    this.updateColor(tempColor;
+    this.setPressure(tempPressure);
+    this.updateThumbSlider(tempThumbSlider);
   }
 
   loop() {
