@@ -86,7 +86,7 @@ class LedHandler {
     this.setPressure(100);
     this.updateThumbSlider(255);
 
-    sleep(2000);
+    this.blink(1);
 
     this.updateColor(tempColor);
     this.setPressure(tempPressure);
@@ -153,6 +153,20 @@ function sleep(milliseconds) {
   do {
     currentDate = Date.now();
   } while (currentDate - date < milliseconds);
+}
+
+function blink(seconds){
+  //ledHandlerInstance.setPressure(50);
+  for(i=0; i<= 100;i++){
+    this.setPressure(i);
+    this.loop();
+    sleep(seconds*5);
+  }
+  for(i=99; i>= 0;i--){
+    this.setPressure(i);
+    this.loop();
+    sleep(seconds*5);
+  }
 }
 
 module.exports = {
