@@ -60,11 +60,11 @@ io.sockets.on('connection', (socket) => {
 
   socket.on('errorhandling', () => {
     sleep(100);
-    ledHandlerInstance.setPressure(100);
+    ledHandlerInstance.setPressure(95);
     sleep(100);
     ledHandlerInstance.updateHexColor('#ff0000');
     sleep(100);
-    ledHandlerInstance.updateThumbSlider(255);
+    ledHandlerInstance.updateThumbSlider(250);
     // for(i=0; i<= 100;i++){
     sleep(2000);
        ledHandlerInstance.setPressure(50);
