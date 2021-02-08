@@ -95,7 +95,7 @@ function blink(seconds){
   //ledHandlerInstance.setPressure(50);
   for(i=0; i<= 100;i++){
     ledHandlerInstance.setPressure(i);
-    sleep(seconds*5);
+    sleep(seconds*50);
     console.log('tick');
   }
   // for(i=99; i>= 0;i--){
