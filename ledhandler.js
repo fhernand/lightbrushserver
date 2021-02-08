@@ -84,9 +84,9 @@ class LedHandler {
 
     this.updateHexColor('#ff0000');
     this.setPressure(100);
-    this.updateThumbSlider(80);
+    this.updateThumbSlider(60);
 
-    for(var i=0;i<=5;i++){
+    for(var i=0;i<=4;i++){
       this.blink();
     }
 
