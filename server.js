@@ -61,10 +61,13 @@ io.sockets.on('connection', (socket) => {
   socket.on('errorhandling', () => {
     ledHandlerInstance.updateHexColor('#ff0000');
     io.sockets.emit('hexcolor', {value: '#ff0000'});
+    sleep(100);
     ledHandlerInstance.updateThumbSlider(255);
     io.sockets.emit('thumbslider', {value: 255});
+    sleep(100);
     ledHandlerInstance.setPressure(100);
     io.sockets.emit('pressure', {value: 100});
+    sleep(100);
     // for(i=0; i<= 100;i++){
     sleep(5000);
        ledHandlerInstance.setPressure(50);
