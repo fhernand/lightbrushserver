@@ -48,6 +48,9 @@ class LedHandler {
     return this.color;
   }
 
+  getCurrentPressure(){
+    return this.pressure;
+  }
   updateColor(color) {
     this.color = color;
   }
