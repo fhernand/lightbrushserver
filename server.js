@@ -35,9 +35,11 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('thumbslider', (data) => {
+    var obj = JSON.parse(data);
     console.log(data);
-    if(checkValue(data.value)!=null){
-      thumbslider = data.value;
+    console.log(obj);
+    if(checkValue(obj.value)!=null){
+      thumbslider = obj.value;
       ledHandlerInstance.updateThumbSlider(thumbslider);
       io.sockets.volatile.emit('thumbslider', {value: thumbslider});
     }
