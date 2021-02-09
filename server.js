@@ -27,21 +27,16 @@ io.sockets.on('connection', (socket) => {
   io.sockets.emit('hexcolor', {value: hexcolor});
 
   socket.on('brush', (data) => {
-    if(checkValue(data.value)!=null){
-      brush = data.value
+    var obj = getJsonObj(data);
+    if(checkValue(obj.value)!=null){
+      brush = obj.value
       ledHandlerInstance.setBrush(brush);
       io.sockets.emit('brush', {value: brush});
     }
   });
 
   socket.on('thumbslider', (data) => {
-    if (typeof data == 'string'){
-    var obj = JSON.parse(data);
-    } else {
-      obj = data;
-    }
-    console.log(data);
-    console.log(obj);
+    var obj = getJsonObj(data);
     if(checkValue(obj.value)!=null){
       thumbslider = obj.value;
       ledHandlerInstance.updateThumbSlider(thumbslider);
@@ -50,16 +45,18 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('pressure', (data) => {
-    if(checkValue(data.value)!=null){
-      pressure = data.value;
+    var obj = getJsonObj(data);
+    if(checkValue(obj.value)!=null){
+      pressure = obj.value;
       ledHandlerInstance.setPressure(pressure);
       io.sockets.volatile.emit('pressure', {value: pressure});
     }
   });
 
   socket.on('hexcolor', (data) => {
-    if(checkValue(data.value)!=null){
-      hexcolor = data.value;
+    var obj = getJsonObj(data);
+    if(checkValue(obj.value)!=null){
+      hexcolor = obj.value;
       ledHandlerInstance.updateHexColor(hexcolor);
       io.sockets.volatile.emit('hexcolor', {value: hexcolor});
     }
@@ -86,9 +83,12 @@ function blink(seconds){
     sleep(seconds*50);
     console.log('tick');
   }
-  // for(i=99; i>= 0;i--){
-  //   ledHandlerInstance.setPressure(i);
-  //   sleep(seconds*5);
-  //   console.log('tick');
-  // }
+function getJsonObject(data){
+    if (typeof data == 'string'){
+      var obj = JSON.parse(data);
+    } else {
+      obj = data;
+    }
+    return obj;
+}
 }
