@@ -27,7 +27,7 @@ io.sockets.on('connection', (socket) => {
   io.sockets.emit('hexcolor', {value: hexcolor});
 
   socket.on('brush', (data) => {
-    var obj = getJsonObj(data);
+    var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       brush = obj.value
       ledHandlerInstance.setBrush(brush);
@@ -36,7 +36,7 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('thumbslider', (data) => {
-    var obj = getJsonObj(data);
+    var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       thumbslider = obj.value;
       ledHandlerInstance.updateThumbSlider(thumbslider);
@@ -45,7 +45,7 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('pressure', (data) => {
-    var obj = getJsonObj(data);
+    var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       pressure = obj.value;
       ledHandlerInstance.setPressure(pressure);
@@ -54,7 +54,7 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('hexcolor', (data) => {
-    var obj = getJsonObj(data);
+    var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       hexcolor = obj.value;
       ledHandlerInstance.updateHexColor(hexcolor);
