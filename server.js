@@ -35,6 +35,7 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('thumbslider', (data) => {
+    console.log(data);
     if(checkValue(data.value)!=null){
       thumbslider = data.value;
       ledHandlerInstance.updateThumbSlider(thumbslider);
