@@ -35,7 +35,11 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('thumbslider', (data) => {
+    if (typeof data == 'string'){
     var obj = JSON.parse(data);
+    } else {
+      obj = data;
+    }
     console.log(data);
     console.log(obj);
     if(checkValue(obj.value)!=null){
