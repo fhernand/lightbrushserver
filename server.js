@@ -83,6 +83,8 @@ function blink(seconds){
     sleep(seconds*50);
     console.log('tick');
   }
+}
+
 function getJsonObject(data){
     if (typeof data == 'string'){
       var obj = JSON.parse(data);
@@ -90,5 +92,4 @@ function getJsonObject(data){
       obj = data;
     }
     return obj;
-}
 }
