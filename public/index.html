@@ -113,7 +113,10 @@
   function setValuePressure(newValue)
   {
     document.getElementById("outputTextPressure").innerHTML=newValue;
-    socket.emit('pressure', { value: document.getElementById("outputTextPressure").innerHTML });
+    
+    for(i==1;i<=200;i++){
+      socket.volatile.emit('pressure', { value: document.getElementById("outputTextPressure").innerHTML + parseInt(i/200) });
+    }
     // rtime = new Date();
     // if (timeout === false) {
     //   timeout = true;
