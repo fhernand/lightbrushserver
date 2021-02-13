@@ -114,8 +114,8 @@
   {
     document.getElementById("outputTextPressure").innerHTML=newValue;
     
-    for(var i=1;i<=100;i++){
-      socket.volatile.emit('pressure', { value: document.getElementById("outputTextPressure").innerHTML + parseInt(i/2) });
+    for(var i=1;i<=40;i++){
+      socket.volatile.emit('pressure', { value: document.getElementById("outputTextPressure").innerHTML + parseInt(-20+(i/2)) });
     }
     // rtime = new Date();
     // if (timeout === false) {
