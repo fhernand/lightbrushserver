@@ -21,6 +21,7 @@ ledHandlerInstance.run();
 const io = require('socket.io')(http);
 
 io.sockets.on('connection', (socket) => {
+  console.log('Client has connected...');
   io.sockets.emit('brush', {value: brush});
   io.sockets.emit('thumbslider', {value: thumbslider});
   io.sockets.emit('pressure', {value: pressure});
@@ -45,7 +46,10 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('pressure', (data) => {
+    console.log('pressure event received:');
+    
     var obj = getJsonObject(data);
+    console.log(obj.value);
     if(checkValue(obj.value)!=null){
       pressure = obj.value;
       ledHandlerInstance.setPressure(pressure);
