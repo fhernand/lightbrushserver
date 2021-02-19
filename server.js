@@ -41,7 +41,7 @@ io.sockets.on('connection', (socket) => {
     if(checkValue(obj.value)!=null){
       thumbslider = obj.value;
       ledHandlerInstance.updateThumbSlider(thumbslider);
-      io.sockets.volatile.emit('thumbslider', {value: thumbslider});
+      io.sockets.emit('thumbslider', {value: thumbslider});
     }
   });
 
@@ -50,7 +50,7 @@ io.sockets.on('connection', (socket) => {
     if(checkValue(obj.value)!=null){
       pressure = obj.value;
       ledHandlerInstance.setPressure(pressure);
-      io.sockets.volatile.emit('pressure', {value: pressure});
+      io.sockets.emit('pressure', {value: pressure});
     }
   });
 
@@ -59,7 +59,7 @@ io.sockets.on('connection', (socket) => {
     if(checkValue(obj.value)!=null){
       hexcolor = obj.value;
       ledHandlerInstance.updateHexColor(hexcolor);
-      io.sockets.volatile.emit('hexcolor', {value: hexcolor});
+      io.sockets.emit('hexcolor', {value: hexcolor});
     }
   });
 
