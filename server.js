@@ -45,11 +45,8 @@ io.sockets.on('connection', (socket) => {
     }
   });
 
-  socket.on('pressure', (data) => {
-    console.log('pressure event received:');
-    
+  socket.on('pressure', (data) => {    
     var obj = getJsonObject(data);
-    console.log(obj.value);
     if(checkValue(obj.value)!=null){
       pressure = obj.value;
       ledHandlerInstance.setPressure(pressure);
