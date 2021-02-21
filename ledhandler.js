@@ -51,6 +51,7 @@ class LedHandler {
   getCurrentPressure(){
     return this.brushInstance.getCurrentPressure();
   }
+  
   updateColor(color) {
     this.color = color;
   }
@@ -77,6 +78,10 @@ class LedHandler {
     this.brushInstance.setPressure(pressure);
   }
 
+  setMaxBrushSizeScale(maxSizeScale){
+    this.brushInstance.setMaxBrushSizeScale(maxSizeScale);
+  }
+  
   showError(){
     var tempColor = this.color;
     var tempPressure = this.getCurrentPressure();
