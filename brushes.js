@@ -4,6 +4,7 @@ class Brush {
     this.height = height;
     this.pressureRange = pressureRange;
     this.granularity = 100;
+    this.maxBrushSizeScale = 1;
     this.megamap = [];
   }
 
@@ -38,6 +39,10 @@ class Brush {
       this.megamap[this.pressure] = new Float32Array(this.width * this.height);
       this.buffered = false;
     }
+  }
+  
+  setMaxBrushSizeScale(maxSizeScale){
+    this.maxBrushSizeScale = maxSizeScale;    
   }
 }
 
@@ -109,9 +114,14 @@ class Circle extends Brush {
 
   setPressure(pressure){
     super.setPressure(pressure);
-    this.convertedradius = this.granularity*(this.width/2)*(pressure/this.pressureRange);
+    this.convertedradius = this.granularity*(this.width/2)*(pressure/this.pressureRange) * this.maxBrushSizeScale;
     this.calculateMap();
   }
+  
+  setMaxBrushSizeScale(maxSizeScale){
+    super.setMaxBrushSizeScale(maxSizeScale);
+  }  
+  
 }
 
 module.exports = {
