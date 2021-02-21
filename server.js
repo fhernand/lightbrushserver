@@ -12,6 +12,7 @@ app.use(express.static('public'));
 
 var thumbslider = 0;
 var pressure = 0;
+var maxbrushsizescale = 1;
 var brush = 1;
 var hexcolor = '#000000';
 
@@ -25,6 +26,7 @@ io.sockets.on('connection', (socket) => {
   io.sockets.emit('brush', {value: brush});
   io.sockets.emit('thumbslider', {value: thumbslider});
   io.sockets.emit('pressure', {value: pressure});
+  io.sockets.emit('maxbrushsizescale', {value: maxbrushsizescale});
   io.sockets.emit('hexcolor', {value: hexcolor});
 
   socket.on('brush', (data) => {
@@ -54,6 +56,15 @@ io.sockets.on('connection', (socket) => {
     }
   });
 
+  socket.on('maxbrushsizescale', (data) => {    
+    var obj = getJsonObject(data);
+    if(checkValue(obj.value)!=null){
+      maxbrushsizescale = obj.value;
+      ledHandlerInstance.setMaxBrushSizeScale(maxbrushsizescale);
+      io.sockets.emit('maxbrushsizescale', {value: maxbrushsizescale});
+    }
+  });
+  
   socket.on('hexcolor', (data) => {
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
