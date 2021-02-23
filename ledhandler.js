@@ -1,6 +1,6 @@
 const ws281x = require('rpi-ws281x');
 
-const { Circle, CircleSmall, CircleMedium } = require("./brushes");
+const { Circle, CircleSmall, CircleMedium, Line } = require("./brushes");
 
 const NUM_LEDS_WIDTH = 8;
 const NUM_LEDS_HEIGHT = 8;
@@ -71,7 +71,10 @@ class LedHandler {
         break;
       case "3":
         this.brushInstance = new CircleMedium(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
-        break;          
+        break; 
+      case "4":
+        this.brushInstance = new Line(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
+        break;         
       default:
       this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
     }
