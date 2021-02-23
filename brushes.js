@@ -125,6 +125,20 @@ class Circle extends Brush {
   
 }
 
+class CircleSmall extends Circle {
+ constructor(width, height, pressureRange){
+    super(width, height, pressureRange);
+    this.maxBrushSize = 0.25;
+  } 
+}
+
+class CircleMedium extends Circle {
+ constructor(width, height, pressureRange){
+    super(width, height, pressureRange);
+    this.maxBrushSize = 0.5;
+  } 
+}
+
 module.exports = {
   Circle
 };
