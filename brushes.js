@@ -140,5 +140,7 @@ class CircleMedium extends Circle {
 }
 
 module.exports = {
-  Circle
+  Circle,
+  CircleSmall,
+  CircleMedium
 };
