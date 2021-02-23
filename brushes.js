@@ -84,8 +84,8 @@ class Circle extends Brush {
 
   draw(n) {
     this.anteil = 0;
-    const x = n % (this.width*this.maxBrushSize/2);
-    const y = Math.floor(n / (this.height*this.maxBrushSize/2));
+    const x = n % (this.width/2);
+    const y = Math.floor(n / (this.height/2));
 
     const max_i = this.granularity*(x+1)-1;
     const max_j = this.granularity*(y+1)-1;
@@ -113,8 +113,8 @@ class Circle extends Brush {
   }
 
   setPressure(pressure){
-    super.setPressure(pressure);
-    this.convertedradius = this.granularity*(this.width/2)*(pressure/this.pressureRange);
+    super.setPressure(pressure*this.maxBrushSize);
+    this.convertedradius = this.granularity*(this.width/2)*(this.pressure/this.pressureRange);
     this.calculateMap();
   }
   
