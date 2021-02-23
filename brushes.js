@@ -57,7 +57,7 @@ class Line extends Brush{
   calculateMap(){
     if (this.buffered == false ){
       for (var i = 0; i < this.width/2; i++) {
-        this.mapCircleQuarter[i] = this.draw(i);
+        this.mapLineQuarter[i] = this.draw(i);
       }
 
       for (var i = 0; i < this.width; i++) {
@@ -65,16 +65,16 @@ class Line extends Brush{
        
         if (x >= this.width/2){
           var index = x-(this.width/2);
-          this.megamap[this.pressure][i] = this.mapCircleQuarter[index]
+          this.megamap[this.pressure][i] = this.mapLineQuarter[index]
         } else if (x < this.width/2) {
           var index = (this.width/2)-x-1;
-          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
+          this.megamap[this.pressure][i] = this.mapLineQuarter[index];
         } else if (x >= this.width/2) {
           var index = x-(this.width/2);
-          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
+          this.megamap[this.pressure][i] = this.mapLineQuarter[index];
         } else if (x < this.width/2) {
           var index = (this.width/2)-x-1;
-          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
+          this.megamap[this.pressure][i] = this.mapLineQuarter[index];
         }
       }
       this.buffered = true;
