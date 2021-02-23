@@ -45,6 +45,79 @@ class Brush {
   }
 }
 
+class Line extends Brush{
+  constructor(width, height, pressureRange){
+    super(width, height, pressureRange);
+    this.maxBrushSize = 1.0;
+    this.anteil = 0;
+    this.mapLineQuarter = new Float32Array(this.width/2);
+    this.bufferAllMaps();
+  }  
+  
+  calculateMap(){
+    if (this.buffered == false ){
+      for (var i = 0; i < this.width/2; i++) {
+        this.mapCircleQuarter[i] = this.draw(i);
+      }
+
+      for (var i = 0; i < this.width; i++) {
+        var x = i % (this.width);
+       
+        if (x >= this.width/2){
+          var index = x-(this.width/2);
+          this.megamap[this.pressure][i] = this.mapCircleQuarter[index]
+        } else if (x < this.width/2) {
+          var index = (this.width/2)-x-1;
+          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
+        } else if (x >= this.width/2) {
+          var index = x-(this.width/2);
+          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
+        } else if (x < this.width/2) {
+          var index = (this.width/2)-x-1;
+          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
+        }
+      }
+      this.buffered = true;
+    }
+  }  
+
+  draw(n) {
+    this.anteil = 0;
+    const x = n % (this.width/2);
+
+    const max_i = this.granularity*(x+1)-1;
+
+    for (var i = max_i; i >= this.granularity * x; i-- ){
+        var dist_ij = i;
+        var value = i / this.convertedradius;
+        if (i == max_i && value <= 1){
+          return 1;
+
+        } else {
+          if (value<=1){
+            this.anteil++;
+          }
+        }
+    }
+    return this.anteil / ( this.granularity );
+  } 
+
+  reset(){
+    super.reset();
+    this.mapLineQuarter = new Float32Array(this.width/2);
+  }
+
+  setPressure(pressure){
+    super.setPressure(pressure*this.maxBrushSize);
+    this.convertedradius = this.granularity*(this.width/2)*(this.pressure/this.pressureRange);
+    this.calculateMap();
+  }
+  
+  setMaxBrushSize(maxBrushSize){
+    super.setMaxBrushSize(maxBrushSize);
+  }   
+}
+
 class Circle extends Brush {
   constructor(width, height, pressureRange){
     super(width, height, pressureRange);
@@ -109,7 +182,7 @@ class Circle extends Brush {
 
   reset(){
     super.reset();
-    this.mapCircleQuarter = new Float32Array(this.width * this.height);
+    this.mapCircleQuarter = new Float32Array(this.width * this.height / 4);
   }
 
   setPressure(pressure){
@@ -141,5 +214,6 @@ class CircleMedium extends Circle {
 module.exports = {
   Circle,
   CircleSmall,
-  CircleMedium
+  CircleMedium,
+  Line
 };
