@@ -41,8 +41,8 @@ class Brush {
     }
   }
   
-  setMaxBrushSizeScale(maxSizeScale){
-    this.maxBrushSizeScale = maxSizeScale;    
+  setMaxBrushSize(maxBrushSize){
+    this.maxBrushSize = maxBrushSize;    
   }
 }
 
@@ -114,12 +114,12 @@ class Circle extends Brush {
 
   setPressure(pressure){
     super.setPressure(pressure);
-    this.convertedradius = this.granularity*(this.width/2)*(pressure/this.pressureRange) * this.maxBrushSizeScale;
+    this.convertedradius = this.granularity*(this.width/2)*(pressure/this.pressureRange) * this.maxBrushSize;
     this.calculateMap();
   }
   
-  setMaxBrushSizeScale(maxSizeScale){
-    super.setMaxBrushSizeScale(maxSizeScale);
+  setMaxBrushSize(maxBrushSize){
+    super.setMaxBrushSize(maxBrushSize);
   }  
   
 }
