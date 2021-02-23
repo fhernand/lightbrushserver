@@ -56,20 +56,28 @@ class Line extends Brush{
   
   calculateMap(){
     if (this.buffered == false ){
-      for (var i = 0; i < this.width/2; i++) {
+      for (var i = 0; i < this.height/2; i++) {
         this.mapLineQuarter[i] = this.draw(i);
       }
 
-      for (var i = 0; i < this.width; i++) {
-        var x = i % (this.width);
+      for (var i = 0; i < this.height; i++) {
+        var y = Math.floor(i / (this.height));
        
+         if (y >= this.height/2){
+          var index = (y-(this.height/2))*this.height/2;
+          this.megamap[this.pressure][i+(3*this.height)] = this.mapLineQuarter[index]
+        } else if (y < this.height/2) {
+          var index = ((this.height/2)-y-1)*this.height/2;
+          this.megamap[this.pressure][i+(3*this.height)] = this.mapLineQuarter[index];
+        }   
+        /*
         if (x >= this.width/2){
           var index = x-(this.width/2);
           this.megamap[this.pressure][i+(3*this.width)] = this.mapLineQuarter[index]
         } else if (x < this.width/2) {
           var index = (this.width/2)-x-1;
           this.megamap[this.pressure][i+(3*this.width)] = this.mapLineQuarter[index];
-        } 
+        } */
       }
       this.buffered = true;
     }
@@ -77,12 +85,12 @@ class Line extends Brush{
 
   draw(n) {
     this.anteil = 0;
-    const x = n % (this.width/2);
-
-    const max_i = this.granularity*(x+1)-1;
-
-    for (var i = max_i; i >= this.granularity * x; i-- ){
-        var dist_ij = i;
+    //const x = n % (this.width/2);
+    const y = Math.floor(n / (this.height/2));
+    
+    const max_i = this.granularity*(y+1)-1;
+    
+    for (var i = max_i; i >= this.granularity * y; i-- ){
         var value = i / this.convertedradius;
         if (i == max_i && value <= 1){
           return 1;
