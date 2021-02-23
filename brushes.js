@@ -65,10 +65,10 @@ class Line extends Brush{
        
         if (x >= this.width/2){
           var index = x-(this.width/2);
-          this.megamap[this.pressure][i+(this.width/2)] = this.mapLineQuarter[index]
+          this.megamap[this.pressure][i+(2*this.width)] = this.mapLineQuarter[index]
         } else if (x < this.width/2) {
           var index = (this.width/2)-x-1;
-          this.megamap[this.pressure][i+(this.width/2)] = this.mapLineQuarter[index];
+          this.megamap[this.pressure][i+(2*this.width)] = this.mapLineQuarter[index];
         } 
       }
       this.buffered = true;
