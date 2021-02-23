@@ -1,6 +1,6 @@
 const ws281x = require('rpi-ws281x');
 
-const { Circle } = require("./brushes");
+const { Circle, CircleSmall, CircleMedium } = require("./brushes");
 
 const NUM_LEDS_WIDTH = 8;
 const NUM_LEDS_HEIGHT = 8;
