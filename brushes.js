@@ -115,6 +115,7 @@ class Circle extends Brush {
   setPressure(pressure){
     super.setPressure(pressure);
     this.convertedradius = this.granularity*(this.width/2)*(pressure/this.pressureRange)*this.maxBrushSize;
+    console.log(this.maxBrushSize);
     this.calculateMap();
   }
   
