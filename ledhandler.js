@@ -78,8 +78,8 @@ class LedHandler {
     this.brushInstance.setPressure(pressure);
   }
 
-  setMaxBrushSizeScale(maxSizeScale){
-    this.brushInstance.setMaxBrushSizeScale(maxSizeScale);
+  setMaxBrushSize(brushMaxSize){
+    this.brushInstance.setMaxBrushSize(brushMaxSize);
   }
   
   showError(){
