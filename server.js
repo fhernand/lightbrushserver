@@ -30,6 +30,7 @@ io.sockets.on('connection', (socket) => {
   io.sockets.emit('hexcolor', {value: hexcolor});
 
   socket.on('brush', (data) => {
+    //Expected values: 1,2,...
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       brush = obj.value
@@ -39,6 +40,7 @@ io.sockets.on('connection', (socket) => {
   });
 
   socket.on('thumbslider', (data) => {
+    //Expected value range: 0-100
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       thumbslider = obj.value;
@@ -47,7 +49,8 @@ io.sockets.on('connection', (socket) => {
     }
   });
 
-  socket.on('pressure', (data) => {    
+  socket.on('pressure', (data) => {  
+    //Expected value range: 0-100
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       pressure = obj.value;
@@ -56,12 +59,13 @@ io.sockets.on('connection', (socket) => {
     }
   });
 
-  socket.on('maxbrushsizescale', (data) => {    
+  socket.on('maxbrushsize', (data) => {   
+    //Expected value range: 0-1 (float)
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
-      maxbrushsizescale = obj.value;
-      ledHandlerInstance.setMaxBrushSizeScale(maxbrushsizescale);
-      io.sockets.emit('maxbrushsizescale', {value: maxbrushsizescale});
+      maxbrushsize = obj.value;
+      ledHandlerInstance.setMaxBrushSize(maxbrushsize);
+      io.sockets.emit('maxbrushsize', {value: maxbrushsize});
     }
   });
   
