@@ -12,8 +12,8 @@
   <input type="range" id= "inputSliderBrush" min="1" max="3" value="1" step="1" oninput="setValueBrush(this.value)" />
   <br><h3>Brush: </h3><span id="outputTextBrush">1</span><br><br>
   
-  <input type="range" id= "inputSliderMaxBrushSize" min="0" max="1" value="1" step="0.1" oninput="setValueMaxBrushSize(this.value)" />
-  <br><h3>Brush: </h3><span id="outputTextMaxBrushSize">1</span><br><br>
+  <input type="range" id= "inputSliderMaxBrushSize" min="0" max="1" value="1" step="0.01" oninput="setValueMaxBrushSize(this.value)" />
+  <br><h3>MaxBrushSize: </h3><span id="outputTextMaxBrushSize">1</span><br><br>
   
   <input type="range" id= "inputSliderThumbSlider" min="0" max="100" value="0" step="1" oninput="setValueThumbSlider(this.value)" />
   <br><h3>ThumbSlider: </h3><span id="outputTextThumbSlider">0</span><br><br>
@@ -91,6 +91,11 @@
     document.getElementById("outputTextBrush").innerHTML = newValue;
     socket.emit('brush', { value: newValue });
   }
+  function setValueMaxBrushSize(newValue)
+  {
+    document.getElementById("outputTextMaxBrushSize").innerHTML = newValue;
+    socket.emit('maxbrushsize', { value: newValue });
+  }    
   function setValueThumbSlider(newValue)
   {
     document.getElementById("outputTextThumbSlider").innerHTML = newValue;
