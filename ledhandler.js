@@ -64,11 +64,14 @@ class LedHandler {
     this.brushInstance = null;
     switch(brush) {
       case "1":
-      this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
-      break;
-      //case "2":
-      // other brush
-      //break;
+        this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
+        break;
+      case "2":
+        this.brushInstance = new CircleSmall(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
+        break;
+      case "3":
+        this.brushInstance = new CircleMedium(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
+        break;          
       default:
       this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
     }
