@@ -43,7 +43,7 @@ class UnicornDriver extends LEDDriver {
     try{
       ws281x.configure(this.config);    
     } catch(error) {
-      return null;
+      return undefined;
     }
   }
 
@@ -70,7 +70,7 @@ class UnicornHDDriver extends LEDDriver {
     try{
       setBrightness(brightness);
     } catch(error){
-      return null;
+      return undefined;
     }
   }
 
