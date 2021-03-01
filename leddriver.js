@@ -18,6 +18,7 @@ class LEDDriver {
 
 class UnicornDriver extends LEDDriver {
   constructor(width, height, brightness) {
+
     super(width, height, brightness);
     const unicorn = require('rpi-ws281x');
     this.pixelData = new Uint32Array(this.width*this.height);
@@ -39,7 +40,11 @@ class UnicornDriver extends LEDDriver {
     this.config.map = 'alternating-matrix';
 
     // Configure ws281x
-    ws281x.configure(this.config);    
+    try{
+      ws281x.configure(this.config);    
+    } catch(error) {
+      return null;
+    }
   }
 
   setBrightness(brightness){
@@ -61,8 +66,13 @@ class UnicornDriver extends LEDDriver {
 class UnicornHDDriver extends LEDDriver {
   constructor(width, height, brightness) {
     super(16,16,brightness);
-    const unicornHD = require('unicornhat-hd');    
-    setBrightness(brightness);
+    const unicornHD = require('unicornhat-hd');  
+    
+    try{
+      setBrightness(brightness);
+    } catch(error){
+      return null;
+    }
   }
 
   setBrightness(brightness){
