@@ -1,14 +1,8 @@
-const unicorn = require('rpi-ws281x');
-const unicornHD = require('unicornhat-hd');
-
-//const { Circle, CircleSmall, CircleMedium, Line } = require("./brushes");
-
-//const NUM_LEDS_WIDTH = 8;
-//const NUM_LEDS_HEIGHT = 8;
-
 class LEDDriver {
 
   constructor(width, height) {
+    this.width = width;
+    this.height = height;
   }
   
   setBrightness(brightness){
@@ -24,7 +18,9 @@ class LEDDriver {
 
 class UnicornDriver extends LEDDriver {
   constructor(width, height, brightness) {
-    this.pixelData = new Uint32Array(NUM_LEDS_WIDTH*NUM_LEDS_HEIGHT);
+    super(width, height, brightness);
+    const unicorn = require('rpi-ws281x');
+    this.pixelData = new Uint32Array(this.width*this.height);
     // Set Neopixel configuration
     this.config = {};
 
@@ -63,6 +59,25 @@ class UnicornDriver extends LEDDriver {
 };
 
 class UnicornHDDriver extends LEDDriver {
+  constructor(width, height, brightness) {
+    super(16,16,brightness);
+    const unicornHD = require('unicornhat-hd');    
+    setBrightness(brightness);
+  }
+
+  setBrightness(brightness){
+    unicornHD.setBrightness(brightness);
+  }
+  
+  setPixel(offset, red, green, blue){
+    var x = ( offset - 1) % 9;
+    var y = ( offset - 1) / 9;
+    unicornHD.setPixel(x,y,red,green.blue)
+  }  
+  
+  showPixels(){
+    unicornHD.show(false,false);
+  }   
   
 };
 
