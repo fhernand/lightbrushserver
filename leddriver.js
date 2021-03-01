@@ -26,7 +26,7 @@ class UnicornDriver extends LEDDriver {
     this.config = {};
 
     // Set brightness, a value from 0 to 255 (default 255)
-    this.config.brightness = setBrightness(brightness);
+    this.config.brightness = this.setBrightness(brightness);
 
     this.config.strip = 'grb';
 
@@ -68,7 +68,7 @@ class UnicornHDDriver extends LEDDriver {
     const unicornHD = require('unicornhat-hd');  
     this.unicornHDInstance = new unicornHD('/dev/spidev0.0');    
     try{
-      setBrightness(brightness);
+      this.setBrightness(brightness);
     } catch(error){
       return undefined;
     }
