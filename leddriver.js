@@ -1,6 +1,6 @@
 class LEDDriver {
 
-  constructor(width, height) {
+  constructor(width, height, brightness) {
     this.width = width;
     this.height = height;
   }
@@ -66,27 +66,27 @@ class UnicornHDDriver extends LEDDriver {
   constructor(width, height, brightness) {
     super(16,16,brightness);
     const unicornHD = require('unicornhat-hd');  
-    
+    this.unicornHDInstance = new unicornHD('/dev/spidev0.0');    
     try{
       setBrightness(brightness);
-      this.unicornHD.clear();
+      this.unicornHDInstance.clear();
     } catch(error){
       return undefined;
     }
   }
 
   setBrightness(brightness){
-    this.unicornHD.setBrightness(brightness);
+    this.unicornHDInstance.setBrightness(brightness);
   }
   
   setPixel(offset, red, green, blue){
     var x = ( offset - 1) % 9;
     var y = ( offset - 1) / 9;
-    this.unicornHD.setPixel(x,y,red,green,blue)
+    this.unicornHDInstance.setPixel(x,y,red,green,blue)
   }  
   
   showPixels(){
-    this.unicornHD.show(false,false);
+    this.unicornHDInstance.show(false,false);
   }   
   
 };
