@@ -22,9 +22,8 @@ class LedHandler {
     
     this.MaxThumbSlider = 0;
     this.pressureRange = 100;
-
     this.color = { r:0, g:0, b:0 };
-        
+    this.offset = 0;
     this.setBrush();
   }
 
