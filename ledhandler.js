@@ -8,7 +8,7 @@ class LedHandler {
 
   constructor() {
     this.ledDriverInstance = new UnicornHDDriver(16,16,1);
-    if (ledDriverInstance == undefined){
+    if (this.ledDriverInstance == undefined){
       this.ledDriverInstance = new UnicornDriver(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, 1);
     }
     
