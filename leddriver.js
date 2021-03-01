@@ -52,8 +52,7 @@ class UnicornDriver extends LEDDriver {
   }
   
   setPixel(offset, red, green, blue){
-    var value = this.brushInstance.getMapValue(this.offset);
-    var pixelColor = rgb2Int(value*red,value*green,value*blue);
+    var pixelColor = rgb2Int(red,green,blue);
     this.pixelData[offset] = pixelColor;
   }  
   
