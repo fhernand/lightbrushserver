@@ -6,18 +6,13 @@ const NUM_LEDS_HEIGHT = 8;
 
 class LedHandler {
 
-  constructor() {
-    this.ledDriverInstance = new UnicornDriver(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, 1);
-    if (this.ledDriverInstance == undefined){
-      console.log("Unicorn Hat not found. Trying to find Unicorn Hat HD or compatible LED module.");
+  constructor(module) {
+    if (module == "hd"){
       this.ledDriverInstance = new UnicornHDDriver(16,16,1);
-      if (this.ledDriverInstance == undefined){
-        console.log("No LED module found.");
-      } else {
-        console.log("Unicorn Hat HD found.");
-      }
+      console.log("Unicorn Hat HD selected.");
     } else {
-      console.log("Unicorn Hat found.");
+      this.ledDriverInstance = new UnicornDriver(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, 1);
+      console.log("Unicorn Hat selected.");
     }
     
     this.MaxThumbSlider = 0;
