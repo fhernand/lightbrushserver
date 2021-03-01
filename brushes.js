@@ -65,11 +65,11 @@ class Line extends Brush{
        
          if (y >= this.height/2){
           var index = (y-(this.height/2))*this.height/2;
-          this.megamap[this.pressure][i] = this.mapLineQuarter[index]
-        } else if (y < this.height/2) {
+         } else if (y < this.height/2) {
           var index = ((this.height/2)-y-1)*this.height/2;
-          this.megamap[this.pressure][i] = this.mapLineQuarter[index];
-        }   
+         }   
+         this.megamap[this.pressure][i][0] = this.mapLineQuarter[index];
+         this.megamap[this.pressure][i][1] = index;
         /*
         if (x >= this.width/2){
           var index = x-(this.width/2);
@@ -141,17 +141,16 @@ class Circle extends Brush {
 
         if (x >= this.width/2 && y >= this.height/2){
           var index = (x-(this.width/2)) + (y-(this.height/2))*this.height/2;
-          this.megamap[this.pressure][i] = this.mapCircleQuarter[index]
+          
         } else if (x < this.width/2 && y < this.height/2) {
           var index = ((this.width/2)-x-1) + ((this.height/2)-y-1)*this.height/2;
-          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
         } else if (x >= this.width/2 && y < this.height/2) {
           var index = (x-(this.width/2)) + ((this.height/2)-y-1)*this.height/2;
-          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
         } else if (x < this.width/2 && y >= this.height/2) {
           var index = ((this.width/2)-x-1) + (y-(this.height/2))*this.height/2;
-          this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
         }
+        this.megamap[this.pressure][i][0] = this.mapCircleQuarter[index];
+        this.megamap[this.pressure][i][1] = index;
       }
       this.buffered = true;
     }
