@@ -16,6 +16,7 @@ class LedHandler {
       } else {
         console.log("Unicorn Hat found.");
       }
+    } else {
       console.log("Unicorn Hat HD found.");
     }
     
