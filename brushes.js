@@ -35,7 +35,7 @@ class Brush {
   setPressure(pressure){
     this.pressure = pressure;
     if (this.megamap[this.pressure] == null ){
-      this.megamap[this.pressure] = Array.from(Array(this.width * this.height), () => new Array(1));
+      this.megamap[this.pressure] = [];//Array.from(Array(this.width * this.height), () => new Array(1));
       this.buffered = false;
     }
   }
@@ -61,6 +61,7 @@ class Line extends Brush{
       }
 
       for (var i = 0; i < this.height; i++) {
+        this.megamap[this.pressure][i] = [];
         var y = Math.floor(i / (this.height));
        
          if (y >= this.height/2){
@@ -136,6 +137,7 @@ class Circle extends Brush {
       }
 
       for (var i = 0; i < this.width*this.height; i++) {
+        this.megamap[this.pressure][i] = [];
         var x = i % (this.width);
         var y = Math.floor(i / (this.height));
 
