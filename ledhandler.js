@@ -102,7 +102,8 @@ class LedHandler {
       var colorBlue = this.color.b * this.MaxThumbSlider / 255;
 
       for (var i = 0; i < leds; i++) {    
-        this.ledDriverInstance.setPixel(this.offset, colorRed, colorGreen, colorBlue);
+        var value = this.brushInstance.getMapValue(this.offset);
+        this.ledDriverInstance.setPixel(this.offset, value*colorRed, value*colorGreen, value*colorBlue);
 
         // Move on to next
         this.offset = (this.offset + 1) % leds;
