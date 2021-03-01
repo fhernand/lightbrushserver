@@ -98,12 +98,14 @@ class LedHandler {
 
       for (var i = 0; i < leds; i++) {    
         var value = this.brushInstance.getMapValue(this.offset);
-        console.log(value);
-        
-        this.ledDriverInstance.setPixel(value[1], value[0]*colorRed, value[0]*colorGreen, value[0]*colorBlue);
+        if (value != undefined){
+          console.log(value);
 
-        // Move on to next
-        this.offset = (this.offset + 1) % leds;
+          this.ledDriverInstance.setPixel(value[1], value[0]*colorRed, value[0]*colorGreen, value[0]*colorBlue);
+
+          // Move on to next
+          this.offset = (this.offset + 1) % leds;
+        }
       }
 
       this.ledDriverInstance.showPixels();
