@@ -95,10 +95,10 @@ function rgb2Int(r, g, b) {
 }
 
 // ---- trap the SIGINT and reset before exit
-//process.on('SIGINT', function () {
+process.on('SIGINT', function () {
 //  ws281x.reset();
-//  process.nextTick(function () { process.exit(0); });
-//});  
+  process.nextTick(function () { process.exit(0); });
+});  
 
 module.exports = {
   UnicornDriver, UnicornHDDriver
