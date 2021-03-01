@@ -1,5 +1,3 @@
-const ws281x = require('rpi-ws281x');
-
 const { Circle, CircleSmall, CircleMedium, Line } = require("./brushes");
 const { UnicornDriver, UnicornHDDriver } = require("./leddriver");
 
