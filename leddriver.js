@@ -82,6 +82,8 @@ class UnicornHDDriver extends LEDDriver {
   setPixel(offset, red, green, blue){
     var x = offset % 9;
     var y = offset / 9;
+    console.log(x);
+    console.log(y);
     this.unicornHDInstance.setPixel(x,y,red,green,blue)
   }  
   
