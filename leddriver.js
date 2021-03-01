@@ -69,7 +69,7 @@ class UnicornHDDriver extends LEDDriver {
     this.unicornHDInstance = new unicornHD('/dev/spidev0.0');    
     try{
       setBrightness(brightness);
-      this.unicornHDInstance.clear();
+      this.unicornHDInstance.setPixel(0,0,0,0,0);
     } catch(error){
       return undefined;
     }
