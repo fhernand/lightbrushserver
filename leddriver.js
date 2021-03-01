@@ -92,5 +92,5 @@ function rgb2Int(r, g, b) {
 }
 
 module.exports = {
-  LedHandler
+  UnicornDriver, UnicornHDDriver
 };
