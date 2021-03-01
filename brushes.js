@@ -21,7 +21,7 @@ class Brush {
   }
 
   getMapValue(i){
-    if (this.megamap[this.pressure] != null ){
+    if (this.megamap[this.pressure][i] != null ){
       return this.megamap[this.pressure][i];
     }
   }
@@ -141,7 +141,6 @@ class Circle extends Brush {
 
         if (x >= this.width/2 && y >= this.height/2){
           var index = (x-(this.width/2)) + (y-(this.height/2))*this.height/2;
-          
         } else if (x < this.width/2 && y < this.height/2) {
           var index = ((this.width/2)-x-1) + ((this.height/2)-y-1)*this.height/2;
         } else if (x >= this.width/2 && y < this.height/2) {
