@@ -64,7 +64,7 @@ class UnicornDriver extends LEDDriver {
 class UnicornHDDriver extends LEDDriver {
   constructor(width, height, brightness) {
     super(16,16,brightness);
-    this.unicornHD = require('unicornhat-hd');  
+    const unicornHD = require('unicornhat-hd');  
         
     this.unicornHDInstance = new unicornHD('/dev/spidev0.0');    
     try{
