@@ -22,7 +22,7 @@ class Brush {
 
   getMapValue(i){
     if (this.megamap[this.pressure][i] != null ){
-      return this.megamap[this.pressure][i];
+      return this.megamap[this.pressure][i][0];
     }
   }
 
