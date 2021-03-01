@@ -35,7 +35,7 @@ class Brush {
   setPressure(pressure){
     this.pressure = pressure;
     if (this.megamap[this.pressure] == null ){
-      this.megamap[this.pressure] = [];//Array.from(Array(this.width * this.height), () => new Array(1));
+      this.megamap[this.pressure] = [];
       this.buffered = false;
     }
   }
@@ -63,11 +63,11 @@ class Line extends Brush{
       for (var i = 0; i < this.height; i++) {
         this.megamap[this.pressure][i] = [];
         var y = Math.floor(i / (this.height));
-       
+        var index = 0;
          if (y >= this.height/2){
-          var index = (y-(this.height/2))*this.height/2;
+          index = (y-(this.height/2))*this.height/2;
          } else if (y < this.height/2) {
-          var index = ((this.height/2)-y-1)*this.height/2;
+          index = ((this.height/2)-y-1)*this.height/2;
          }   
          this.megamap[this.pressure][i][0] = this.mapLineQuarter[index];
          this.megamap[this.pressure][i][1] = index;
@@ -140,15 +140,15 @@ class Circle extends Brush {
         this.megamap[this.pressure][i] = [];
         var x = i % (this.width);
         var y = Math.floor(i / (this.height));
-
+        var index = 0;
         if (x >= this.width/2 && y >= this.height/2){
-          var index = (x-(this.width/2)) + (y-(this.height/2))*this.height/2;
+          index = (x-(this.width/2)) + (y-(this.height/2))*this.height/2;
         } else if (x < this.width/2 && y < this.height/2) {
-          var index = ((this.width/2)-x-1) + ((this.height/2)-y-1)*this.height/2;
+          index = ((this.width/2)-x-1) + ((this.height/2)-y-1)*this.height/2;
         } else if (x >= this.width/2 && y < this.height/2) {
-          var index = (x-(this.width/2)) + ((this.height/2)-y-1)*this.height/2;
+          index = (x-(this.width/2)) + ((this.height/2)-y-1)*this.height/2;
         } else if (x < this.width/2 && y >= this.height/2) {
-          var index = ((this.width/2)-x-1) + (y-(this.height/2))*this.height/2;
+          index = ((this.width/2)-x-1) + (y-(this.height/2))*this.height/2;
         }
         this.megamap[this.pressure][i][0] = this.mapCircleQuarter[index];
         this.megamap[this.pressure][i][1] = index;
