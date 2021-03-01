@@ -46,19 +46,19 @@ class LedHandler {
     this.brushInstance = null;
     switch(brush) {
       case "1":
-        this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
+        this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
         break;
       case "2":
-        this.brushInstance = new CircleSmall(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
+        this.brushInstance = new CircleSmall(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
         break;
       case "3":
-        this.brushInstance = new CircleMedium(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
+        this.brushInstance = new CircleMedium(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
         break; 
       case "4":
-        this.brushInstance = new Line(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
+        this.brushInstance = new Line(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
         break;         
       default:
-      this.brushInstance = new Circle(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, this.pressureRange);
+      this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
     }
   }
 
@@ -99,12 +99,12 @@ class LedHandler {
       for (var i = 0; i < leds; i++) {    
         var value = this.brushInstance.getMapValue(this.offset);
         if (value != undefined){
-          console.log(value);
-
           this.ledDriverInstance.setPixel(value[1], value[0]*colorRed, value[0]*colorGreen, value[0]*colorBlue);
 
           // Move on to next
           this.offset = (this.offset + 1) % leds;
+        } else {
+          console.log(value);
         }
       }
 
