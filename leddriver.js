@@ -16,11 +16,9 @@ class LEDDriver {
   
 };
 
-class UnicornDriver extends LEDDriver {
-  const unicorn = require('rpi-ws281x');
-  
+class UnicornDriver extends LEDDriver { 
   constructor(width, height, brightness) {
-
+    this.unicorn = require('rpi-ws281x');
     super(width, height, brightness);
     this.pixelData = new Uint32Array(this.width*this.height);
     // Set Neopixel configuration
@@ -63,9 +61,9 @@ class UnicornDriver extends LEDDriver {
 };
 
 class UnicornHDDriver extends LEDDriver {
-  const unicornHD = require('unicornhat-hd');  
-
   constructor(width, height, brightness) {
+    this.unicornHD = require('unicornhat-hd');  
+    
     super(16,16,brightness);
     
     this.unicornHDInstance = new unicornHD('/dev/spidev0.0');    
