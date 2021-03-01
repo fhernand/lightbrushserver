@@ -4,7 +4,7 @@ class Brush {
     this.height = height;
     this.pressureRange = pressureRange;
     this.granularity = 100;
-    this.megamap = Array.from(Array(this.granularity), () => new Array(this.width * this.height));
+    this.megamap = [];
   }
 
   bufferAllMaps(){
@@ -21,7 +21,7 @@ class Brush {
   }
 
   getMapValue(i){
-    if (this.megamap[this.pressure][i] != null ){
+    if (this.megamap[this.pressure][i][0] != null ){
       return this.megamap[this.pressure][i];
     }
   }
