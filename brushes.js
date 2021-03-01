@@ -4,7 +4,7 @@ class Brush {
     this.height = height;
     this.pressureRange = pressureRange;
     this.granularity = 100;
-    this.megamap = [];
+    this.megamap = Array.from(Array(this.width * this.height), () => new Array(1));
   }
 
   bufferAllMaps(){
@@ -34,8 +34,9 @@ class Brush {
   }
   setPressure(pressure){
     this.pressure = pressure;
-    if (this.megamap[this.pressure] == null ){
+    if (this.megamap[this.pressure][0] == null ){
       this.megamap[this.pressure][0] = new Float32Array(this.width * this.height);
+      this.megamap[this.pressure][1] = 0;
       this.buffered = false;
     }
   }
