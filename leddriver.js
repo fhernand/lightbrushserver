@@ -60,13 +60,6 @@ class UnicornDriver extends LEDDriver {
   showPixels(){
     ws281x.render(this.pixelData);
   }  
-
-  // ---- trap the SIGINT and reset before exit
-  process.on('SIGINT', function () {
-    ws281x.reset();
-    process.nextTick(function () { process.exit(0); });
-  });  
-  
 };
 
 class UnicornHDDriver extends LEDDriver {
@@ -100,6 +93,12 @@ class UnicornHDDriver extends LEDDriver {
 function rgb2Int(r, g, b) {
   return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
+
+// ---- trap the SIGINT and reset before exit
+process.on('SIGINT', function () {
+  ws281x.reset();
+  process.nextTick(function () { process.exit(0); });
+});  
 
 module.exports = {
   UnicornDriver, UnicornHDDriver
