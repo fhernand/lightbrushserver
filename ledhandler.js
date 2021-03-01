@@ -94,20 +94,22 @@ class LedHandler {
   }
 
   loop() {
-    var leds = this.ledDriverInstance.width * this.ledDriverInstance.height;
+    if(this.ledDriverInstance != undefined){
+      var leds = this.ledDriverInstance.width * this.ledDriverInstance.height;
 
-    var colorRed = this.color.r * this.MaxThumbSlider / 255;
-    var colorGreen = this.color.g * this.MaxThumbSlider / 255;
-    var colorBlue = this.color.b * this.MaxThumbSlider / 255;
+      var colorRed = this.color.r * this.MaxThumbSlider / 255;
+      var colorGreen = this.color.g * this.MaxThumbSlider / 255;
+      var colorBlue = this.color.b * this.MaxThumbSlider / 255;
 
-    for (var i = 0; i < leds; i++) {    
-      this.ledDriverInstance.setPixel(this.offset, colorRed, colorGreen, colorBlue);
-      
-      // Move on to next
-      this.offset = (this.offset + 1) % leds;
+      for (var i = 0; i < leds; i++) {    
+        this.ledDriverInstance.setPixel(this.offset, colorRed, colorGreen, colorBlue);
+
+        // Move on to next
+        this.offset = (this.offset + 1) % leds;
+      }
+
+      this.ledDriverInstance.showPixels();
     }
-    
-    this.ledDriverInstance.showPixels();
   }
 
   run() {
