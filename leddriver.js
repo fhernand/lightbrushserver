@@ -69,6 +69,7 @@ class UnicornHDDriver extends LEDDriver {
     
     try{
       setBrightness(brightness);
+      this.unicornHD.clear();
     } catch(error){
       return undefined;
     }
