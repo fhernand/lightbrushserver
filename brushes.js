@@ -35,7 +35,7 @@ class Brush {
   setPressure(pressure){
     this.pressure = pressure;
     if (this.megamap[this.pressure] == null ){
-      this.megamap[this.pressure] = new Float32Array(this.width * this.height);
+      this.megamap[this.pressure][0] = new Float32Array(this.width * this.height);
       this.buffered = false;
     }
   }
