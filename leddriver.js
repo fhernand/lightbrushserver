@@ -41,7 +41,7 @@ class UnicornDriver extends LEDDriver {
 
     // Configure ws281x
     try{
-      ws281x.configure(this.config);    
+      this.unicorn.configure(this.config);    
     } catch(error) {
       return undefined;
     }
@@ -58,7 +58,7 @@ class UnicornDriver extends LEDDriver {
   }  
   
   showPixels(){
-    ws281x.render(this.pixelData);
+    this.unicorn.render(this.pixelData);
   }  
 };
 
@@ -75,17 +75,17 @@ class UnicornHDDriver extends LEDDriver {
   }
 
   setBrightness(brightness){
-    unicornHD.setBrightness(brightness);
+    this.unicornHD.setBrightness(brightness);
   }
   
   setPixel(offset, red, green, blue){
     var x = ( offset - 1) % 9;
     var y = ( offset - 1) / 9;
-    unicornHD.setPixel(x,y,red,green.blue)
+    this.unicornHD.setPixel(x,y,red,green.blue)
   }  
   
   showPixels(){
-    unicornHD.show(false,false);
+    this.unicornHD.show(false,false);
   }   
   
 };
@@ -95,10 +95,10 @@ function rgb2Int(r, g, b) {
 }
 
 // ---- trap the SIGINT and reset before exit
-process.on('SIGINT', function () {
-  ws281x.reset();
-  process.nextTick(function () { process.exit(0); });
-});  
+//process.on('SIGINT', function () {
+//  ws281x.reset();
+//  process.nextTick(function () { process.exit(0); });
+//});  
 
 module.exports = {
   UnicornDriver, UnicornHDDriver
