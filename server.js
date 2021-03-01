@@ -16,7 +16,7 @@ var maxbrushsizescale = 1;
 var brush = 1;
 var hexcolor = '#000000';
 
-var ledHandlerInstance = new LedHandler();
+var ledHandlerInstance = new LedHandler(process.argv[2]);
 ledHandlerInstance.run();
 
 const io = require('socket.io')(http);
