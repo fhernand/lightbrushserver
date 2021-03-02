@@ -21,8 +21,8 @@ class Brush {
   }
 
   getMapValue(i){
-    if (this.megamap[this.pressure][i] != null ){
-      return this.megamap[this.pressure][i][0];
+    if (this.megamap[this.pressure] != null ){
+      return this.megamap[this.pressure][i];
     }
   }
 
@@ -61,7 +61,6 @@ class Line extends Brush{
       }
 
       for (var i = 0; i < this.height; i++) {
-        this.megamap[this.pressure][i] = [];
         var y = Math.floor(i / (this.height));
         var index = 0;
          if (y >= this.height/2){
@@ -69,8 +68,7 @@ class Line extends Brush{
          } else if (y < this.height/2) {
           index = ((this.height/2)-y-1)*this.height/2;
          }   
-         this.megamap[this.pressure][i][0] = this.mapLineQuarter[index];
-         this.megamap[this.pressure][i][1] = index;
+         this.megamap[this.pressure][i] = this.mapLineQuarter[index];
         /*
         if (x >= this.width/2){
           var index = x-(this.width/2);
@@ -137,7 +135,6 @@ class Circle extends Brush {
       }
 
       for (var i = 0; i < this.width*this.height; i++) {
-        this.megamap[this.pressure][i] = [];
         var x = i % (this.width);
         var y = Math.floor(i / (this.height));
         var index = 0;
@@ -150,8 +147,7 @@ class Circle extends Brush {
         } else if (x < this.width/2 && y >= this.height/2) {
           index = ((this.width/2)-x-1) + (y-(this.height/2))*this.height/2;
         }
-        this.megamap[this.pressure][i][0] = this.mapCircleQuarter[index];
-        this.megamap[this.pressure][i][1] = index;
+        this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
       }
       this.buffered = true;
     }
