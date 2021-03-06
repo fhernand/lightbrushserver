@@ -6,6 +6,7 @@ class Brush {
     this.granularity = 100;
     this.megamap = [];
     this.brightness = 100;
+    this.maxBrightness = 100;
   }
 
   bufferAllMaps(){
@@ -46,7 +47,7 @@ class Brush {
   }
 
   setBrightness(brightness){
-    this.brightness = brightness;
+    this.brightness = brightness * this.maxBrightness/100;
   }
 
   getCurrentBrightness(){
@@ -222,17 +223,19 @@ class CircleBrightness extends Circle {
   setPressure(pressure){
     super.setPressure(this.pressureRange);
     this.convertedradius = this.granularity*(this.width/2);
-    this.brightness = pressure;
+    this.setBrightness(pressure);
     this.calculateMap();
   }
 }
 
 class Dot extends CircleBrightness {
-  constructor(width, height, pressureRange){
-     super(2, 2, pressureRange);
-   }
+  draw(n){
+      if (n == this.width*this.height/2) {
+        super.draw(n);
+      }
+  }
 
-   getMapValue(i){
+  getMapValue(i){
      if (this.megamap[this.pressure] != null && i == this.width / 2){
        return this.megamap[this.pressure][i];
      }
