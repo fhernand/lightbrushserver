@@ -71,12 +71,12 @@ class Line extends Brush{
       }
 
       for (var i = 0; i < this.height; i++) {
-        var y = Math.floor(i / (this.height));
+
         var index = 0;
-         if (y >= this.height/2){
-          index = (y-(this.height/2))*this.height/2;
-         } else if (y < this.height/2) {
-          index = ((this.height/2)-y-1)*this.height/2;
+         if (i >= this.height/2){
+          index = (i-(this.height/2))*this.height/2;
+        } else if (i < this.height/2) {
+          index = ((this.height/2)-i-1)*this.height/2;
          }
          this.megamap[this.pressure][i] = this.mapLineHalf[index];
       }
@@ -221,7 +221,7 @@ class CircleBrightness extends Circle {
 class Dot extends CircleBrightness {
   calculateMap(){
     if (this.buffered == false ){
-        this.megamap[this.pressure][this.width*this.height/2] = this.pressure/this.pressureRange;
+        this.megamap[this.pressure][(this.width*this.height/2) - (this.width/2)] = this.pressure/this.pressureRange;
       }
       this.buffered = true;
     }
