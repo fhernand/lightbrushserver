@@ -101,7 +101,7 @@ class Line extends Brush{
 
     for (var i = max_i; i >= this.granularity * y; i-- ){
         var value = i / this.convertedradius;
-        if (value <= 1){
+        if (i == max_i && value <= 1){
           return 1;
 
         } else {
@@ -223,7 +223,7 @@ class CircleBrightness extends Circle {
   setPressure(pressure){
     super.setPressure(this.pressureRange);
     this.convertedradius = this.granularity*(this.width/2);
-    this.setBrightness(pressure);
+    this.setBrightness(pressure*this.maxBrushSize);
     this.calculateMap();
   }
 }
@@ -232,6 +232,7 @@ class Dot extends CircleBrightness {
   draw(n){
       if (n == this.width*this.height/2) {
         super.draw(n);
+        console.log(n);
       }
   }
 }
