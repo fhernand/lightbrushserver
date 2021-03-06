@@ -226,10 +226,23 @@ class CircleBrightness extends Circle {
   }
 }
 
+class Dot extends CircleBrightness {
+  constructor(width, height, pressureRange){
+     super(2, 2, pressureRange);
+   }
+
+   getMapValue(i){
+     if (this.megamap[this.pressure] != null && i == 0 ){
+       return this.megamap[this.pressure][i];
+     }
+   }
+}
+
 module.exports = {
   Circle,
   CircleSmall,
   CircleMedium,
   CircleBrightness,
+  Dot,
   Line
 };
