@@ -97,7 +97,7 @@ class Line extends Brush{
 
     //const x = n % (this.width/2);
     const y = Math.floor(n / (this.height/4));
-console.log(n);
+console.log(y);
 
     const max_i = this.granularity*(y+1)-1;
 
@@ -232,10 +232,8 @@ class CircleBrightness extends Circle {
 
 class Dot extends CircleBrightness {
   draw(n){
-      if (n == 0) {
+      if (n == (this.width*this.height/4) - 1) {
         super.draw(n);
-        console.log("n");
-        console.log(n);
       }
   }
 
