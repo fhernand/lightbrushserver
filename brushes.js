@@ -222,6 +222,7 @@ class CircleBrightness extends Circle {
   setPressure(pressure){
     super.setPressure(this.pressureRange);
     this.convertedradius = this.granularity*(this.width/2);
+    this.brightness = pressure;
     this.calculateMap();
   }
 }
@@ -232,7 +233,7 @@ class Dot extends CircleBrightness {
    }
 
    getMapValue(i){
-     if (this.megamap[this.pressure] != null && i == 0 ){
+     if (this.megamap[this.pressure] != null && i == this.width / 2){
        return this.megamap[this.pressure][i];
      }
    }
