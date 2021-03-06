@@ -60,14 +60,14 @@ class Line extends Brush{
     super(width, height, pressureRange);
     this.maxBrushSize = 1.0;
     this.anteil = 0;
-    this.mapLineQuarter = new Float32Array(this.width/2);
+    this.mapLineHalf = new Float32Array(this.width/2);
     this.bufferAllMaps();
   }
 
   calculateMap(){
     if (this.buffered == false ){
       for (var i = 0; i < this.height/2; i++) {
-        this.mapLineQuarter[i] = this.draw(i);
+        this.mapLineHalf[i] = this.draw(i);
       }
 
       for (var i = 0; i < this.height; i++) {
@@ -78,15 +78,7 @@ class Line extends Brush{
          } else if (y < this.height/2) {
           index = ((this.height/2)-y-1)*this.height/2;
          }
-         this.megamap[this.pressure][i] = this.mapLineQuarter[index];
-        /*
-        if (x >= this.width/2){
-          var index = x-(this.width/2);
-          this.megamap[this.pressure][i+(3*this.width)] = this.mapLineQuarter[index]
-        } else if (x < this.width/2) {
-          var index = (this.width/2)-x-1;
-          this.megamap[this.pressure][i+(3*this.width)] = this.mapLineQuarter[index];
-        } */
+         this.megamap[this.pressure][i] = this.mapLineHalf[index];
       }
       this.buffered = true;
     }
@@ -95,13 +87,9 @@ class Line extends Brush{
   draw(n) {
     this.anteil = 0;
 
-    //const x = n % (this.width/2);
-    const y = Math.floor(n / (this.height/4));
-console.log(y);
+    const max_i = this.granularity*n;
 
-    const max_i = this.granularity*(y+1)-1;
-
-    for (var i = max_i; i >= this.granularity * y; i-- ){
+    for (var i = max_i; i >= this.granularity*(n-1); i-- ){
         var value = i / this.convertedradius;
         if (i == max_i && value <= 1){
           return 1;
@@ -117,7 +105,7 @@ console.log(y);
 
   reset(){
     super.reset();
-    this.mapLineQuarter = new Float32Array(this.width/2);
+    this.mapLineHalf = new Float32Array(this.width/2);
   }
 
   setPressure(pressure){
@@ -233,7 +221,7 @@ class CircleBrightness extends Circle {
 class Dot extends CircleBrightness {
   calculateMap(){
     if (this.buffered == false ){
-        this.megamap[this.pressure][this.width*this.height/2] = this.pressure;
+        this.megamap[this.pressure][this.width*this.height/2] = this.pressure/this.pressureRange;
       }
       this.buffered = true;
     }
