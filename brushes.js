@@ -237,9 +237,8 @@ class Dot extends CircleBrightness {
       }
       this.buffered = true;
     }
-  }
 
-  getMapValue(i){
+  getMapValue(i) {
     if (this.megamap[this.pressure] != null){
       return this.megamap[this.pressure][i];
     }
