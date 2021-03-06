@@ -74,9 +74,9 @@ class Line extends Brush{
 
         var index = 0;
          if (i >= this.height/2){
-          index = (i-(this.height/2))*this.height/2;
+          index = (this.width/2) + (i-(this.height/2))*this.height/2;
         } else if (i < this.height/2) {
-          index = ((this.height/2)-i-1)*this.height/2;
+          index = (this.width/2) + ((this.height/2)-i-1)*this.height/2;
          }
          this.megamap[this.pressure][i] = this.mapLineHalf[index];
       }
