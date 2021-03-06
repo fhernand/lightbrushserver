@@ -231,16 +231,17 @@ class CircleBrightness extends Circle {
 }
 
 class Dot extends CircleBrightness {
-  draw(n){
-      if (n == (this.width*this.height/4) - 1) {
-        super.draw(n);
+  calculateMap(){
+    if (this.buffered == false ){
+        this.megamap[this.pressure][this.width*this.height] = this.pressure];
       }
+      this.buffered = true;
+    }
   }
 
   getMapValue(i){
-    if (this.megamap[this.pressure] != null && i == this.width*this.height/2 ){
+    if (this.megamap[this.pressure] != null){
       return this.megamap[this.pressure][i];
-      console.log(i);
     }
   }
 }
