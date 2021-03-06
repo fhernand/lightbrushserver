@@ -97,7 +97,7 @@ class Line extends Brush{
 
     //const x = n % (this.width/2);
     const y = Math.floor(n / (this.height/2));
-console.log(y);
+console.log(n);
 
     const max_i = this.granularity*(y+1)-1;
 
@@ -234,12 +234,15 @@ class Dot extends CircleBrightness {
   draw(n){
       if (n == this.width*this.height/4) {
         super.draw(n);
+        console.log("n");
+        console.log(n);
       }
   }
 
   getMapValue(i){
     if (this.megamap[this.pressure] != null && i == this.width*this.height/2 ){
       return this.megamap[this.pressure][i];
+      console.log(i);
     }
   }
 }
