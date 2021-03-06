@@ -101,7 +101,7 @@ class Line extends Brush{
 
     for (var i = max_i; i >= this.granularity * y; i-- ){
         var value = i / this.convertedradius;
-        if (i == max_i && value <= 1){
+        if (value <= 1){
           return 1;
 
         } else {
@@ -110,7 +110,7 @@ class Line extends Brush{
           }
         }
     }
-    return this.anteil / ( this.granularity );
+    return this.anteil / this.granularity;
   }
 
   reset(){
@@ -234,12 +234,6 @@ class Dot extends CircleBrightness {
         super.draw(n);
       }
   }
-
-  getMapValue(i){
-     if (this.megamap[this.pressure] != null && i == this.width / 2){
-       return this.megamap[this.pressure][i];
-     }
-   }
 }
 
 module.exports = {
