@@ -4,6 +4,10 @@ body {
 	background: #000000;
 }
 
+h3 {
+  color: grey;
+}
+
 input[type=range]{
 	-webkit-appearance: none;
 	width: 80%;

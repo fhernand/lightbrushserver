@@ -1,4 +1,4 @@
-const { Circle, CircleSmall, CircleMedium, Line } = require("./brushes");
+const { Circle, CircleSmall, CircleMedium, CircleBrightness, Line } = require("./brushes");
 const { UnicornDriver, UnicornHDDriver } = require("./leddriver");
 
 const NUM_LEDS_WIDTH = 8;
@@ -14,8 +14,7 @@ class LedHandler {
       this.ledDriverInstance = new UnicornDriver(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, 1);
       console.log("Unicorn Hat selected.");
     }
-    
-    this.MaxThumbSlider = 0;
+
     this.pressureRange = 100;
     this.color = { r:0, g:0, b:0 };
     this.offset = 0;
@@ -23,7 +22,7 @@ class LedHandler {
   }
 
   updateThumbSlider(thumbslider) {
-    this.MaxThumbSlider = thumbslider;
+    this.brushInstance.setBrightness(thumbslider);
   }
 
   getCurrentColor(){
@@ -33,7 +32,11 @@ class LedHandler {
   getCurrentPressure(){
     return this.brushInstance.getCurrentPressure();
   }
-  
+
+  getCurrentBrightness(){
+    return this.brushInstance.getCurrentBrightness();
+  }
+
   updateColor(color) {
     this.color = color;
   }
@@ -53,10 +56,13 @@ class LedHandler {
         break;
       case "3":
         this.brushInstance = new CircleMedium(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
-        break; 
+        break;
       case "4":
         this.brushInstance = new Line(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
-        break;         
+        break;
+      case "5":
+        this.brushInstance = new CircleBrightness(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
+        break;
       default:
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
     }
@@ -69,11 +75,11 @@ class LedHandler {
   setMaxBrushSize(brushMaxSize){
     this.brushInstance.setMaxBrushSize(brushMaxSize);
   }
-  
+
   showError(){
     var tempColor = this.color;
     var tempPressure = this.getCurrentPressure();
-    var tempThumbSlider = this.MaxThumbSlider;
+    var tempThumbSlider = this.getCurrentBrightness();
 
     this.updateHexColor('#ff0000');
     this.setPressure(100);
@@ -91,12 +97,12 @@ class LedHandler {
   loop() {
     if(this.ledDriverInstance != undefined){
       var leds = this.ledDriverInstance.width * this.ledDriverInstance.height;
+      var brightness = this.getCurrentBrightness();
+      var colorRed = this.color.r * brightness / 100;
+      var colorGreen = this.color.g * brightness / 100;
+      var colorBlue = this.color.b * brightness / 100;
 
-      var colorRed = this.color.r * this.MaxThumbSlider / 255;
-      var colorGreen = this.color.g * this.MaxThumbSlider / 255;
-      var colorBlue = this.color.b * this.MaxThumbSlider / 255;
-
-      for (var i = 0; i < leds; i++) {    
+      for (var i = 0; i < leds; i++) {
         var value = this.brushInstance.getMapValue(this.offset);
         this.ledDriverInstance.setPixel(this.offset, value*colorRed, value*colorGreen, value*colorBlue);
 

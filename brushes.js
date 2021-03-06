@@ -5,6 +5,7 @@ class Brush {
     this.pressureRange = pressureRange;
     this.granularity = 100;
     this.megamap = [];
+    this.brightness = 100;
   }
 
   bufferAllMaps(){
@@ -39,9 +40,17 @@ class Brush {
       this.buffered = false;
     }
   }
-  
+
   setMaxBrushSize(maxBrushSize){
-    this.maxBrushSize = maxBrushSize;    
+    this.maxBrushSize = maxBrushSize;
+  }
+
+  setBrightness(brightness){
+    this.brightness = brightness;
+  }
+
+  getCurrentBrightness(){
+    return this.brightness;
   }
 }
 
@@ -52,8 +61,8 @@ class Line extends Brush{
     this.anteil = 0;
     this.mapLineQuarter = new Float32Array(this.width/2);
     this.bufferAllMaps();
-  }  
-  
+  }
+
   calculateMap(){
     if (this.buffered == false ){
       for (var i = 0; i < this.height/2; i++) {
@@ -67,7 +76,7 @@ class Line extends Brush{
           index = (y-(this.height/2))*this.height/2;
          } else if (y < this.height/2) {
           index = ((this.height/2)-y-1)*this.height/2;
-         }   
+         }
          this.megamap[this.pressure][i] = this.mapLineQuarter[index];
         /*
         if (x >= this.width/2){
@@ -80,15 +89,15 @@ class Line extends Brush{
       }
       this.buffered = true;
     }
-  }  
+  }
 
   draw(n) {
     this.anteil = 0;
     //const x = n % (this.width/2);
     const y = Math.floor(n / (this.height/2));
-    
+
     const max_i = this.granularity*(y+1)-1;
-    
+
     for (var i = max_i; i >= this.granularity * y; i-- ){
         var value = i / this.convertedradius;
         if (i == max_i && value <= 1){
@@ -101,7 +110,7 @@ class Line extends Brush{
         }
     }
     return this.anteil / ( this.granularity );
-  } 
+  }
 
   reset(){
     super.reset();
@@ -113,10 +122,10 @@ class Line extends Brush{
     this.convertedradius = this.granularity*(this.width/2)*(this.pressure/this.pressureRange);
     this.calculateMap();
   }
-  
+
   setMaxBrushSize(maxBrushSize){
     super.setMaxBrushSize(maxBrushSize);
-  }   
+  }
 }
 
 class Circle extends Brush {
@@ -188,30 +197,39 @@ class Circle extends Brush {
     this.convertedradius = this.granularity*(this.width/2)*(this.pressure/this.pressureRange);
     this.calculateMap();
   }
-  
+
   setMaxBrushSize(maxBrushSize){
     super.setMaxBrushSize(maxBrushSize);
-  }  
-  
+  }
+
 }
 
 class CircleSmall extends Circle {
  constructor(width, height, pressureRange){
     super(width, height, pressureRange);
     this.maxBrushSize = 0.25;
-  } 
+  }
 }
 
 class CircleMedium extends Circle {
  constructor(width, height, pressureRange){
     super(width, height, pressureRange);
     this.maxBrushSize = 0.5;
-  } 
+  }
+}
+
+class CircleBrightness extends Circle {
+  setPressure(pressure){
+    super.setPressure(this.pressureRange);
+    this.convertedradius = this.granularity*(this.width/2);
+    this.calculateMap();
+  }
 }
 
 module.exports = {
   Circle,
   CircleSmall,
   CircleMedium,
+  CircleBrightness,
   Line
 };
