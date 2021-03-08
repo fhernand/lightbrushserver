@@ -1,4 +1,4 @@
-class Brush {
+ghclass Brush {
   constructor(width, height, pressureRange){
     this.width = width;
     this.height = height;
@@ -73,11 +73,11 @@ class Line extends Brush{
       for (var i = 0; i < this.height; i++) {
 
         var index = 0;
-         if (i >= this.height/2){
-          index = (this.width/2) + (i-(this.height/2))*this.height/2;
+        if (i >= this.height/2){
+          index = (this.height/2) - (i-(this.height/2)) - 1;
         } else if (i < this.height/2) {
-          index = (this.width/2) + ((this.height/2)-i-1)*this.height/2;
-         }
+          index = i;
+        }
          this.megamap[this.pressure][i] = this.mapLineHalf[index];
       }
       this.buffered = true;
@@ -87,9 +87,9 @@ class Line extends Brush{
   draw(n) {
     this.anteil = 0;
 
-    const max_i = this.granularity*n;
+    const max_i = this.granularity*(n+1);
 
-    for (var i = max_i; i >= this.granularity*(n-1); i-- ){
+    for (var i = max_i; i >= this.granularity*n; i-- ){
         var value = i / this.convertedradius;
         if (i == max_i && value <= 1){
           return 1;
@@ -110,7 +110,7 @@ class Line extends Brush{
 
   setPressure(pressure){
     super.setPressure(pressure*this.maxBrushSize);
-    this.convertedradius = this.granularity*(this.width/2)*(this.pressure/this.pressureRange);
+    this.convertedradius = this.granularity*(this.height/2)*(this.pressure/this.pressureRange);
     this.calculateMap();
   }
 
