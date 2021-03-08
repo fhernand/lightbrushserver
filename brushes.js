@@ -217,8 +217,12 @@ class CircleBrightness extends Circle {
   setPressure(pressure){
     super.setPressure(this.pressureRange);
     this.convertedradius = this.granularity*(this.width/2);
-    this.setBrightness(pressure*this.maxBrushSize);
+    super.setBrightness(pressure*this.maxBrushSize);
     this.calculateMap();
+  }
+  
+  setBrightness(maxBrightness){
+    this.setMaxBrightness(maxBrightness);
   }
 }
 
