@@ -1,4 +1,4 @@
-ghclass Brush {
+class Brush {
   constructor(width, height, pressureRange){
     this.width = width;
     this.height = height;
