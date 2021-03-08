@@ -74,11 +74,11 @@ class Line extends Brush{
 
         var index = 0;
         if (i >= this.height/2){
-          index = (this.height/2) - (i-(this.height/2)) - 1;
-        } else if (i < this.height/2) {
           index = i;
+        } else if (i < this.height/2) {
+          index = (this.height/2) - (i-(this.height/2)) - 1;
         }
-         this.megamap[this.pressure][i+this.height*this.width/2 - this.height/2] = this.mapLineHalf[index];
+         this.megamap[this.pressure][i+this.height*this.width/2] = this.mapLineHalf[index];
       }
       this.buffered = true;
     }
