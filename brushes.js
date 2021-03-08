@@ -229,7 +229,7 @@ class CircleBrightness extends Circle {
 class Dot extends CircleBrightness {
   calculateMap(){
     if (this.buffered == false ){
-        this.megamap[this.pressure][(this.width*this.height/2) - (this.width/2)] = this.pressure/this.pressureRange;
+        this.megamap[this.pressure][(this.width*this.height/2) + (this.width/2)] = this.pressure/this.pressureRange;
       }
       this.buffered = true;
     }
