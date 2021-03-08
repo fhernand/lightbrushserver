@@ -46,6 +46,10 @@ class Brush {
     this.maxBrushSize = maxBrushSize;
   }
 
+  setMaxBrightness(maxBrightness){
+    this.maxBrightness = maxBrightness;
+  } 
+  
   setBrightness(brightness){
     this.brightness = brightness * this.maxBrightness/100;
   }
