@@ -61,11 +61,13 @@ io.sockets.on('connection', (socket) => {
 
   socket.on('maxbrushsize', (data) => {   
     //Expected value range: 0-1 (float)
+    console.log(data);
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       maxbrushsize = obj.value;
       ledHandlerInstance.setMaxBrushSize(maxbrushsize);
       io.sockets.emit('maxbrushsize', {value: maxbrushsize});
+      console.log(obj.value);
     }
   });
   
@@ -97,7 +99,6 @@ function blink(seconds){
   for(i=0; i<= 100;i++){
     ledHandlerInstance.setPressure(i);
     sleep(seconds*50);
-    console.log('tick');
   }
 }
 
