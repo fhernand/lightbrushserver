@@ -45,7 +45,7 @@ class Brush {
   }
   
   armStamp(){
-    if (this.stampArmCount >= 10){
+    if (this.stampArmCount >= 1000){
       this.readyForStamp = true;
     } else {
       this.stampArmCount++;
@@ -56,7 +56,7 @@ class Brush {
     if (this.stampArmCount <= 0 || this.pressure == 0){
       this.readyForStamp = true;
     } else {
-      this.stampArmCount--;
+      this.stampArmCount = this.stampArmCount - 50;
     }
   }  
   
