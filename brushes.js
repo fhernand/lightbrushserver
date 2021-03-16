@@ -4,7 +4,7 @@ class Brush {
     this.height = height;
     this.pressureRange = pressureRange;
     this.granularity = 100;
-    this.brightness  100;
+    this.brightness = 100;
     this.megamap = [];
   }
 
