@@ -11,6 +11,7 @@ class Brush {
     this.maxBrushSize = 1.0;
     this.megamap = [];
     this.isStampBrush = false;
+    this.readForStamp = false;
   }
 
   bufferAllMaps(){
@@ -28,6 +29,10 @@ class Brush {
 
   isStampBrush(){
    return this.isStampBrush; 
+  }
+  
+  isReadyForStamp(){
+   return this.readyForStamp; 
   }
   
   getMapValue(i){
@@ -81,6 +86,10 @@ class Brush {
   
   setStampBrush(active){
     this.isStampBrush = active;
+  }
+  
+  armStamp(){
+    this.readyForStamp = true;
   }
   
   getCurrentMaxBrightness(){
