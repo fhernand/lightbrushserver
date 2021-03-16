@@ -42,6 +42,7 @@ class Brush {
   setStampBrush(active){
     this.stampBrush = active;
     this.readyForStamp = true;
+    console.log(active);
   }
   
   armStamp(){
