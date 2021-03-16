@@ -219,10 +219,6 @@ class CircleBrightness extends Circle {
     super.setBrightness(pressure*this.maxBrushSize);
     this.calculateMap();
   }
-  
-  setBrightness(maxBrightness){
-    this.setMaxBrightness(maxBrightness);
-  }
 }
 
 class Dot extends CircleBrightness {
