@@ -6,7 +6,9 @@ class Brush {
     this.granularity = 100;
     this.brightness = 100;
     this.adjustedBrightness = 100;
+    this.adjustedPressure = 100;
     this.maxBrightness = 1.0;
+    this.maxBrushSize = 1.0;
     this.megamap = [];
   }
 
@@ -41,6 +43,10 @@ class Brush {
     this.adjustedBrightness = this.brightness * this.maxBrightness/100;
   }
   
+  applyMaxBrushSize(){
+    this.adjustedPressure = this.pressure * this.maxBrushSize;
+  }  
+  
   getCurrentPressure(){
     return this.pressure;
   }
@@ -51,6 +57,7 @@ class Brush {
       this.megamap[this.pressure] = [];
       this.buffered = false;
     }
+    this.applyMaxBrushSize();
   }
 
   setMaxBrushSize(maxBrushSize){
@@ -137,8 +144,8 @@ class Line extends Brush{
   }
 
   setPressure(pressure){
-    super.setPressure(pressure*this.maxBrushSize);
-    this.convertedradius = this.granularity*(this.height/2)*(this.pressure/this.pressureRange);
+    super.setPressure(pressure);
+    this.convertedradius = this.granularity*(this.height/2)*(this.adjustedPressure/this.pressureRange);
     this.calculateMap();
   }
 
@@ -212,8 +219,8 @@ class Circle extends Brush {
   }
 
   setPressure(pressure){
-    super.setPressure(pressure*this.maxBrushSize);
-    this.convertedradius = this.granularity*(this.width/2)*(this.pressure/this.pressureRange);
+    super.setPressure(pressure);
+    this.convertedradius = this.granularity*(this.width/2)*(this.adjustedPressure/this.pressureRange);
     this.calculateMap();
   }
 
