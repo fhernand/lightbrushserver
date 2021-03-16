@@ -66,8 +66,7 @@ io.sockets.on('connection', (socket) => {
       maxbrushsize = obj.value;
       maxbrushsize = maxbrushsize.replace(/,/g, '.');
       ledHandlerInstance.setMaxBrushSize(maxbrushsize);
-      io.sockets.emit('maxbrushsize', {value: maxbrushsize})
-      console.log(obj.value);
+      io.sockets.emit('maxbrushsize', {value: maxbrushsize});
     }
   });
   
