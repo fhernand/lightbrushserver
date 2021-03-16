@@ -5,6 +5,8 @@ class Brush {
     this.pressureRange = pressureRange;
     this.granularity = 100;
     this.brightness = 100;
+    this.adjustedBrightness = 100;
+    this.maxBrightness = 1.0;
     this.megamap = [];
   }
 
@@ -74,6 +76,10 @@ class Brush {
   
   getCurrentBrightness(){
     return this.brightness;
+  }
+  
+  getCurrentAdjustedBrightness(){
+    return this.adjustedBrightness;
   }
 }
 
