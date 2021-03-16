@@ -22,7 +22,7 @@ class LedHandler {
   }
 
   updateThumbSlider(thumbslider) {
-    this.brushInstance.setBrightness(thumbslider);
+    this.brushInstance.setMaxBrightness(thumbslider);
   }
 
   getCurrentColor(){
