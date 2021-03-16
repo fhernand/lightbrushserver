@@ -153,9 +153,7 @@ class LedHandler {
           this.brushInstance.disarmStamp();  
         } else {
          this.brushInstance.armStamp(); 
-        }
-          
-        }
+        }   
       }
     }
   }
