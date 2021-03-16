@@ -56,6 +56,10 @@ class Brush {
   getCurrentBrightness(){
     return this.brightness;
   }
+  
+  getCurrentMaxBrightness(){
+    return this.maxBrightness;
+  }  
 }
 
 class Line extends Brush{
