@@ -8,6 +8,10 @@ h3 {
   color: grey;
 }
 
+span {
+  color: grey;
+}
+
 input[type=range]{
 	-webkit-appearance: none;
 	width: 80%;
