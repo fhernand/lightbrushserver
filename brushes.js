@@ -30,9 +30,19 @@ class Brush {
   reset(){
   }
 
+  refresh(){
+    this.setPressure(this.getCurrentPressure());
+    this.setBrightness(this.getCurrentBrightness());
+  }  
+  
+  applyMaxBrightness(){
+    this.adjustedBrightness = this.brightness * this.maxBrightness/100;
+  }
+  
   getCurrentPressure(){
     return this.pressure;
   }
+  
   setPressure(pressure){
     this.pressure = pressure;
     if (this.megamap[this.pressure] == null ){
@@ -50,7 +60,8 @@ class Brush {
   } 
   
   setBrightness(brightness){
-    this.brightness = brightness * this.maxBrightness/100;
+    this.brightness = brightness;
+    this.applyMaxBrightness();
   }
   
   getCurrentMaxBrightness(){
