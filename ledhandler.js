@@ -89,6 +89,10 @@ class LedHandler {
       case "6":
         this.brushInstance = new Dot(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
         break;
+      case "7":
+        this.brushInstance = new CircleBrightness(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
+        this.brushInstance.setStampBrush(true);
+        break;        
       default:
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
     }
@@ -144,7 +148,14 @@ class LedHandler {
       if(!this.brushInstance.isStampBrush){
         this.ledDriverInstance.showPixels();
       } else {
-        
+        if (this.brushInstance.isReadyForStamp()){
+          this.ledDriverInstance.showPixels();
+          this.brushInstance.disarmStamp();  
+        } else {
+         this.brushInstance.armStamp(); 
+        }
+          
+        }
       }
     }
   }
