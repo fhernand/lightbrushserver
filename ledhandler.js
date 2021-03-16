@@ -34,7 +34,7 @@ class LedHandler {
   }
 
   getCurrentPressure(){
-    return = this.brushInstance.getCurrentPressure();
+    return this.brushInstance.getCurrentPressure();
   }
 
   getCurrentBrightness(){
