@@ -130,7 +130,7 @@ class LedHandler {
   }
 
   loop() {
-    if(this.ledDriverInstance != undefined){
+    if (this.ledDriverInstance != undefined){
       var leds = this.ledDriverInstance.width * this.ledDriverInstance.height;
       var brightness = this.getCurrentAdjustedBrightness();
       var colorRed = this.color.r * brightness / 100;
@@ -145,7 +145,7 @@ class LedHandler {
         this.offset = (this.offset + 1) % leds;
       }
 
-      if(this.brushInstance.isStampBrush() == false){
+      if (this.brushInstance.isStampBrush() == false){
         this.ledDriverInstance.showPixels();
       } else {
         if (this.brushInstance.isReadyForStamp()){
