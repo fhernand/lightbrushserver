@@ -52,14 +52,14 @@ class Brush {
   setBrightness(brightness){
     this.brightness = brightness * this.maxBrightness/100;
   }
-
-  getCurrentBrightness(){
-    return this.brightness;
-  }
   
   getCurrentMaxBrightness(){
     return this.maxBrightness;
   }  
+  
+  getCurrentBrightness(){
+    return this.brightness;
+  }
 }
 
 class Line extends Brush{
