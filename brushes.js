@@ -32,7 +32,9 @@ class Brush {
   }
   
   isReadyForStamp(){
-   return this.readyForStamp; 
+    if (this.pressure == this.pressureRange){
+      return this.readyForStamp; 
+    }
   }
   
   setStampBrush(active){
@@ -40,7 +42,7 @@ class Brush {
   }
   
   armStamp(){
-    if (this.stampArmCount >= 10 && this.pressure == this.pressureRange){
+    if (this.stampArmCount >= 10){
       this.readyForStamp = true;
     } else {
       this.stampArmCount++;
