@@ -30,6 +30,7 @@ class LedHandler {
   
   updateMaxBrightness(maxBrightness) {
     this.brushInstance.setMaxBrightness(maxBrightness);
+    this.brushInstance.setBrightness(this.brightness);
     this.maxBrightness = maxBrightness;
   }  
 
