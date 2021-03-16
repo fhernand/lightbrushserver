@@ -48,8 +48,11 @@ class Brush {
   }
   
   disarmStamp(){
-    this.readyForStamp = false;
-    this.stampArmCount = 0;
+    if (this.stampArmCount <= 0 || this.pressure == 0){
+      this.readyForStamp = true;
+    } else {
+      this.stampArmCount--;
+    }
   }  
   
   getMapValue(i){
