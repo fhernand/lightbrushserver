@@ -46,7 +46,7 @@ io.sockets.on('connection', (socket) => {
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       brightness = obj.value;
-      ledHandlerInstance.updateBrightness(brightness);
+      ledHandlerInstance.setBrightness(brightness);
       io.sockets.emit('brightness', {value: brightness});
     }
   });
@@ -56,7 +56,7 @@ io.sockets.on('connection', (socket) => {
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       maxbrightness = obj.value;
-      ledHandlerInstance.updateMaxBrightness(maxbrightness);
+      ledHandlerInstance.setMaxBrightness(maxbrightness);
       io.sockets.emit('maxbrightness', {value: maxbrightness});
     }
   });  
@@ -86,7 +86,7 @@ io.sockets.on('connection', (socket) => {
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       hexcolor = obj.value;
-      ledHandlerInstance.updateHexColor(hexcolor);
+      ledHandlerInstance.setHexColor(hexcolor);
       io.sockets.emit('hexcolor', {value: hexcolor});
     }
   });
