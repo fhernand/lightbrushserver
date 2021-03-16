@@ -10,7 +10,7 @@ class Brush {
     this.maxBrightness = 1.0;
     this.maxBrushSize = 1.0;
     this.megamap = [];
-    this.isStampBrush = false;
+    this.stampBrush = false;
     this.readyForStamp = false;
   }
 
@@ -28,7 +28,7 @@ class Brush {
   }
 
   isStampBrush(){
-   return this.isStampBrush; 
+   return this.stampBrush; 
   }
   
   isReadyForStamp(){
@@ -38,7 +38,7 @@ class Brush {
   }
   
   setStampBrush(active){
-    this.isStampBrush = active;
+    this.stampBrush = active;
   }
   
   armStamp(){
