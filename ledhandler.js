@@ -82,7 +82,7 @@ class LedHandler {
     }
     this.updateMaxBrightness(tempMaxBrightness);
     this.updateBrightness(tempBrightness);
-    this.setPressure(tempPressure);
+    //this.setPressure(tempPressure);
   }
 
   setPressure(pressure){
