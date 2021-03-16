@@ -10,6 +10,7 @@ class Brush {
     this.maxBrightness = 1.0;
     this.maxBrushSize = 1.0;
     this.megamap = [];
+    this.isStampBrush = false;
   }
 
   bufferAllMaps(){
@@ -25,6 +26,10 @@ class Brush {
   draw(n) {
   }
 
+  isStampBrush(){
+   return this.isStampBrush; 
+  }
+  
   getMapValue(i){
     if (this.megamap[this.adjustedPressure] != null ){
       return this.megamap[this.adjustedPressure][i];
@@ -72,6 +77,10 @@ class Brush {
   setBrightness(brightness){
     this.brightness = brightness;
     this.applyMaxBrightness();
+  }
+  
+  setStampBrush(active){
+    this.isStampBrush = active;
   }
   
   getCurrentMaxBrightness(){
