@@ -84,7 +84,6 @@ class LedHandler {
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
     }
     this.updateMaxBrightness(this.maxBrightness);
-    this.updateBrightness(this.brightness);
     this.setPressure(this.pressure);
   }
 
