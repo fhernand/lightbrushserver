@@ -141,7 +141,11 @@ class LedHandler {
         this.offset = (this.offset + 1) % leds;
       }
 
-      this.ledDriverInstance.showPixels();
+      if(!this.brushInstance.isStampBrush){
+        this.ledDriverInstance.showPixels();
+      } else {
+        
+      }
     }
   }
 
@@ -150,7 +154,6 @@ class LedHandler {
   }
 
   blink(){
-    //ledHandlerInstance.setPressure(50);
     for(var i=0; i<= 10;i++){
       this.setPressure(i*10);
       this.loop();
