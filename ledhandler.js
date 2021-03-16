@@ -33,6 +33,10 @@ class LedHandler {
     return this.brushInstance.getCurrentBrightness();
   }
 
+  getCurrentAdjustedBrightness(){
+    return this.brushInstance.getCurrentAdjustedBrightness();
+  }
+
   getCurrentMaxBrightness(){
     return this.brushInstance.getCurrentMaxBrightness();
   }
@@ -124,7 +128,7 @@ class LedHandler {
   loop() {
     if(this.ledDriverInstance != undefined){
       var leds = this.ledDriverInstance.width * this.ledDriverInstance.height;
-      var brightness = this.getCurrentBrightness();
+      var brightness = this.getCurrentAdjustedBrightness();
       var colorRed = this.color.r * brightness / 100;
       var colorGreen = this.color.g * brightness / 100;
       var colorBlue = this.color.b * brightness / 100;
