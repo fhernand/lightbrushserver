@@ -20,15 +20,7 @@ class LedHandler {
     this.offset = 0;
     this.setBrush();
   }
-
-  updateBrightness(brightness) {
-    this.brushInstance.setBrightness(brightness);
-  }
   
-  updateMaxBrightness(maxBrightness) {
-    this.brushInstance.setMaxBrightness(maxBrightness);
-  }  
-
   getCurrentColor(){
     return this.color;
   }
@@ -44,13 +36,25 @@ class LedHandler {
   getCurrentMaxBrightness(){
     return this.brushInstance.getCurrentMaxBrightness();
   }
+
+  getCurrentMaxBrushSize(){
+    return this.brushInstance.getCurrentMaxBrushSize();
+  }
+
+  setBrightness(brightness) {
+    this.brushInstance.setBrightness(brightness);
+  }
   
-  updateColor(color) {
+  setMaxBrightness(maxBrightness) {
+    this.brushInstance.setMaxBrightness(maxBrightness);
+  }  
+
+  setColor(color) {
     this.color = color;
   }
 
-  updateHexColor(hexcolor) {
-    this.updateColor(hexToRgb(hexcolor));
+  setHexColor(hexcolor) {
+    this.setColor(hexToRgb(hexcolor));
   }
 
   setBrush(brush){
@@ -58,6 +62,7 @@ class LedHandler {
       var tempMaxBrightness = this.getCurrentMaxBrightness();
       var tempBrightness = this.getCurrentBrightness();
       var tempPressure = this.getCurrentPressure();
+      var tempMaxBrushSize = this.getCurrentMaxBrushSize();
     }
     this.brushInstance = null;
     switch(brush) {
@@ -82,8 +87,9 @@ class LedHandler {
       default:
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
     }
-    this.updateMaxBrightness(tempMaxBrightness);
-    this.updateBrightness(tempBrightness);
+    this.setMaxBrushSize(tempMaxBrushSize);
+    this.setMaxBrightness(tempMaxBrightness);
+    this.setBrightness(tempBrightness);
     this.setPressure(tempPressure);
   }
 
@@ -94,23 +100,23 @@ class LedHandler {
   setMaxBrushSize(brushMaxSize){
     this.brushInstance.setMaxBrushSize(brushMaxSize);
   }
-
+  
   showError(){
     var tempColor = this.color;
     var tempPressure = this.getCurrentPressure();
     var tempBrightness = this.getCurrentBrightness();
 
-    this.updateHexColor('#ff0000');
+    this.setHexColor('#ff0000');
     this.setPressure(100);
-    this.updateBrightness(60);
+    this.setBrightness(60);
 
     for(var i=0;i<=4;i++){
       this.blink();
     }
 
-    this.updateColor(tempColor);
+    this.setColor(tempColor);
     this.setPressure(tempPressure);
-    this.updateBrightness(tempBrightness);
+    this.setBrightness(tempBrightness);
   }
 
   loop() {
