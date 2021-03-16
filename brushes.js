@@ -56,6 +56,10 @@ class Brush {
   getCurrentMaxBrightness(){
     return this.maxBrightness;
   }  
+
+  getCurrentMaxBrushSize(){
+    return this.maxBrushSize;
+  }
   
   getCurrentBrightness(){
     return this.brightness;
