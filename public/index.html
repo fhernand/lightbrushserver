@@ -15,9 +15,12 @@
   <input type="range" id= "inputSliderMaxBrushSize" min="0" max="1" value="1" step="0.01" oninput="setValueMaxBrushSize(this.value)" />
   <br><h3>MaxBrushSize: </h3><span id="outputTextMaxBrushSize">1</span><br><br>
 
-  <input type="range" id= "inputSliderThumbSlider" min="0" max="100" value="0" step="1" oninput="setValueThumbSlider(this.value)" />
-  <br><h3>ThumbSlider: </h3><span id="outputTextThumbSlider">0</span><br><br>
+  <input type="range" id= "inputSliderBrightness" min="0" max="100" value="0" step="1" oninput="setValueBrightness(this.value)" />
+  <br><h3>Brightness: </h3><span id="outputTextBrightness">0</span><br><br>
 
+  <input type="range" id= "inputSliderMaxBrightness" min="0" max="100" value="0" step="1" oninput="setValueMaxBrightness(this.value)" />
+  <br><h3>Maximum Brightness: </h3><span id="outputTextMaxBrightness">0</span><br><br>
+  
   <input type="range" id= "inputSliderPressure" min="0" max="100" value="0" step="1" oninput="setValuePressure(this.value)" />
   <br><h3>Pressure: </h3><span id="outputTextPressure">0</span><br><br>
 
@@ -55,10 +58,15 @@
     document.getElementById("outputTextBrush").innerHTML = data.value;
   });
 
-  socket.on('thumbslider', (data) => {
-    document.getElementById("inputSliderThumbSlider").value = data.value;
-    document.getElementById("outputTextThumbSlider").innerHTML = data.value;
+  socket.on('brightness', (data) => {
+    document.getElementById("inputSliderBrightness").value = data.value;
+    document.getElementById("outputTextBrightness").innerHTML = data.value;
   });
+    
+  socket.on('maxbrightness', (data) => {
+    document.getElementById("inputSliderMaxBrightness").value = data.value;
+    document.getElementById("outputTextMaxBrightness").innerHTML = data.value;
+  });    
 
   socket.on('maxbrushsize', (data) => {
     document.getElementById("inputSliderMaxBrushSize").value = data.value;
@@ -96,11 +104,16 @@
     document.getElementById("outputTextMaxBrushSize").innerHTML = newValue;
     socket.emit('maxbrushsize', { value: newValue });
   }
-  function setValueThumbSlider(newValue)
+  function setValueBrightness(newValue)
   {
-    document.getElementById("outputTextThumbSlider").innerHTML = newValue;
-    socket.emit('thumbslider', {value: newValue});
+    document.getElementById("outputTextBrightness").innerHTML = newValue;
+    socket.emit('brightness', {value: newValue});
   }
+  function setValueMaxBrightness(newValue)
+  {
+    document.getElementById("outputTextMaxBrightness").innerHTML = newValue;
+    socket.emit('maxbrightness', {value: newValue});
+  }    
   function setValueHexColor(newValue)
   {
     var colorRGB = hexToRgb(newValue);
