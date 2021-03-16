@@ -26,8 +26,8 @@ class Brush {
   }
 
   getMapValue(i){
-    if (this.megamap[this.pressure] != null ){
-      return this.megamap[this.pressure][i];
+    if (this.megamap[this.adjustedPressure] != null ){
+      return this.megamap[this.adjustedPressure][i];
     }
   }
 
@@ -53,11 +53,12 @@ class Brush {
   
   setPressure(pressure){
     this.pressure = pressure;
-    if (this.megamap[this.pressure] == null ){
-      this.megamap[this.pressure] = [];
+    this.applyMaxBrushSize();    
+    if (this.megamap[this.adjustedPressure] == null ){
+      this.megamap[this.adjustedPressure] = [];
       this.buffered = false;
     }
-    this.applyMaxBrushSize();
+    
   }
 
   setMaxBrushSize(maxBrushSize){
@@ -113,7 +114,7 @@ class Line extends Brush{
         } else if (i < this.height/2) {
           index = this.height/2 - 1 - i;
         }
-         this.megamap[this.pressure][i+this.height*this.width/2] = this.mapLineHalf[index];
+         this.megamap[this.adjustedPressure][i+this.height*this.width/2] = this.mapLineHalf[index];
       }
       this.buffered = true;
     }
@@ -182,7 +183,7 @@ class Circle extends Brush {
         } else if (x < this.width/2 && y >= this.height/2) {
           index = ((this.width/2)-x-1) + (y-(this.height/2))*this.height/2;
         }
-        this.megamap[this.pressure][i] = this.mapCircleQuarter[index];
+        this.megamap[this.adjustedPressure][i] = this.mapCircleQuarter[index];
       }
       this.buffered = true;
     }
@@ -248,7 +249,7 @@ class CircleBrightness extends Circle {
   setPressure(pressure){
     super.setPressure(this.pressureRange);
     this.convertedradius = this.granularity*(this.width/2);
-    super.setBrightness(pressure*this.maxBrushSize);
+    super.setBrightness(this.adjustedPressure);
     this.calculateMap();
   }
 }
@@ -256,14 +257,14 @@ class CircleBrightness extends Circle {
 class Dot extends CircleBrightness {
   calculateMap(){
     if (this.buffered == false ){
-        this.megamap[this.pressure][(this.width*this.height/2) + (this.width/2)] = this.pressure/this.pressureRange;
+        this.megamap[this.adjustedPressure][(this.width*this.height/2) + (this.width/2)] = this.adjustedPressure/this.pressureRange;
       }
       this.buffered = true;
     }
 
   getMapValue(i) {
-    if (this.megamap[this.pressure] != null){
-      return this.megamap[this.pressure][i];
+    if (this.megamap[this.adjustedPressure] != null){
+      return this.megamap[this.adjustedPressure][i];
     }
   }
 }
