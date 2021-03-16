@@ -17,8 +17,6 @@ class LedHandler {
 
     this.pressureRange = 100;
     this.color = { r:0, g:0, b:0 };
-    this.maxBrightness = 0;
-    this.brightness = 0;
     this.pressure = 0;
     this.offset = 0;
     this.setBrush();
@@ -26,13 +24,10 @@ class LedHandler {
 
   updateBrightness(brightness) {
     this.brushInstance.setBrightness(brightness);
-    this.brightness = brightness;
   }
   
   updateMaxBrightness(maxBrightness) {
     this.brushInstance.setMaxBrightness(maxBrightness);
-    this.brushInstance.setBrightness(this.brightness);
-    this.maxBrightness = maxBrightness;
   }  
 
   getCurrentColor(){
@@ -40,18 +35,15 @@ class LedHandler {
   }
 
   getCurrentPressure(){
-    this.pressure = this.brushInstance.getCurrentPressure();
-    return this.pressure;
+    return = this.brushInstance.getCurrentPressure();
   }
 
   getCurrentBrightness(){
-    this.brightness = this.brushInstance.getCurrentBrightness();
-    return this.brightness;
+    return this.brushInstance.getCurrentBrightness();
   }
 
   getCurrentMaxBrightness(){
-    this.maxBrightness = this.brushInstance.getCurrentMaxBrightness();
-    return this.maxBrightness;
+    return this.brushInstance.getCurrentMaxBrightness();
   }
   
   updateColor(color) {
@@ -63,6 +55,9 @@ class LedHandler {
   }
 
   setBrush(brush){
+    var tempMaxBrightness = this.getCurrentMaxBrightness();
+    var tempBrightness = this.getCurrentBrightness();
+    var tempPressure = this.getCurrentPressure();
     this.brushInstance = null;
     switch(brush) {
       case "1":
@@ -86,13 +81,13 @@ class LedHandler {
       default:
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
     }
-    this.updateMaxBrightness(this.maxBrightness);
-    this.setPressure(this.pressure);
+    this.updateMaxBrightness(tempMaxBrightness);
+    this.updateBrightness(tempBrightness);
+    this.setPressure(tempPressure);
   }
 
   setPressure(pressure){
     this.brushInstance.setPressure(pressure);
-    this.pressure = pressure;
   }
 
   setMaxBrushSize(brushMaxSize){
