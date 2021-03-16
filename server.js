@@ -13,7 +13,7 @@ app.use(express.static('public'));
 var brightness = 0;
 var maxbrightness = 0;
 var pressure = 0;
-var maxbrushsizescale = 1;
+var maxbrushsize = 1;
 var brush = 1;
 var hexcolor = '#000000';
 
@@ -28,7 +28,7 @@ io.sockets.on('connection', (socket) => {
   io.sockets.emit('brightness', {value: brightness});
   io.sockets.emit('maxbrightness', {value: maxbrightness});
   io.sockets.emit('pressure', {value: pressure});
-  io.sockets.emit('maxbrushsizescale', {value: maxbrushsizescale});
+  io.sockets.emit('maxbrushsize', {value: maxbrushsize});
   io.sockets.emit('hexcolor', {value: hexcolor});
 
   socket.on('brush', (data) => {
