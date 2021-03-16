@@ -17,13 +17,21 @@ class LedHandler {
 
     this.pressureRange = 100;
     this.color = { r:0, g:0, b:0 };
+    this.maxBrightness = 0;
+    this.brightness = 0;
     this.offset = 0;
     this.setBrush();
   }
 
-  updateThumbSlider(thumbslider) {
-    this.brushInstance.setMaxBrightness(thumbslider);
+  updateBrightness(brightness) {
+    this.brushInstance.setBrightness(brightness);
+    this.brightness = brightness;
   }
+  
+  updateMaxBrightness(maxBrightness) {
+    this.brushInstance.setMaxBrightness(maxBrightness);
+    this.maxBrightness = maxBrightness;
+  }  
 
   getCurrentColor(){
     return this.color;
@@ -69,6 +77,8 @@ class LedHandler {
       default:
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
     }
+    updateMaxBrightness(this.maxBrightness);
+    updateBrightness(this.brightness);
   }
 
   setPressure(pressure){
@@ -82,11 +92,11 @@ class LedHandler {
   showError(){
     var tempColor = this.color;
     var tempPressure = this.getCurrentPressure();
-    var tempThumbSlider = this.getCurrentBrightness();
+    var tempBrightness = this.getCurrentBrightness();
 
     this.updateHexColor('#ff0000');
     this.setPressure(100);
-    this.updateThumbSlider(60);
+    this.updateBrightness(60);
 
     for(var i=0;i<=4;i++){
       this.blink();
@@ -94,7 +104,7 @@ class LedHandler {
 
     this.updateColor(tempColor);
     this.setPressure(tempPressure);
-    this.updateThumbSlider(tempThumbSlider);
+    this.updateBrightness(tempBrightness);
   }
 
   loop() {
