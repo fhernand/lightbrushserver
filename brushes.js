@@ -34,6 +34,8 @@ class Brush {
   isReadyForStamp(){
     if (this.pressure == this.pressureRange){
       return this.readyForStamp; 
+      console.log(this.pressure);
+      console.log(this.readyForStamp);
     }
   }
   
