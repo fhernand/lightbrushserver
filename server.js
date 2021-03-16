@@ -10,7 +10,8 @@ http.listen(3000, () => {
 
 app.use(express.static('public'));
 
-var thumbslider = 0;
+var brightness = 0;
+var maxBrightness = 0;
 var pressure = 0;
 var maxbrushsizescale = 1;
 var brush = 1;
@@ -24,7 +25,8 @@ const io = require('socket.io')(http);
 io.sockets.on('connection', (socket) => {
   console.log('Client has connected...');
   io.sockets.emit('brush', {value: brush});
-  io.sockets.emit('thumbslider', {value: thumbslider});
+  io.sockets.emit('brightness', {value: brightness});
+  io.sockets.emit('maxBrightness', {value: maxBrightness});
   io.sockets.emit('pressure', {value: pressure});
   io.sockets.emit('maxbrushsizescale', {value: maxbrushsizescale});
   io.sockets.emit('hexcolor', {value: hexcolor});
@@ -39,15 +41,25 @@ io.sockets.on('connection', (socket) => {
     }
   });
 
-  socket.on('thumbslider', (data) => {
+  socket.on('brightness', (data) => {
     //Expected value range: 0-100
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
-      thumbslider = obj.value;
-      ledHandlerInstance.updateThumbSlider(thumbslider);
-      io.sockets.emit('thumbslider', {value: thumbslider});
+      brightness = obj.value;
+      ledHandlerInstance.updateBrightness(brightness);
+      io.sockets.emit('brightness', {value: brightness});
     }
   });
+  
+  socket.on('maxbrightness', (data) => {
+    //Expected value range: 0-100
+    var obj = getJsonObject(data);
+    if(checkValue(obj.value)!=null){
+      maxbrightness = obj.value;
+      ledHandlerInstance.updateMaxBrightness(maxbrightness);
+      io.sockets.emit('maxbrightness', {value: maxbrightness});
+    }
+  });  
 
   socket.on('pressure', (data) => {  
     //Expected value range: 0-100
