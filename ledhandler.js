@@ -145,7 +145,7 @@ class LedHandler {
         this.offset = (this.offset + 1) % leds;
       }
 
-      if(!this.brushInstance.isStampBrush()){
+      if(this.brushInstance.isStampBrush() == false){
         this.ledDriverInstance.showPixels();
       } else {
         if (this.brushInstance.isReadyForStamp()){
