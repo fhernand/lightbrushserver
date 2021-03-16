@@ -19,6 +19,7 @@ class LedHandler {
     this.color = { r:0, g:0, b:0 };
     this.maxBrightness = 0;
     this.brightness = 0;
+    this.pressure = 0;
     this.offset = 0;
     this.setBrush();
   }
@@ -39,13 +40,17 @@ class LedHandler {
   }
 
   getCurrentPressure(){
-    return this.brushInstance.getCurrentPressure();
+    return this.pressure;
   }
 
   getCurrentBrightness(){
-    return this.brushInstance.getCurrentBrightness();
+    return this.brightness;
   }
 
+  getCurrentMaxBrightness(){
+    return this.maxBrightness;
+  }
+  
   updateColor(color) {
     this.color = color;
   }
@@ -80,10 +85,12 @@ class LedHandler {
     }
     this.updateMaxBrightness(this.maxBrightness);
     this.updateBrightness(this.brightness);
+    this.setPressure(this.pressure);
   }
 
   setPressure(pressure){
     this.brushInstance.setPressure(pressure);
+    this.pressure = pressure;
   }
 
   setMaxBrushSize(brushMaxSize){
