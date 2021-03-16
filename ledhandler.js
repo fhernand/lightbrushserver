@@ -47,6 +47,7 @@ class LedHandler {
   
   setMaxBrightness(maxBrightness) {
     this.brushInstance.setMaxBrightness(maxBrightness);
+    this.setPressure(this.brushInstance.getCurrentPressure());
   }  
 
   setColor(color) {
@@ -99,6 +100,7 @@ class LedHandler {
 
   setMaxBrushSize(brushMaxSize){
     this.brushInstance.setMaxBrushSize(brushMaxSize);
+    this.setPressure(this.brushInstance.getCurrentPressure());
   }
   
   showError(){
