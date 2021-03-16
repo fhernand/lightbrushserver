@@ -5,8 +5,6 @@ class Brush {
     this.pressureRange = pressureRange;
     this.granularity = 100;
     this.megamap = [];
-    this.brightness = 100;
-    this.maxBrightness = 100;
   }
 
   bufferAllMaps(){
