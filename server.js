@@ -11,7 +11,7 @@ http.listen(3000, () => {
 app.use(express.static('public'));
 
 var brightness = 0;
-var maxBrightness = 0;
+var maxbrightness = 0;
 var pressure = 0;
 var maxbrushsizescale = 1;
 var brush = 1;
@@ -26,7 +26,7 @@ io.sockets.on('connection', (socket) => {
   console.log('Client has connected...');
   io.sockets.emit('brush', {value: brush});
   io.sockets.emit('brightness', {value: brightness});
-  io.sockets.emit('maxBrightness', {value: maxBrightness});
+  io.sockets.emit('maxbrightness', {value: maxbrightness});
   io.sockets.emit('pressure', {value: pressure});
   io.sockets.emit('maxbrushsizescale', {value: maxbrushsizescale});
   io.sockets.emit('hexcolor', {value: hexcolor});
