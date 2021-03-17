@@ -93,8 +93,12 @@
   });
 
   socket.on('stampbrush', (data) => {
-    document.getElementById("inputSliderStampBrush").value = data.value;
-    document.getElementById("outputTextStampBrush").innerHTML = data.value;
+    var stampbrushvalue = 0;
+    if (data.value == 'true') {
+      stampbrushvalue = 1;
+    }
+    document.getElementById("inputSliderStampBrush").value = stampbrushvalue;
+    document.getElementById("outputTextStampBrush").innerHTML = stampbrushvalue;
   });
     
   function setColor()
