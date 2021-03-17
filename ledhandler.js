@@ -1,4 +1,4 @@
-const { Circle, CircleSmall, CircleMedium, CircleBrightness, Dot, Line } = require("./brushes");
+const { Circle, CircleSmall, CircleMedium, CircleBrightness, Dot, Line, Square } = require("./brushes");
 const { UnicornDriver, UnicornHDDriver } = require("./leddriver");
 
 const NUM_LEDS_WIDTH = 8;
@@ -90,7 +90,7 @@ class LedHandler {
         this.brushInstance = new Dot(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
         break;
       case "7":
-        this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
+        this.brushInstance = new Square(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
         this.brushInstance.setStampBrush(true);
         break;        
       default:
