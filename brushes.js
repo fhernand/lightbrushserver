@@ -240,8 +240,7 @@ class Circle extends Brush {
 
     for (var i = max_i; i >= this.granularity * x; i-- ){
       for (var j = max_j; j >= this.granularity * y; j-- ){
-        var dist_ij = Math.sqrt( (i * i) + (j * j) );
-        var value = dist_ij / this.convertedradius;
+        var value = getValue(i,j);
         if (i == max_i && j == max_j && value <= 1){
           return 1;
 
@@ -255,6 +254,11 @@ class Circle extends Brush {
     return this.anteil / ( this.granularity * this.granularity );
   }
 
+  getValue(i,j){
+    var dist_ij = Math.sqrt( (i * i) + (j * j) );
+    return (dist_ij / this.convertedradius);
+  }
+  
   reset(){
     super.reset();
     this.mapCircleQuarter = new Float32Array(this.width * this.height / 4);
@@ -295,6 +299,10 @@ class CircleBrightness extends Circle {
   }
 }
 
+class Square extends Circle{
+  
+}
+
 class Dot extends CircleBrightness {
   calculateMap(){
     if (this.buffered == false ){
@@ -316,5 +324,6 @@ module.exports = {
   CircleMedium,
   CircleBrightness,
   Dot,
-  Line
+  Line,
+  Square
 };
