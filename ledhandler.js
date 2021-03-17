@@ -153,7 +153,6 @@ class LedHandler {
           this.brushInstance.disarmStamp();  
         } else {
           this.ledDriverInstance.clearPixels();
-          this.brushInstance.setPressure(0);
           this.brushInstance.armStamp(); 
         }   
       }
