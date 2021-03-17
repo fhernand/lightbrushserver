@@ -147,13 +147,16 @@ class LedHandler {
 
       if (!this.brushInstance.isStampBrush()){
         this.ledDriverInstance.showPixels();
+        console.log("not stamping...");
       } else {
         if (this.brushInstance.isReadyForStamp()){
           this.ledDriverInstance.showPixels();
           this.brushInstance.disarmStamp();  
+          console.log("stamping...");
         } else {
           this.ledDriverInstance.clearPixels();
           this.brushInstance.armStamp(); 
+          console.log("arming...");
         }   
       }
     }
