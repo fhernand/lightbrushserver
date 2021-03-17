@@ -61,6 +61,10 @@ class LedHandler {
   setHexColor(hexcolor) {
     this.setColor(hexToRgb(hexcolor));
   }
+  
+  setStampBrush(flag){
+   this.brushInstance.setStampBrush(flag); 
+  }
 
   setBrush(brush){
     if (this.brushInstance != null){
@@ -91,7 +95,6 @@ class LedHandler {
         break;
       case "7":
         this.brushInstance = new Square(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
-        this.brushInstance.setStampBrush(true);
         break;        
       default:
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
