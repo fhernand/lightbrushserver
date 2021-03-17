@@ -14,7 +14,7 @@ class Brush {
     this.readyForStamp = false;
     this.stampArmCount = 0;
     this.maxStampArmCount = 1000;
-    this.stampPressureChanged = false;
+    this.stampPressureChanged = true;
     this.lastStampPressure = 0;
   }
 
