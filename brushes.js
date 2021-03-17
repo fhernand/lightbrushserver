@@ -56,6 +56,7 @@ class Brush {
   disarmStamp(){
     if (this.stampArmCount <= 0 || this.pressure == 0){
       this.readyForStamp = true;
+      this.pressure = 0;
     } else {
       this.stampArmCount = this.stampArmCount - 50;
     }
