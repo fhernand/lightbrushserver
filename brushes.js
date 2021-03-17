@@ -60,7 +60,6 @@ class Brush {
     }
     if (this.getCurrentPressure() != this.lastStampPressure){
       this.stampPressureChanged = true;
-      console.log("pressurechanged!");
     }
     this.lastStampPressure = this.getCurrentPressure();
   }
