@@ -48,25 +48,21 @@ class Brush {
   }
   
   armStamp(){
-    if (this.stampArmCount != this.maxStampArmCount){ 
-      if (this.stampArmCount > this.maxStampArmCount){
-        this.readyForStamp = true;
-        this.stampArmCount = this.maxStampArmCount
-      } else {
-        this.stampArmCount = this.stampArmCount + 50;
-      }
+    if (this.stampArmCount > this.maxStampArmCount){
+      this.readyForStamp = true;
+      this.stampArmCount = this.maxStampArmCount
+    } else {
+      this.stampArmCount = this.stampArmCount + 50;
     }
   }
   
   disarmStamp(){
-    if (this.stampArmCount != 0){ 
-      if (this.stampArmCount < 0 || this.getCurrentPressure() != this.pressureRange){
-        this.readyForStamp = false;
-        this.setPressure(0);
-        this.stampArmCount = 0;
-      } else {
-        this.stampArmCount = this.stampArmCount - 50;
-      }
+    if (this.stampArmCount < 0 || this.getCurrentPressure() != this.pressureRange){
+      this.readyForStamp = false;
+      this.setPressure(0);
+      this.stampArmCount = 0;
+    } else {
+      this.stampArmCount = this.stampArmCount - 50;
     }
   }  
   
