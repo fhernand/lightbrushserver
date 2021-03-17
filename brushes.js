@@ -37,7 +37,7 @@ class Brush {
   
   isReadyForStamp(){
     if (this.getCurrentPressure() == this.pressureRange && this.readyForStamp == true && this.stampPressureChanged == true){
-      this.stampPressureChanged == false;
+      this.stampPressureChanged = false;
       this.lastStampPressure = this.getCurrentPressure();      
       return this.readyForStamp; 
     } else {
@@ -58,10 +58,9 @@ class Brush {
     } else {
       this.stampArmCount = this.stampArmCount + 50;
     }
-    console.log(this.getCurrentPressure());
-    console.log(this.lastStampPressure);
     if (this.getCurrentPressure() != this.lastStampPressure){
       this.stampPressureChanged = true;
+      console.log("pressurechanged!");
     }
     this.lastStampPressure = this.getCurrentPressure();
   }
