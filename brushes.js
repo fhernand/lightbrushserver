@@ -52,7 +52,7 @@ class Brush {
       this.readyForStamp = true;
       this.stampArmCount = this.maxStampArmCount
     } else {
-      this.stampArmCount = this.stampArmCount + 5;
+      this.stampArmCount = this.stampArmCount + 50;
     }
   }
   
