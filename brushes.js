@@ -34,8 +34,10 @@ class Brush {
   }
   
   isReadyForStamp(){
-    if (this.pressure == this.pressureRange && this.isStampBrush() && this.readyForStamp == true){
+    if (this.getCurrentPressure() == this.pressureRange && this.isStampBrush() && this.readyForStamp == true){
+      console.log(this.getCurrentPressure());
       return this.readyForStamp; 
+      
     } else {
       return false;
     }
@@ -50,6 +52,7 @@ class Brush {
   armStamp(){
     if (this.stampArmCount >= this.maxStampArmCount){
       this.readyForStamp = true;
+      console.log("armed!");
     } else {
       this.stampArmCount = this.stampArmCount + 50;
     }
@@ -59,6 +62,7 @@ class Brush {
     if (this.stampArmCount <= 0 || this.getCurrentPressure() != this.pressureRange){
       this.readyForStamp = false;
       this.setPressure(0);
+      console.log("disarmed!");
     } else {
       this.stampArmCount = this.stampArmCount - 50;
     }
