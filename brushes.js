@@ -13,7 +13,7 @@ class Brush {
     this.stampBrush = false;
     this.readyForStamp = false;
     this.stampArmCount = 0;
-    this.maxStampArmCount = 10000;
+    this.maxStampArmCount = 1000;
   }
 
   bufferAllMaps(){
@@ -51,7 +51,7 @@ class Brush {
     if (this.stampArmCount >= this.maxStampArmCount){
       this.readyForStamp = true;
     } else {
-      this.stampArmCount++;
+      this.stampArmCount = this.stampArmCount + 50;
     }
   }
   
@@ -60,7 +60,7 @@ class Brush {
       this.readyForStamp = false;
       this.setPressure(0);
     } else {
-      this.stampArmCount = this.stampArmCount - 500;
+      this.stampArmCount = this.stampArmCount - 50;
     }
   }  
   
