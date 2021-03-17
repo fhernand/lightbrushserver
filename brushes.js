@@ -45,6 +45,7 @@ class Brush {
     this.stampBrush = flag;
     this.readyForStamp = flag;
     this.stampArmCount = this.maxStampArmCount;
+    console.log(this.stampBrush);
   }
   
   armStamp(){
