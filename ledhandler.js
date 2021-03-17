@@ -149,7 +149,7 @@ class LedHandler {
         this.ledDriverInstance.showPixels();
         console.log("not stamping...");
       } else {
-        if (this.brushInstance.isReadyForStamp()){
+        if (this.brushInstance.isReadyForStamp() == true){
           this.ledDriverInstance.showPixels();
           this.brushInstance.disarmStamp();  
           console.log("stamping...");
