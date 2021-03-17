@@ -45,7 +45,6 @@ class Brush {
     this.stampBrush = flag;
     this.readyForStamp = flag;
     this.stampArmCount = this.maxStampArmCount;
-    console.log(this.stampBrush);
   }
   
   armStamp(){
@@ -302,7 +301,7 @@ class CircleBrightness extends Circle {
 
 class Square extends Circle{
   getValue(i,j){
-    if (i <= this.convertedRadius && j <= this.convertedRadius){
+    if (i <= this.convertedradius && j <= this.convertedradius){
       return 1;
     } else {
       return 2;
