@@ -100,8 +100,8 @@ io.sockets.on('connection', (socket) => {
     //Expected values: true, false
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
-      stampbrush = obj.value;
-      if (stampbrush = 'true'){
+      var stampbrush = obj.value;
+      if (stampbrush == 'true'){
         stampbrush = true;
       } else {
         stampbrush = false;
