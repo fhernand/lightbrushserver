@@ -14,6 +14,8 @@ class Brush {
     this.readyForStamp = false;
     this.stampArmCount = 0;
     this.maxStampArmCount = 1000;
+    this.stampPressureChanged = false;
+    this.lastStampPressure = 0;
   }
 
   bufferAllMaps(){
@@ -34,7 +36,7 @@ class Brush {
   }
   
   isReadyForStamp(){
-    if (this.getCurrentPressure() == this.pressureRange && this.readyForStamp == true){
+    if (this.getCurrentPressure() == this.pressureRange && this.readyForStamp == true && this.stampPressureChanged == true){
       return this.readyForStamp; 
     } else {
       return false;
@@ -54,12 +56,15 @@ class Brush {
     } else {
       this.stampArmCount = this.stampArmCount + 50;
     }
+    this.lastStampPressure = this.getCurrentPressure();
+    if (this.getCurrentPressure() != this.lastStampPressure){
+      this.stampPressureChanged = true;
+    }
   }
   
   disarmStamp(){
     if (this.stampArmCount < 0 || this.getCurrentPressure() != this.pressureRange){
       this.readyForStamp = false;
-      this.setPressure(0);
       this.stampArmCount = 0;
     } else {
       this.stampArmCount = this.stampArmCount - 50;
@@ -99,7 +104,6 @@ class Brush {
       this.megamap[this.adjustedPressure] = [];
       this.buffered = false;
     }
-    
   }
 
   setMaxBrushSize(maxBrushSize){
