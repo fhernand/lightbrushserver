@@ -36,11 +36,11 @@ class Brush {
   }
   
   isReadyForStamp(){
-    if (this.getCurrentPressure() == this.pressureRange && this.readyForStamp == true && this.stampPressureChanged == true){
-      this.stampPressureChanged = false;
-      this.lastStampPressure = this.getCurrentPressure();      
+    if (this.getCurrentPressure() == this.pressureRange && this.readyForStamp == true && this.stampPressureChanged == true){ 
       return this.readyForStamp; 
     } else {
+      this.stampPressureChanged = false;
+      this.lastStampPressure = this.getCurrentPressure();       
       return false;
     }
   }
