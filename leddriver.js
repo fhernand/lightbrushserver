@@ -14,6 +14,11 @@ class LEDDriver {
   showPixels(){
   }
   
+  clearPixels(){
+    for (var i = 0; i <= this.width*this.height; i++){
+      this.setPixel(i, 0, 0, 0); 
+    }
+  }
 };
 
 class UnicornDriver extends LEDDriver { 
