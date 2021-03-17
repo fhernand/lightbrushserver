@@ -60,7 +60,7 @@ class Brush {
       this.readyForStamp = false;
       this.setPressure(0);
     } else {
-      this.stampArmCount = this.stampArmCount - 50;
+      this.stampArmCount = this.stampArmCount - 500;
     }
   }  
   
