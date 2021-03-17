@@ -101,6 +101,11 @@ io.sockets.on('connection', (socket) => {
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
       stampbrush = obj.value;
+      if (stampbrush = 'true'){
+        stampbrush = true;
+      } else {
+        stampbrush = false;
+      }
       ledHandlerInstance.setStampBrush(stampbrush);
       io.sockets.emit('stampbrush', {value: stampbrush});
     }
