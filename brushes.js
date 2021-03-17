@@ -240,7 +240,7 @@ class Circle extends Brush {
 
     for (var i = max_i; i >= this.granularity * x; i-- ){
       for (var j = max_j; j >= this.granularity * y; j-- ){
-        var value = getValue(i,j);
+        var value = this.getValue(i,j);
         if (i == max_i && j == max_j && value <= 1){
           return 1;
 
