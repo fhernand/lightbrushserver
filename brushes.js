@@ -41,9 +41,9 @@ class Brush {
     }
   }
   
-  setStampBrush(active){
-    this.stampBrush = active;
-    this.readyForStamp = active;
+  setStampBrush(flag){
+    this.stampBrush = flag;
+    this.readyForStamp = flag;
     this.stampArmCount = this.maxStampArmCount;
   }
   
