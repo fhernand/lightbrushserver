@@ -37,6 +37,7 @@ class Brush {
   
   isReadyForStamp(){
     if (this.getCurrentPressure() == this.pressureRange && this.readyForStamp == true && this.stampPressureChanged == true){
+      this.stampPressureChanged == false;
       return this.readyForStamp; 
     } else {
       return false;
