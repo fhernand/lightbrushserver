@@ -16,6 +16,7 @@ var pressure = 0;
 var maxbrushsize = 1;
 var brush = 1;
 var hexcolor = '#000000';
+var stampbrush = 'false';
 
 var ledHandlerInstance = new LedHandler(process.argv[2]);
 ledHandlerInstance.run();
@@ -31,6 +32,16 @@ io.sockets.on('connection', (socket) => {
   io.sockets.emit('maxbrushsize', {value: maxbrushsize});
   io.sockets.emit('hexcolor', {value: hexcolor});
 
+  socket.on('brightness', (data) => {
+    //Expected value range: 0-100
+    var obj = getJsonObject(data);
+    if(checkValue(obj.value)!=null){
+      brightness = obj.value;
+      ledHandlerInstance.setBrightness(brightness);
+      io.sockets.emit('brightness', {value: brightness});
+    }
+  });
+  
   socket.on('brush', (data) => {
     //Expected values: 1,2,...
     var obj = getJsonObject(data);
@@ -40,14 +51,17 @@ io.sockets.on('connection', (socket) => {
       io.sockets.emit('brush', {value: brush});
     }
   });
-
-  socket.on('brightness', (data) => {
-    //Expected value range: 0-100
+ 
+  socket.on('errorhandling', () => {
+    ledHandlerInstance.showError();
+  });
+  
+  socket.on('hexcolor', (data) => {
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
-      brightness = obj.value;
-      ledHandlerInstance.setBrightness(brightness);
-      io.sockets.emit('brightness', {value: brightness});
+      hexcolor = obj.value;
+      ledHandlerInstance.setHexColor(hexcolor);
+      io.sockets.emit('hexcolor', {value: hexcolor});
     }
   });
   
@@ -61,16 +75,6 @@ io.sockets.on('connection', (socket) => {
     }
   });  
 
-  socket.on('pressure', (data) => {  
-    //Expected value range: 0-100
-    var obj = getJsonObject(data);
-    if(checkValue(obj.value)!=null){
-      pressure = obj.value;
-      ledHandlerInstance.setPressure(pressure);
-      io.sockets.emit('pressure', {value: pressure});
-    }
-  });
-
   socket.on('maxbrushsize', (data) => {   
     //Expected value range: 0-1 (float)
     var obj = getJsonObject(data);
@@ -82,18 +86,25 @@ io.sockets.on('connection', (socket) => {
     }
   });
   
-  socket.on('hexcolor', (data) => {
+  socket.on('pressure', (data) => {  
+    //Expected value range: 0-100
     var obj = getJsonObject(data);
     if(checkValue(obj.value)!=null){
-      hexcolor = obj.value;
-      ledHandlerInstance.setHexColor(hexcolor);
-      io.sockets.emit('hexcolor', {value: hexcolor});
+      pressure = obj.value;
+      ledHandlerInstance.setPressure(pressure);
+      io.sockets.emit('pressure', {value: pressure});
     }
   });
-
-  socket.on('errorhandling', () => {
-    ledHandlerInstance.showError();
-  });
+  
+  socket.on('stampbrush', (data) => {  
+    //Expected values: true, false
+    var obj = getJsonObject(data);
+    if(checkValue(obj.value)!=null){
+      stampbrush = obj.value;
+      ledHandlerInstance.setStampBrush(stampbrush);
+      io.sockets.emit('stampbrush', {value: stampbrush});
+    }
+  });  
 });
 
 function checkValue(value){
