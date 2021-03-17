@@ -48,7 +48,7 @@ class Brush {
   }
   
   armStamp(){
-    if (this.stampArmCount <> this.maxStampArmCount){ 
+    if (this.stampArmCount != this.maxStampArmCount){ 
       if (this.stampArmCount > this.maxStampArmCount){
         this.readyForStamp = true;
         this.stampArmCount = this.maxStampArmCount
@@ -59,7 +59,7 @@ class Brush {
   }
   
   disarmStamp(){
-    if (this.stampArmCount <> 0){ 
+    if (this.stampArmCount != 0){ 
       if (this.stampArmCount < 0 || this.getCurrentPressure() != this.pressureRange){
         this.readyForStamp = false;
         this.setPressure(0);
