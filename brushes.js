@@ -300,7 +300,13 @@ class CircleBrightness extends Circle {
 }
 
 class Square extends Circle{
-  
+  getValue(i,j){
+    if (i <= this.convertedRadius && j <= this.convertedRadius){
+      return 1;
+    } else {
+      return 2;
+    }
+  }
 }
 
 class Dot extends CircleBrightness {
