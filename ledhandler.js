@@ -155,6 +155,7 @@ class LedHandler {
           console.log("stamping...");
         } else {
           this.ledDriverInstance.clearPixels();
+          this.setPressure(0);
           this.brushInstance.armStamp(); 
           console.log("arming...");
         }   
