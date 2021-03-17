@@ -12,6 +12,8 @@ class Brush {
     this.megamap = [];
     this.stampBrush = false;
     this.readyForStamp = false;
+    this.stampArmCount = 0;
+    const MAXSTAMPARMCOUNT = 1000;
   }
 
   bufferAllMaps(){
@@ -43,7 +45,7 @@ class Brush {
   }
   
   armStamp(){
-    if (this.stampArmCount >= 1000){
+    if (this.stampArmCount >= MAXSTAMPARMCOUNT){
       this.readyForStamp = true;
     } else {
       this.stampArmCount++;
