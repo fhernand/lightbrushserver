@@ -56,10 +56,10 @@ class Brush {
     } else {
       this.stampArmCount = this.stampArmCount + 50;
     }
-    this.lastStampPressure = this.getCurrentPressure();
     if (this.getCurrentPressure() != this.lastStampPressure){
       this.stampPressureChanged = true;
     }
+    this.lastStampPressure = this.getCurrentPressure();
   }
   
   disarmStamp(){
