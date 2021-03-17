@@ -34,15 +34,12 @@ class Brush {
   isReadyForStamp(){
     if (this.pressure == this.pressureRange && this.isStampBrush()){
       return this.readyForStamp; 
-      console.log(this.pressure);
-      console.log(this.readyForStamp);
     }
   }
   
   setStampBrush(active){
     this.stampBrush = active;
-    this.readyForStamp = true;
-    console.log(active);
+    this.readyForStamp = active;
   }
   
   armStamp(){
