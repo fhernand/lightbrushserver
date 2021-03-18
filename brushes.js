@@ -15,7 +15,6 @@ class Brush {
     this.stampArmCount = 0;
     this.maxStampArmCount = 1000;
     this.stampPressureChanged = true;
-    this.lastStampPressure = 0;
   }
 
   bufferAllMaps(){
@@ -56,18 +55,16 @@ class Brush {
     } else {
       this.stampArmCount = this.stampArmCount + 50;
     }
-    if (this.getCurrentPressure() != this.lastStampPressure){
+    if (this.getCurrentPressure() < this.pressureRang){
       this.stampPressureChanged = true;
     }
-    this.lastStampPressure = this.getCurrentPressure();
   }
   
   disarmStamp(){
     if (this.stampArmCount < 0 || this.getCurrentPressure() != this.pressureRange){
       this.readyForStamp = false;
       this.stampArmCount = 0;
-      this.stampPressureChanged = false;
-      this.lastStampPressure = this.getCurrentPressure();       
+      this.stampPressureChanged = false;      
     } else {
       this.stampArmCount = this.stampArmCount - 50;
     }
@@ -298,7 +295,11 @@ class CircleMedium extends Circle {
 
 class CircleBrightness extends Circle {
   setPressure(pressure){
-    super.setPressure(this.pressureRange);
+    if (this.isStampBrush() == false){
+      super.setPressure(this.pressureRange);
+    } else {
+      super.setPressure(pressure);
+    }
     this.convertedradius = this.granularity*(this.width/2);
     super.setBrightness(pressure);
     this.calculateMap();
