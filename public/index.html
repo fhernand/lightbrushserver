@@ -11,10 +11,7 @@
   <br>
   <input type="range" id= "inputSliderBrush" min="1" max="7" value="1" step="1" oninput="setValueBrush(this.value)" />
   <br><h3>Brush: </h3><span id="outputTextBrush">1</span><br><br>
-  
-  <input type="range" id= "inputStampBrush" min="0" max="1" value="0" step="1" oninput="setValueStampBrush(this.value)" />
-  <br><h3>Stamp Brush: </h3><span id="outputTextStampBrush">0</span><br><br>  
-
+ 
   <input type="range" id= "inputSliderMaxBrushSize" min="0" max="1" value="0" step="0.01" oninput="setValueMaxBrushSize(this.value)" />
   <br><h3>MaxBrushSize: </h3><span id="outputTextMaxBrushSize">0</span><br><br>
 
@@ -45,6 +42,8 @@
   </div>
 
   <br><button type="button" onclick="generateError()">Generate Error</button>
+  <br><button type="button" onclick="toggleStampBrush()">Toggle Stamp Brush</button>
+  <h3>Status </h3><span id="outputTextStampBrush">0</span>
 
   <script type="text/javascript">
   var socket = io.connect();
@@ -93,12 +92,7 @@
   });
 
   socket.on('stampbrush', (data) => {
-    var stampbrushvalue = 0;
-    if (data.value == 'true') {
-      stampbrushvalue = 1;
-    }
-    document.getElementById("inputSliderStampBrush").value = stampbrushvalue;
-    document.getElementById("outputTextStampBrush").innerHTML = stampbrushvalue;
+    document.getElementById("outputTextStampBrush").innerHTML = data.value;
   });
     
   function setColor()
@@ -111,13 +105,15 @@
     document.getElementById("outputTextBrush").innerHTML = newValue;
     socket.emit('brush', { value: newValue });
   }
-  function setValueStampBrush(newValue)
+  function toggleStampBrush()
   {
-    var stampbrush = 'false';
-    document.getElementById("outputTextStampBrush").innerHTML = newValue;
-    if (newValue == 1){
+    var stampbrush = document.getElementById("outputTextStampBrush").innerHTML;
+    if (stampbrush == 'false'){
       stampbrush = 'true';
+    } else {
+      stampbrush = 'false';  
     }
+    document.getElementById("outputTextStampBrush").innerHTML = stampbrush;
     socket.emit('stampbrush', { value: stampbrush });
   }    
   function setValueMaxBrushSize(newValue)
