@@ -55,7 +55,7 @@ class Brush {
     } else {
       this.stampArmCount = this.stampArmCount + 50;
     }
-    if (this.getCurrentPressure() < this.pressureRang){
+    if (this.getCurrentPressure() < this.pressureRange){
       this.stampPressureChanged = true;
     }
   }
