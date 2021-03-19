@@ -4,11 +4,11 @@ class Brush {
     this.height = height;
     this.pressureRange = pressureRange;
     this.granularity = 100;
-    this.brightness = 100;
-    this.adjustedBrightness = 100;
-    this.adjustedPressure = 100;
-    this.maxBrightness = 1.0;
-    this.maxBrushSize = 1.0;
+    this.brightness = 0;
+    this.adjustedBrightness = 0;
+    this.adjustedPressure = 0;
+    this.maxBrightness = 0;
+    this.maxBrushSize = 0;
     this.megamap = [];
     this.stampBrush = false;
     this.readyForStamp = false;
@@ -138,7 +138,7 @@ class Brush {
 class Line extends Brush{
   constructor(width, height, pressureRange){
     super(width, height, pressureRange);
-    this.maxBrushSize = 1.0;
+    this.maxBrushSize = 0;
     this.anteil = 0;
     this.mapLineHalf = new Float32Array(this.width/2);
     this.bufferAllMaps();
@@ -202,7 +202,7 @@ class Line extends Brush{
 class Circle extends Brush {
   constructor(width, height, pressureRange){
     super(width, height, pressureRange);
-    this.maxBrushSize = 1.0;
+    this.maxBrushSize = 0;
     this.anteil = 0;
     this.mapCircleQuarter = new Float32Array(this.width * this.height / 4);
     this.bufferAllMaps();
