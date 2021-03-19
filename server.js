@@ -13,7 +13,7 @@ app.use(express.static('public'));
 var brightness = 0;
 var maxbrightness = 0;
 var pressure = 0;
-var maxbrushsize = 1;
+var maxbrushsize = 0;
 var brush = 1;
 var hexcolor = '#000000';
 var stampbrush = 'false';
