@@ -9,7 +9,8 @@
     "node-inspect": "^2.0.0",
     "socket.io": "2.0.1",
     "rpi-ws281x": "^1.0.35",
-    "unicornhat-hd": "^0.0.4"
+    "unicornhat-hd": "^0.0.4",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {},
   "scripts": {
