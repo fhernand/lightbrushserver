@@ -1,10 +1,15 @@
+const argv = require('yargs/yargs')(process.argv.slice(2)).argv;
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 
 const { LedHandler } = require("./ledhandler");
 
-http.listen(3000, () => {
+var port = 3000;
+if (argv.port){
+  port = argv.port;
+}
+http.listen(port, () => {
   console.log('listening on *:3000');
 });
 
@@ -18,7 +23,7 @@ var brush = 1;
 var hexcolor = '#000000';
 var stampbrush = 'false';
 
-var ledHandlerInstance = new LedHandler(process.argv[2]);
+var ledHandlerInstance = new LedHandler(argv.led);
 ledHandlerInstance.run();
 
 const io = require('socket.io')(http);
