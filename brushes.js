@@ -36,6 +36,14 @@ class Brush {
    return this.stampBrush; 
   }
   
+  isGlowEnabled(){
+    return this.glow;
+  }
+  
+  isGradientEnabled(){
+    return this.gradient;
+  }
+  
   isReadyForStamp(){
     if (this.getCurrentPressure() == this.pressureRange && this.readyForStamp == true && this.stampPressureChanged == true){ 
       return this.readyForStamp; 
@@ -222,7 +230,9 @@ class Line extends Brush{
   }
   
   getGradient(i){
-    return 1 / i;
+    if (this.isGradientEnabled()){
+      return 1 / i;
+    }
   }
 }
 
@@ -290,8 +300,10 @@ class Circle extends Brush {
   }
   
   getGradient(i,j){
-   var dist_ij = Math.sqrt( (i * i) + (j * j) );
-   return 1 / dist_ij;
+   if (this.isGradientEnabled()){
+    var dist_ij = Math.sqrt( (i * i) + (j * j) );
+    return 1 / dist_ij;
+   }
   }
   
   reset(){
