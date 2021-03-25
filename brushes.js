@@ -232,6 +232,8 @@ class Line extends Brush{
   getGradient(i){
     if (this.isGradientEnabled()){
       return 1 / i;
+    } else {
+      return 1;
     }
   }
 }
@@ -303,6 +305,8 @@ class Circle extends Brush {
    if (this.isGradientEnabled()){
     var dist_ij = Math.sqrt( (i * i) + (j * j) );
     return 1 / dist_ij;
+   } else {
+     return 1;
    }
   }
   
