@@ -10,6 +10,8 @@ class Brush {
     this.maxBrightness = 0;
     this.maxBrushSize = 0;
     this.megamap = [];
+    this.gradient = false;
+    this.glow = false;
     this.stampBrush = false;
     this.readyForStamp = false;
     this.stampArmCount = 0;
@@ -76,6 +78,23 @@ class Brush {
     }
   }
 
+  getValue(i,j){  
+  }
+  
+  getGlow(i,j){
+  }
+  
+  getGradient(i,j){
+  }
+  
+  setGlow(flag){
+    this.glow = flag;
+  }
+
+  setGradient(flag){
+    this.gradient = flag;
+  }
+  
   reset(){
   }
 
@@ -170,13 +189,13 @@ class Line extends Brush{
     const max_i = this.granularity*(n+1);
 
     for (var i = max_i; i >= this.granularity*n; i-- ){
-        var value = i / this.convertedradius;
+        var value = this.getValue(i);
         if (i == max_i && value <= 1){
-          return 1;
+          return 1 * this.getGradient(i);
 
         } else {
           if (value<=1){
-            this.anteil++;
+            this.anteil =+ 1 * this.getGradient(i);
           }
         }
     }
@@ -196,6 +215,14 @@ class Line extends Brush{
 
   setMaxBrushSize(maxBrushSize){
     super.setMaxBrushSize(maxBrushSize);
+  }
+  
+  getValue(i){
+    return i / this.convertedradius;
+  }
+  
+  getGradient(i){
+    return 1 / i;
   }
 }
 
@@ -245,11 +272,11 @@ class Circle extends Brush {
       for (var j = max_j; j >= this.granularity * y; j-- ){
         var value = this.getValue(i,j);
         if (i == max_i && j == max_j && value <= 1){
-          return 1;
+          return 1 * this.getGradient(i,j);
 
         } else {
           if (value<=1){
-            this.anteil++;
+            this.anteil =+ 1 * this.getGradient(i,j);
           }
         }
       }
@@ -260,6 +287,11 @@ class Circle extends Brush {
   getValue(i,j){
     var dist_ij = Math.sqrt( (i * i) + (j * j) );
     return (dist_ij / this.convertedradius);
+  }
+  
+  getGradient(i,j){
+   var dist_ij = Math.sqrt( (i * i) + (j * j) );
+   return 1 / dist_ij;
   }
   
   reset(){
