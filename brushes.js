@@ -203,7 +203,7 @@ class Line extends Brush{
 
         } else {
           if (value<=1){
-            this.anteil =+ 1 * this.getGradient(i);
+            this.anteil = this.anteil + ( 1 * this.getGradient(i) );
           }
         }
     }
@@ -288,7 +288,7 @@ class Circle extends Brush {
 
         } else {
           if (value<=1){
-            this.anteil =+ 1 * this.getGradient(i,j);
+            this.anteil = this.anteil + ( 1 * this.getGradient(i,j) );
           }
         }
       }
