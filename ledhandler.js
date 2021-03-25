@@ -65,6 +65,14 @@ class LedHandler {
   setStampBrush(flag){
    this.brushInstance.setStampBrush(flag); 
   }
+  
+  setGradient(flag){
+   this.brushInstance.setGradient(flag); 
+  }
+  
+  setGlow(flag){
+   this.brushInstance.setGlow(flag); 
+  }  
 
   setBrush(brush){
     if (this.brushInstance != null){
