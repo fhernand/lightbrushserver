@@ -42,9 +42,16 @@
   </div>
 
   <br><button type="button" onclick="generateError()">Generate Error</button>
+  
   <br><button type="button" onclick="toggleStampBrush()">Toggle Stamp Brush</button>
   <h3>Stamp Brush Status: </h3><span id="outputTextStampBrush">false</span>
 
+  <br><button type="button" onclick="toggleGradient()">Toggle Gradient</button>
+  <h3>Gradient Status: </h3><span id="outputTextGradient">false</span>
+ 
+  <br><button type="button" onclick="toggleGlow()">Toggle Glow</button>
+  <h3>Glow Status: </h3><span id="outputTextGlow">false</span>
+  
   <script type="text/javascript">
   var socket = io.connect();
   var rtime;
@@ -65,6 +72,14 @@
     document.getElementById("outputTextBrightness").innerHTML = data.value;
   });
 
+  socket.on('glow', (data) => {
+    document.getElementById("outputTextGlow").innerHTML = data.value;
+  });    
+
+  socket.on('gradient', (data) => {
+    document.getElementById("outputTextGradient").innerHTML = data.value;
+  });        
+    
   socket.on('hexcolor', (data) => {
     var colorRGB = hexToRgb(data.value);
     document.getElementById("inputSliderRed").value = colorRGB.r;
@@ -105,6 +120,28 @@
     document.getElementById("outputTextBrush").innerHTML = newValue;
     socket.emit('brush', { value: newValue });
   }
+  function toggleGlow()
+  {
+    var glow = document.getElementById("outputTextGlow").innerHTML;
+    if (glow == 'false'){
+      glow = 'true';
+    } else {
+      glow = 'false';  
+    }
+    document.getElementById("outputTextGlow").innerHTML = glow;
+    socket.emit('glow', { value: glow });
+  }     
+  function toggleGradient()
+  {
+    var gradient = document.getElementById("outputTextGradient").innerHTML;
+    if (gradient == 'false'){
+      gradient = 'true';
+    } else {
+      gradient = 'false';  
+    }
+    document.getElementById("outputTextGradient").innerHTML = gradient;
+    socket.emit('gradient', { value: gradient });
+  }      
   function toggleStampBrush()
   {
     var stampbrush = document.getElementById("outputTextStampBrush").innerHTML;
