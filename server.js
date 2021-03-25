@@ -10,7 +10,7 @@ if (argv.port){
   port = argv.port;
 }
 http.listen(port, () => {
-  console.log('listening on *:3000');
+  console.log('listening on *:' + argv.port);
 });
 
 app.use(express.static('public'));
