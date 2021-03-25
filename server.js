@@ -114,7 +114,36 @@ io.sockets.on('connection', (socket) => {
       ledHandlerInstance.setStampBrush(stampbrush);
       io.sockets.emit('stampbrush', {value: stampbrush});
     }
-  });  
+  }); 
+  
+  socket.on('gradient', (data) => {  
+    //Expected values: true, false
+    var obj = getJsonObject(data);
+    if(checkValue(obj.value)!=null){
+      var gradient = obj.value;
+      if (gradient == 'true'){
+        gradient = true;
+      } else {
+        gradient = false;
+      }
+      ledHandlerInstance.setGradient(gradient);
+      io.sockets.emit('gradient', {value: gradient});
+    }
+  });   
+  socket.on('glow', (data) => {  
+    //Expected values: true, false
+    var obj = getJsonObject(data);
+    if(checkValue(obj.value)!=null){
+      var glow = obj.value;
+      if (glow == 'true'){
+        glow = true;
+      } else {
+        glow = false;
+      }
+      ledHandlerInstance.setGlow(glow);
+      io.sockets.emit('glow', {value: glow});
+    }
+  });   
 });
 
 function checkValue(value){
