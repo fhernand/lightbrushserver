@@ -107,11 +107,10 @@ class LedHandler {
         break;        
       default:
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
-    } 
-    this.setBrightness(tempBrightness);    
+    }     
     this.setMaxBrushSize(tempMaxBrushSize);
     this.setMaxBrightness(tempMaxBrightness);
-    //this.setPressure(tempPressure);     
+    this.setBrightness(tempBrightness);    
     this.brushInstance.refresh();    
   }
 
