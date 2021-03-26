@@ -97,10 +97,12 @@ class Brush {
   
   setGlow(flag){
     this.glow = flag;
+    this.bufferAllMaps();    
   }
 
   setGradient(flag){
     this.gradient = flag;
+    this.bufferAllMaps();
   }
   
   reset(){
@@ -282,14 +284,14 @@ class Circle extends Brush {
     for (var i = max_i; i >= this.granularity * x; i-- ){
       for (var j = max_j; j >= this.granularity * y; j-- ){
         var value = this.getValue(i,j);
-        if (i == max_i && j == max_j && value <= 1){
-          return this.getGradient(i,j);
+        //if (i == max_i && j == max_j && value <= 1){
+        //  return this.getGradient(i,j);
 
-        } else {
+        //} else {
           if (value<=1){
             this.anteil += this.getGradient(i,j);
           }
-        }
+        //}
       }
     }
     return this.anteil / ( this.granularity * this.granularity );
