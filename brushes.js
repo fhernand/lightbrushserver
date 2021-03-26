@@ -199,8 +199,7 @@ class Line extends Brush{
     for (var i = max_i; i >= this.granularity*n; i-- ){
         var value = this.getValue(i);
         if (i == max_i && value <= 1){
-          return 1 * this.getGradient(i);
-
+          return this.getGradient(i);
         } else {
           if (value<=1){
             this.anteil = this.anteil + ( 1 * this.getGradient(i) );
@@ -231,7 +230,7 @@ class Line extends Brush{
   
   getGradient(i){
     if (this.isGradientEnabled()){
-      return 1 / i;
+      return 1 - this.getValue(i);
     } else {
       return 1;
     }
@@ -284,7 +283,7 @@ class Circle extends Brush {
       for (var j = max_j; j >= this.granularity * y; j-- ){
         var value = this.getValue(i,j);
         if (i == max_i && j == max_j && value <= 1){
-          return 1 * this.getGradient(i,j);
+          return this.getGradient(i,j);
 
         } else {
           if (value<=1){
@@ -303,8 +302,7 @@ class Circle extends Brush {
   
   getGradient(i,j){
    if (this.isGradientEnabled()){
-    var dist_ij = Math.sqrt( (i * i) + (j * j) );
-    return 1 / dist_ij;
+    return 1 - this.getValue(i,j);
    } else {
      return 1;
    }
