@@ -13,7 +13,7 @@ class LedHandler {
       this.num_leds_width = 16;
       this.num_leds_height = 16;
       this.ledDriverInstance = new UnicornHDDriver(this.num_leds_width,this.num_leds_height,1);
-      this.granularity = 10;
+      this.granularity = 100;
       console.log("Unicorn Hat HD selected.");
     } else {
       this.num_leds_width = 8;
