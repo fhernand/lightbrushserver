@@ -177,7 +177,7 @@ class Line extends Brush{
 
   calculateMap(){
           console.log(this.buffered);
-          console.log(this.megamap);
+          console.log(this.megamap[this.adjustedPressure][1]);
     if (this.buffered == false ){
       for (var i = 0; i < this.height/2; i++) {
         this.mapLineHalf[i] = this.draw(i);
