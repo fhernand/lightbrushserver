@@ -17,6 +17,7 @@ class Brush {
     this.stampArmCount = 0;
     this.maxStampArmCount = 1000;
     this.stampPressureChanged = true;
+    this.buffered = false;
   }
 
   bufferAllMaps(){
@@ -132,7 +133,6 @@ class Brush {
     this.applyMaxBrushSize();    
     if (this.megamap[this.adjustedPressure] == null ){
       this.megamap[this.adjustedPressure] = [];
-      this.buffered = false;
     }
   }
 
@@ -172,7 +172,6 @@ class Line extends Brush{
     this.maxBrushSize = 0;
     this.anteil = 0;
     this.mapLineHalf = new Float32Array(this.width/2);
-    this.refresh(); 
   }
 
   calculateMap(){
@@ -246,8 +245,7 @@ class Circle extends Brush {
     super(width, height, pressureRange);
     this.maxBrushSize = 0;
     this.anteil = 0;
-    this.mapCircleQuarter = new Float32Array(this.width * this.height / 4);
-    this.refresh(); 
+    this.mapCircleQuarter = new Float32Array(this.width * this.height / 4); 
   }
 
   calculateMap(){
