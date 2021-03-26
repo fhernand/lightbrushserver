@@ -5,10 +5,10 @@ const NUM_LEDS_WIDTH = 8;
 const NUM_LEDS_HEIGHT = 8;
 
 class LedHandler {
-  this.granularity = 0;
-  this.num_leds_width = 0;
-  this.num_leds_height = 0;
   constructor(module) {
+    this.granularity = 0;
+    this.num_leds_width = 0;
+    this.num_leds_height = 0;
     if (module == "hd"){
       this.num_leds_width = 16;
       this.num_leds_height = 16;
