@@ -74,12 +74,14 @@ class LedHandler {
   }  
 
   setBrush(brush){
+      var tempMaxBrightness = 100;
+      var tempBrightness = 100;
+      var tempMaxBrushSize = 100;    
     if (this.brushInstance != null){
-      var tempMaxBrightness = this.getCurrentMaxBrightness();
-      var tempBrightness = this.getCurrentBrightness();
-      //var tempPressure = this.getCurrentPressure();
-      var tempMaxBrushSize = this.getCurrentMaxBrushSize();
-    }
+      tempMaxBrightness = this.getCurrentMaxBrightness();
+      tempBrightness = this.getCurrentBrightness();
+      tempMaxBrushSize = this.getCurrentMaxBrushSize();
+    } 
     this.brushInstance = null;
     switch(brush) {
       case "1":
