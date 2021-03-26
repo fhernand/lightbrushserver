@@ -51,7 +51,6 @@ class LedHandler {
   
   setMaxBrightness(maxBrightness) {
     this.brushInstance.setMaxBrightness(maxBrightness);
-    this.brushInstance.refresh();
   }  
 
   setColor(color) {
@@ -107,10 +106,11 @@ class LedHandler {
       default:
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
     }
+    this.setPressure(tempPressure);    
+    this.setBrightness(tempBrightness);    
     this.setMaxBrushSize(tempMaxBrushSize);
     this.setMaxBrightness(tempMaxBrightness);
-    this.setBrightness(tempBrightness);
-    this.setPressure(tempPressure);
+    this.brushInstance.refresh();    
   }
 
   setPressure(pressure){
@@ -118,8 +118,7 @@ class LedHandler {
   }
 
   setMaxBrushSize(brushMaxSize){
-    this.brushInstance.setMaxBrushSize(brushMaxSize);    
-    this.brushInstance.refresh();
+    this.brushInstance.setMaxBrushSize(brushMaxSize);
   }
   
   showError(){
