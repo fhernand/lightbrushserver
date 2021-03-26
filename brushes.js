@@ -3,7 +3,7 @@ class Brush {
     this.width = width;
     this.height = height;
     this.pressureRange = pressureRange;
-    this.granularity = 10;
+    this.granularity = 100;
     this.brightness = 0;
     this.adjustedBrightness = 0;
     this.adjustedPressure = 0;
@@ -145,6 +145,7 @@ class Brush {
 
   setMaxBrightness(maxBrightness){
     this.maxBrightness = maxBrightness;
+    this.applyMaxBrightness();    
   } 
   
   setBrightness(brightness){
