@@ -121,7 +121,7 @@ class Brush {
   }
   
   applyMaxBrushSize(){
-    this.adjustedPressure = ceil(this.pressure * this.maxBrushSize); 
+    this.adjustedPressure = Math.ceil(this.pressure * this.maxBrushSize); 
   }  
   
   getCurrentPressure(){
