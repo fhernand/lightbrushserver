@@ -1,9 +1,6 @@
 const { Circle, CircleBrightness, Dot, Line, Square } = require("./brushes");
 const { UnicornDriver, UnicornHDDriver } = require("./leddriver");
 
-const NUM_LEDS_WIDTH = 8;
-const NUM_LEDS_HEIGHT = 8;
-
 class LedHandler {
   constructor(module) {
     this.granularity = 0;
@@ -13,7 +10,7 @@ class LedHandler {
       this.num_leds_width = 16;
       this.num_leds_height = 16;
       this.ledDriverInstance = new UnicornHDDriver(this.num_leds_width,this.num_leds_height,1);
-      this.granularity = 100;
+      this.granularity = 10;
       console.log("Unicorn Hat HD selected.");
     } else {
       this.num_leds_width = 8;
