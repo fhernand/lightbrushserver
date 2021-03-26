@@ -176,6 +176,8 @@ class Line extends Brush{
   }
 
   calculateMap(){
+          console.log(this.buffered);
+          console.log(this.megamap);
     if (this.buffered == false ){
       for (var i = 0; i < this.height/2; i++) {
         this.mapLineHalf[i] = this.draw(i);
@@ -191,7 +193,6 @@ class Line extends Brush{
         }
          this.megamap[this.adjustedPressure][i+this.height*this.width/2] = this.mapLineHalf[index];
       }
-      console.log(this.megamap);
       this.buffered = true;
     }
   }
