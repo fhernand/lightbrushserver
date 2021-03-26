@@ -1,9 +1,9 @@
 class Brush {
-  constructor(width, height, pressureRange){
+  constructor(width, height, pressureRange, granularity){
     this.width = width;
     this.height = height;
     this.pressureRange = pressureRange;
-    this.granularity = 10;
+    this.granularity = granularity;
     this.brightness = 0;
     this.adjustedBrightness = 0;
     this.adjustedPressure = 0;
@@ -171,8 +171,8 @@ class Brush {
 }
 
 class Line extends Brush{
-  constructor(width, height, pressureRange){
-    super(width, height, pressureRange);
+  constructor(width, height, pressureRange, granularity){
+    super(width, height, pressureRange, granularity);
     this.maxBrushSize = 0;
     this.anteil = 0;
     this.mapLineHalf = new Float32Array(this.width/2);
@@ -237,8 +237,8 @@ class Line extends Brush{
 }
 
 class Circle extends Brush {
-  constructor(width, height, pressureRange){
-    super(width, height, pressureRange);
+  constructor(width, height, pressureRange, granularity){
+    super(width, height, pressureRange, granularity);
     this.maxBrushSize = 0;
     this.anteil = 0;
     this.mapCircleQuarter = new Float32Array(this.width * this.height / 4); 
@@ -313,20 +313,6 @@ class Circle extends Brush {
   }
 }
 
-class CircleSmall extends Circle {
- constructor(width, height, pressureRange){
-    super(width, height, pressureRange);
-    this.maxBrushSize = 0.25;
-  }
-}
-
-class CircleMedium extends Circle {
- constructor(width, height, pressureRange){
-    super(width, height, pressureRange);
-    this.maxBrushSize = 0.5;
-  }
-}
-
 class CircleBrightness extends Circle {
   setPressure(pressure){
     if (this.isStampBrush() == false){
@@ -367,8 +353,6 @@ class Dot extends CircleBrightness {
 
 module.exports = {
   Circle,
-  CircleSmall,
-  CircleMedium,
   CircleBrightness,
   Dot,
   Line,
