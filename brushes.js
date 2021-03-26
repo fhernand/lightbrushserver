@@ -98,12 +98,12 @@ class Brush {
   
   setGlow(flag){
     this.glow = flag;
-    this.bufferAllMaps();    
+    this.refresh();    
   }
 
   setGradient(flag){
     this.gradient = flag;
-    this.bufferAllMaps();
+    this.refresh();  
   }
   
   reset(){
@@ -112,6 +112,7 @@ class Brush {
   refresh(){
     this.setPressure(this.getCurrentPressure());
     this.setBrightness(this.getCurrentBrightness());
+    this.bufferAllMaps();     
   }  
   
   applyMaxBrightness(){
@@ -119,7 +120,7 @@ class Brush {
   }
   
   applyMaxBrushSize(){
-    this.adjustedPressure = this.pressure * this.maxBrushSize;
+    this.adjustedPressure = this.pressure * this.maxBrushSize; 
   }  
   
   getCurrentPressure(){
@@ -171,7 +172,7 @@ class Line extends Brush{
     this.maxBrushSize = 0;
     this.anteil = 0;
     this.mapLineHalf = new Float32Array(this.width/2);
-    this.bufferAllMaps();
+    this.refresh(); 
   }
 
   calculateMap(){
@@ -246,7 +247,7 @@ class Circle extends Brush {
     this.maxBrushSize = 0;
     this.anteil = 0;
     this.mapCircleQuarter = new Float32Array(this.width * this.height / 4);
-    this.bufferAllMaps();
+    this.refresh(); 
   }
 
   calculateMap(){
