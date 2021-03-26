@@ -17,6 +17,7 @@ class Brush {
     this.stampArmCount = 0;
     this.maxStampArmCount = 1000;
     this.stampPressureChanged = true;
+    this.buffered = false;
   }
 
   bufferAllMaps(){
