@@ -84,10 +84,9 @@ class Brush {
   
   getMapValue(i){
     if (this.megamap[this.adjustedPressure] != null ){
+            console.log('Megamap found for adjustedPressure' + this.adjustedPressure);
       return this.megamap[this.adjustedPressure][i];
-    } else {
-      console.log('No megamap found for adjustedPressure' + this.adjustedPressure);
-    }
+    } 
   }
 
   getValue(i,j){  
