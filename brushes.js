@@ -21,6 +21,7 @@ class Brush {
   }
 
   bufferAllMaps(){
+    this.megamap = [];
     this.buffered = false;
     for (var i = 0; i < this.pressureRange; i++) {
       this.setPressure(i);
