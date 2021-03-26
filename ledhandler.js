@@ -1,17 +1,25 @@
-const { Circle, CircleSmall, CircleMedium, CircleBrightness, Dot, Line, Square } = require("./brushes");
+const { Circle, CircleBrightness, Dot, Line, Square } = require("./brushes");
 const { UnicornDriver, UnicornHDDriver } = require("./leddriver");
 
 const NUM_LEDS_WIDTH = 8;
 const NUM_LEDS_HEIGHT = 8;
 
 class LedHandler {
-
+  this.granularity = 0;
+  this.num_leds_width = 0;
+  this.num_leds_height = 0;
   constructor(module) {
     if (module == "hd"){
-      this.ledDriverInstance = new UnicornHDDriver(16,16,1);
+      this.num_leds_width = 16;
+      this.num_leds_height = 16;
+      this.ledDriverInstance = new UnicornHDDriver(this.num_leds_width,this.num_leds_height,1);
+      this.granularity = 10;
       console.log("Unicorn Hat HD selected.");
     } else {
-      this.ledDriverInstance = new UnicornDriver(NUM_LEDS_WIDTH, NUM_LEDS_HEIGHT, 1);
+      this.num_leds_width = 8;
+      this.num_leds_height = 8;      
+      this.ledDriverInstance = new UnicornDriver(this.num_leds_width, this.num_leds_height, 1);
+      this.granularity = 100;      
       console.log("Unicorn Hat selected.");
     }
 
@@ -85,28 +93,22 @@ class LedHandler {
     this.brushInstance = null;
     switch(brush) {
       case "1":
-        this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
+        this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange, this.granularity);
         break;
       case "2":
-        this.brushInstance = new CircleSmall(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
+        this.brushInstance = new Line(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange, this.granularity);
         break;
       case "3":
-        this.brushInstance = new CircleMedium(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
+        this.brushInstance = new CircleBrightness(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange, this.granularity);
         break;
       case "4":
-        this.brushInstance = new Line(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
+        this.brushInstance = new Dot(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange, this.granularity);
         break;
       case "5":
-        this.brushInstance = new CircleBrightness(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
-        break;
-      case "6":
-        this.brushInstance = new Dot(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
-        break;
-      case "7":
-        this.brushInstance = new Square(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
+        this.brushInstance = new Square(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange, this.granularity);
         break;        
       default:
-      this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange);
+      this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange, this.granularity);
     }     
     this.setMaxBrushSize(tempMaxBrushSize);
     this.setMaxBrightness(tempMaxBrightness);
