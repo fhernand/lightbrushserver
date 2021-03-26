@@ -111,9 +111,9 @@ class Brush {
   }
 
   refresh(){
+    this.bufferAllMaps();  
     this.setPressure(this.getCurrentPressure());
-    this.setBrightness(this.getCurrentBrightness());
-    this.bufferAllMaps();     
+    this.setBrightness(this.getCurrentBrightness());   
   }  
   
   applyMaxBrightness(){
@@ -202,12 +202,8 @@ class Line extends Brush{
 
     for (var i = max_i; i >= this.granularity*n; i-- ){
         var value = this.getValue(i);
-        if (i == max_i && value <= 1){
-          return this.getGradient(i);
-        } else {
-          if (value<=1){
-            this.anteil = this.anteil + ( 1 * this.getGradient(i) );
-          }
+        if (value<=1){
+          this.anteil = this.anteil + ( 1 * this.getGradient(i) );
         }
     }
     return this.anteil / this.granularity;
@@ -222,10 +218,6 @@ class Line extends Brush{
     super.setPressure(pressure);
     this.convertedradius = this.granularity*(this.height/2)*(this.adjustedPressure/this.pressureRange);
     this.calculateMap();
-  }
-
-  setMaxBrushSize(maxBrushSize){
-    super.setMaxBrushSize(maxBrushSize);
   }
   
   getValue(i){
@@ -285,14 +277,9 @@ class Circle extends Brush {
     for (var i = max_i; i >= this.granularity * x; i-- ){
       for (var j = max_j; j >= this.granularity * y; j-- ){
         var value = this.getValue(i,j);
-        //if (i == max_i && j == max_j && value <= 1){
-        //  return this.getGradient(i,j);
-
-        //} else {
           if (value<=1){
             this.anteil += this.getGradient(i,j);
           }
-        //}
       }
     }
     return this.anteil / ( this.granularity * this.granularity );
@@ -321,11 +308,6 @@ class Circle extends Brush {
     this.convertedradius = this.granularity*(this.width/2)*(this.adjustedPressure/this.pressureRange);
     this.calculateMap();
   }
-
-  setMaxBrushSize(maxBrushSize){
-    super.setMaxBrushSize(maxBrushSize);
-  }
-
 }
 
 class CircleSmall extends Circle {
