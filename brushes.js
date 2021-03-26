@@ -133,6 +133,7 @@ class Brush {
     this.applyMaxBrushSize();    
     if (this.megamap[this.adjustedPressure] == null ){
       this.megamap[this.adjustedPressure] = [];
+      this.buffered = false;
     }
   }
 
@@ -177,6 +178,7 @@ class Line extends Brush{
 
   calculateMap(){
           console.log(this.buffered);
+          console.log(this.adjustedPressure);
           console.log(this.megamap[this.adjustedPressure][1]);
     if (this.buffered == false ){
       for (var i = 0; i < this.height/2; i++) {
