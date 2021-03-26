@@ -3,7 +3,7 @@ class Brush {
     this.width = width;
     this.height = height;
     this.pressureRange = pressureRange;
-    this.granularity = 100;
+    this.granularity = 10;
     this.brightness = 0;
     this.adjustedBrightness = 0;
     this.adjustedPressure = 0;
@@ -84,7 +84,6 @@ class Brush {
   
   getMapValue(i){
     if (this.megamap[this.adjustedPressure] != null ){
-            console.log('Megamap found for adjustedPressure' + this.adjustedPressure);
       return this.megamap[this.adjustedPressure][i];
     } 
   }
@@ -192,6 +191,7 @@ class Line extends Brush{
         }
          this.megamap[this.adjustedPressure][i+this.height*this.width/2] = this.mapLineHalf[index];
       }
+      console.log(this.megamap);
       this.buffered = true;
     }
   }
