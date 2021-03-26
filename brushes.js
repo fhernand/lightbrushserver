@@ -209,7 +209,7 @@ class Line extends Brush{
           this.anteil = this.anteil + ( 1 * this.getGradient(i) );
         }
     }
-    return this.anteil / this.granularity;
+    return Math.min(this.anteil / this.granularity, 1);
   }
 
   reset(){
@@ -329,7 +329,7 @@ class CircleBrightness extends Circle {
 class Square extends Circle{
   getValue(i,j){
     if (i <= this.convertedradius && j <= this.convertedradius){
-      return 1;
+      return i / this.convertedradius;
     } else {
       return 2;
     }
