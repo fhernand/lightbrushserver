@@ -109,7 +109,7 @@ class LedHandler {
     }     
     this.setMaxBrushSize(tempMaxBrushSize);
     this.setMaxBrightness(tempMaxBrightness);
-    this.setBrightness(tempBrightness);    
+    //this.setBrightness(tempBrightness);    
     this.brushInstance.refresh();    
   }
 
