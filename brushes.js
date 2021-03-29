@@ -113,8 +113,10 @@ class Brush {
 
   refresh(){
     this.bufferAllMaps();  
-    this.setPressure(this.getCurrentPressure());
+    this.setMaxBrushSize(this.getCurrentMaxBrushSize());
+    this.setMaxBrightness(this.getCurrentMaxBrightness());
     this.setBrightness(this.getCurrentBrightness());   
+    this.setPressure(this.getCurrentPressure());
   }  
   
   applyMaxBrightness(){
@@ -140,7 +142,6 @@ class Brush {
 
   setMaxBrushSize(maxBrushSize){
     this.maxBrushSize = maxBrushSize;
-    this.refresh();     
   }
 
   setMaxBrightness(maxBrightness){
