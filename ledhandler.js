@@ -1,4 +1,4 @@
-const { Circle, CircleBrightness, Dot, Line, Square } = require("./brushes");
+const { Circle, CircleBrightness, Dot, Line, Square, SquareBrightness } = require("./brushes");
 const { UnicornDriver, UnicornHDDriver } = require("./leddriver");
 
 class LedHandler {
@@ -103,12 +103,15 @@ class LedHandler {
         break;
       case "5":
         this.brushInstance = new Square(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange, this.granularity);
-        break;        
+        break;  
+      case "6":
+        this.brushInstance = new SquareBrightness(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange, this.granularity);
+        break;         
       default:
       this.brushInstance = new Circle(this.ledDriverInstance.width, this.ledDriverInstance.height, this.pressureRange, this.granularity);
     }     
     this.setMaxBrushSize(tempMaxBrushSize);
-    if(brush != "3") {
+    if(brush != "3" && brush != "6") {
       this.setMaxBrightness(tempMaxBrightness);
       this.setBrightness(tempBrightness);    
     }
