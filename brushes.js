@@ -338,6 +338,19 @@ class Square extends Circle{
   }
 }
 
+class SquareBrightness extends Square {
+  setPressure(pressure){
+    if (this.isStampBrush() == false){
+      super.setPressure(this.pressureRange);
+    } else {
+      super.setPressure(pressure);
+    }
+    this.convertedradius = this.granularity*(this.width/2);
+    super.setBrightness(pressure);
+    this.calculateMap();
+  }
+}
+
 class Dot extends CircleBrightness {
   calculateMap(){
     if (this.buffered == false ){
@@ -358,5 +371,6 @@ module.exports = {
   CircleBrightness,
   Dot,
   Line,
-  Square
+  Square,
+  SquareBrightness
 };
