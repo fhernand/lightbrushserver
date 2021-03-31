@@ -142,6 +142,7 @@ class Brush {
 
   setMaxBrushSize(maxBrushSize){
     this.maxBrushSize = maxBrushSize;
+    this.setPressure(this.getCurrentPressure());
   }
 
   setMaxBrightness(maxBrightness){
